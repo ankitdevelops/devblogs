@@ -1,0 +1,69 @@
+import React, { useContext, useEffect } from "react";
+import PostContext from "../context/PostContext";
+import ReactMarkdown from "react-markdown";
+import DotLoader from "react-spinners/DotLoader";
+import { Link } from "react-router-dom";
+const PostCard = () => {
+  const { posts, getPosts, post, loading } = useContext(PostContext);
+  useEffect(() => {
+    getPosts();
+  }, []);
+
+  if (!posts) {
+    return (
+      <>
+        <div className="loader d-flex justify-content-center mt-5">
+          <DotLoader color="#fff" size={150} />
+        </div>
+      </>
+    );
+  } else {
+    return (
+      <>
+        {posts.map((post, index) => (
+          <Link
+            key={index}
+            to={`/${post.author.username}/${post.slug}`}
+            className="text-decoration-none text-white"
+          >
+            <div className="card card-body mb-2">
+              <div className="author-profile ">
+                <div className="author-img  ">
+                  <img
+                    src={post.author.avatar}
+                    alt=""
+                    className="img-fluid rounded-circle"
+                  />
+                </div>
+                <div className="author-info">
+                  <h6>{post.author.username}</h6>
+                  <p>{post.created}</p>
+                </div>
+              </div>
+              <div className="post-heading mt-2">
+                <h4 className="">{post.title}</h4>
+              </div>
+              <div className="post-desc">
+                {/* <ReactMarkdown>{post.content}</ReactMarkdown> */}
+              </div>
+              <div className="card-footer d-flex justify-content-between">
+                <div className="reaction-container d-flex">
+                  <div className="like-container me-2">
+                    <i className="bi bi-suit-heart" /> <span>34 Likes</span>
+                  </div>
+                  <div className="comment-container">
+                    <i className="bi bi-chat" /> <span>46 Comments</span>
+                  </div>
+                </div>
+                <div className="save-container">
+                  <i className="bi bi-bookmark" />
+                </div>
+              </div>
+            </div>
+          </Link>
+        ))}
+      </>
+    );
+  }
+};
+export default PostCard;

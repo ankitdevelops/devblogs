@@ -13,6 +13,11 @@ const postReducer = (state, action) => {
 		
 		case "GET_SINGLE_POSTS":
 			return {post:action.payload}	
+
+		case "GET_SINGLE_USER":
+			return {
+				singleUser:action.payload,
+			}
 		default:
 			return state;
 	}

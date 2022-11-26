@@ -13,7 +13,7 @@ const DetailsPage = () => {
   useEffect(() => {
     getSinglePost(slug);
   }, [slug]);
-
+  console.log(post);
   if (!post) {
     return (
       <>
@@ -89,17 +89,15 @@ const DetailsPage = () => {
                     post.author.name.slice(1)}
                 </Link>
               </h3>
-              <div className="about-author my-2">
-                <p className="text-center fs-6">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Est,
-                  iure!
-                </p>
-              </div>
+
               <div className="follow-btn">
                 <div className="d-grid gap-2">
-                  <button className="btn-primary btn mt-2 btn-block">
+                  <Link
+                    to={`/profile/${post.author.username}`}
+                    className="btn-primary btn mt-2 btn-block"
+                  >
                     View Profile
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>

@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 const Navbar = () => {
-  const { isLoggedin } = useContext(AuthContext);
+  const { isLoggedin, user } = useContext(AuthContext);
   const [showDropdown, setShowDropdown] = useState(false);
   function myFunction() {
     setShowDropdown(!showDropdown);
@@ -34,6 +34,7 @@ const Navbar = () => {
               </form>
             </div>
           </div>
+          <p className="text-white">{isLoggedin}</p>
           <div className="right-container">
             <div className="create-btn">
               {isLoggedin ? (
@@ -56,7 +57,7 @@ const Navbar = () => {
                   }
                   id="myDropdown"
                 >
-                  <Link to="/user-profile">Profile</Link>
+                  <Link to={`/profile/${user}`}>Profile</Link>
                   <Link to="/dashboard">Dashboard</Link>
                   <Link to="create">Create Post</Link>
                   <hr />

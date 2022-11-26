@@ -1,69 +1,96 @@
 import { createContext, useState, useReducer, useEffect } from "react";
 import authReducer from "./AuthReducer";
 import axios from "axios";
-
+import jwt_decode from "jwt-decode";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-	const initialState = {
-		isLoggedin: localStorage.getItem("accessToken") ? true : false,
-		user: useState(null),
-		loading: true,
-	};
-	// useEffect(() => {
+  const initialState = {
+    isLoggedin: localStorage.getItem("accessToken") ? true : false,
+    user: localStorage.getItem("username")
+      ? JSON.parse(localStorage.getItem("username"))
+      : null,
+    loading: true,
+  };
+  // useEffect(() => {
 
-	// },[])
-	const [state, dispatch] = useReducer(authReducer, initialState);
+  // },[])
+  const [state, dispatch] = useReducer(authReducer, initialState);
 
-	const login = async (user) => {
-		const response = axios({
-			method: "post",
-			url: "http://127.0.0.1:8000/api/user/login/",
-			data: user,
-		});
-		const { data } = await response;
-		console.log("first", data);
-		if (data) {
-			localStorage.setItem("accessToken", JSON.stringify(data.access));
-			localStorage.setItem("refreshToken", JSON.stringify(data.refresh));
-		}
-		dispatch({
-			type: "LOGIN",
-			payload: data,
-		});
-	};
+  const login = async (user) => {
+    const baseUrl = "http://127.0.0.1:8000/api/user/login/";
+    axios
+      .post(baseUrl, user)
+      .then((response) => {
+        if (response.data) {
+          localStorage.setItem(
+            "accessToken",
+            JSON.stringify(response.data.access)
+          );
+          localStorage.setItem(
+            "refreshToken",
+            JSON.stringify(response.data.refresh)
+          );
 
-	const signup = async (user) => {
-		const response = axios({
-			method: "post",
-			url: "http://127.0.0.1:8000/api/user/register/",
-			data: user,
-		});
-		const { data } = await response;
-		console.log("first", data);
-		if (data) {
-			localStorage.setItem("authToken", JSON.stringify(data.tokens.access));
-			console.log(data);
-		}
-		dispatch({
-			type: "SIGNUP",
-			payload: data,
-		});
-	};
+          const token = response.data.access;
+          const decodedToken = jwt_decode(token);
+          localStorage.setItem(
+            "username",
+            JSON.stringify(decodedToken.username)
+          );
+        }
+        dispatch({
+          type: "LOGIN",
+          payload: response.data,
+        });
+      })
+      .catch((error) => {
+        console.log("error", error.message);
+      });
+  };
 
-	return (
-		<AuthContext.Provider
-			value={{
-				user: state.user,
-				// authToken: state.authToken,
-				login,
-				signup,
-				isLoggedin: state.isLoggedin,
-			}}
-		>
-			{children}
-		</AuthContext.Provider>
-	);
+  const signup = async (user) => {
+    const baseUrl = "http://127.0.0.1:8000/api/user/register/";
+    axios
+      .post(baseUrl, user)
+      .then((response) => {
+        if (response.data) {
+          localStorage.setItem(
+            "accessToken",
+            JSON.stringify(response.data.tokens.access)
+          );
+          localStorage.setItem(
+            "refreshToken",
+            JSON.stringify(response.data.tokens.refresh)
+          );
+
+          localStorage.setItem(
+            "username",
+            JSON.stringify(response.data.user.username)
+          );
+        }
+        dispatch({
+          type: "SIGNUP",
+          payload: response.data,
+        });
+      })
+      .catch((error) => {
+        console.log("error", error.message);
+      });
+  };
+
+  return (
+    <AuthContext.Provider
+      value={{
+        user: state.user,
+        login,
+        signup,
+        isLoggedin: state.isLoggedin,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export default AuthContext;

@@ -25,14 +25,13 @@ function App() {
 					path="/signup"
 					element={isLoggedin ? <Navigate to="/" /> : <SignUp />}
 				/>
-				{/* <Route element={<PrivateRoutes />}> */}
-				{/* <Route path="/create" element={<CreatePost />} /> */}
 				<Route
 					path="/create"
 					element={isLoggedin ?<CreatePost/> : <Signin />}
 				/>
 				<Route
-					path="/user-profile"
+					path="/profile/:username"
+					// element={<UserProfile/>}
 					element={isLoggedin ?<UserProfile/> : <Signin />}
 				/>
 			</Routes>

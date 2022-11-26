@@ -7,7 +7,7 @@ const PostCard = () => {
   const { posts, getPosts, post, loading } = useContext(PostContext);
   useEffect(() => {
     getPosts();
-  }, [posts]);
+  }, []);
 
   if (!posts) {
     return (

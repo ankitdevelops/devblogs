@@ -28,7 +28,7 @@ const UserProfile = () => {
             <div className="card card-body">
               <div className="user-image mx-auto my-3">
                 <img
-                  src={`http://127.0.0.1:8000/${singleUser.user.avatar}`}
+                  src={`${singleUser.avatar}`}
                   alt="user_image"
                   height={150}
                   width={150}
@@ -36,17 +36,18 @@ const UserProfile = () => {
                 />
               </div>
               <div className="user-name text-center text-capitalize">
-                <h3>{singleUser.user.name}</h3>
+                <h3>{singleUser.name}</h3>
               </div>
               <div className="user-info text-center my-2">
-                <p className="fs-5">{singleUser.user.about}</p>
+                <p className="fs-5">{singleUser.about}</p>
               </div>
               <div className="user-social  w-50 mx-auto">
                 <ul className="d-flex justify-content-evenly">
-                  <li className="list-group-item mx-1">India</li>
                   <li className="list-group-item mx-1">
-                    {singleUser.user.email}
+                    {/* Date Joined: {singleUser.date_joined}cd */}
                   </li>
+                  <li className="list-group-item mx-1">India</li>
+                  <li className="list-group-item mx-1">{singleUser.email}</li>
                   <li className="list-group-item mx-1">
                     <Link>Github</Link>
                   </li>
@@ -83,7 +84,7 @@ const UserProfile = () => {
                         <li className="list-group-item ">
                           <h6>Current Job</h6>
                           <hr />
-                          {singleUser.user.designation}
+                          {singleUser.designation}
                         </li>
                       </ul>
                     </div>
@@ -127,15 +128,16 @@ const UserProfile = () => {
                         <li className="list-group-item ">
                           <h5>Recent Post</h5>
                         </li>
-                        {singleUser.user.blogs.map((post, index) => (
-                          <Link
-                            to={`/${username}/${post.slug}`}
-                            className="list-group-item list-group-item text-capitalize"
-                            key={index}
-                          >
-                            {post.title}
-                          </Link>
-                        ))}
+                        {singleUser.authorBlogs &&
+                          singleUser.authorBlogs.map((post, index) => (
+                            <Link
+                              to={`/${username}/${post.slug}`}
+                              className="list-group-item list-group-item text-capitalize"
+                              key={index}
+                            >
+                              {post.title}
+                            </Link>
+                          ))}
                       </ul>
                     </div>
                   </div>

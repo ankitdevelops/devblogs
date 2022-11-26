@@ -6,12 +6,15 @@ import PostContext from "../context/PostContext";
 const CreatePost = () => {
   const navigate = useNavigate();
 
+  const user = JSON.parse(localStorage.getItem("username"));
+
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("");
   const [status, setStatus] = useState("");
   const [thumbnail, setThumbnail] = useState([]);
   const [preview, setPreview] = useState(false);
+
   const { posts, addPost } = useContext(PostContext);
 
   const onSubmit = async (e) => {
@@ -23,7 +26,7 @@ const CreatePost = () => {
     formData.append("status", status);
     formData.append("thumbnail", thumbnail[0]);
     await addPost(formData);
-    navigate("/");
+    navigate(`/profile/${user}`);
   };
 
   const handlePreview = (e) => {

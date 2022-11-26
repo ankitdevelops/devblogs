@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from api.account.models import User
 from api.blogs.serializers import BlogSerializer
-from api.blogs.models import Blog
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 
 class UserRegisterSerializer(serializers.ModelSerializer):
@@ -38,23 +38,24 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         return user
 
 
-class UserBlogListSerializer(serializers.ModelSerializer):
+from django.contrib.auth import get_user_model
+
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    authorBlogs = BlogSerializer(read_only=True, many=True)
+
     class Meta:
-        model = Blog
+        model = get_user_model()
         fields = (
-            "title",
-            "slug",
-            # "thumbnail",
-            # "content",
-            # "category",
-            # "status",
-            # "is_featured",
-            # "is_must_read",
-            # "created",
+            "name",
+            "username",
+            "email",
+            "avatar",
+            "designation",
+            "date_joined",
+            "about",
+            "authorBlogs",
         )
-
-
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):

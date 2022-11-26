@@ -1,9 +1,10 @@
 from rest_framework.response import Response
 from rest_framework.generics import CreateAPIView, ListAPIView
-from .serializers import UserRegisterSerializer, UserBlogListSerializer
+from .serializers import UserRegisterSerializer, UserProfileSerializer
 from api.account.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import status
+from api.blogs.models import Blog
 
 
 class UserRegisterView(CreateAPIView):
@@ -27,32 +28,13 @@ class UserRegisterView(CreateAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class UserListView(ListAPIView):
+class UserProfileView(ListAPIView):
     queryset = User.objects.all()
-    serializer_class = UserBlogListSerializer
-    lookup_field = "username"
+    serializer_class = UserProfileSerializer
 
-    def list(self, request, *args, **kwargs):
-        """
-        Currently returning details of logged in user
-        change this by username
-        """
-        user = self.queryset.get(username=kwargs["username"])
-        queryset = self.filter_queryset(user.authorBlogs.all())
-        serializer = self.get_serializer(queryset, many=True)
-        print(user.avatar.url)
-        data = {
-            "user": {
-                "username": user.username,
-                "name": user.name,
-                "email": user.email,
-                "avatar": user.avatar.url,
-                "blogs": serializer.data,
-                "about": user.about,
-                "designation": user.designation,
-            },
-        }
-        return Response(data)
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.filter(username=self.kwargs["username"])
 
 
 # Trying to Add Username in login returned token

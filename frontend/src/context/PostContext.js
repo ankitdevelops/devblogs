@@ -2,26 +2,26 @@ import { createContext, useReducer } from "react";
 import postReducer from "./PostReducer";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
-const PostContext = createContext();
+import { toast } from "react-toastify";
 
+const PostContext = createContext();
 export const PostProvider = ({ children }) => {
   const initialState = {
     posts: [],
     loading: true,
     post: null,
-    singleUser: null,
+    singleUser: {},
   };
-
   const [state, dispatch] = useReducer(postReducer, initialState);
-  //   const navigate = useNavigate();
-  // get post
+
+  // get all posts
 
   const getPosts = async () => {
     const url = "http://127.0.0.1:8000/api/blogs/";
     axios
       .get(url)
       .then((response) => {
-        if (response.status === 200) {
+        if (response.status == 200) {
           dispatch({
             type: "GET_POSTS",
             payload: response.data,
@@ -30,6 +30,7 @@ export const PostProvider = ({ children }) => {
       })
       .catch((error) => {
         console.log("error", error.message);
+        toast.success(error.message);
       });
   };
 
@@ -52,22 +53,32 @@ export const PostProvider = ({ children }) => {
             payload: response.data,
           });
         }
+        toast.success("Post Created Successfully");
       })
       .catch((error) => {
         console.log("Error Message: ", error.message);
+        toast.error(error.message);
       });
   };
 
   // get single post
 
   const getSinglePost = async (slug) => {
-    const response = axios.get(`http://127.0.0.1:8000/api/blogs/${slug}/`);
-
-    const { data } = await response;
-    dispatch({
-      type: "GET_SINGLE_POSTS",
-      payload: data,
-    });
+    const url = `http://127.0.0.1:8000/api/blogs/${slug}/`;
+    axios
+      .get(url)
+      .then((response) => {
+        if (response.status == 200) {
+          dispatch({
+            type: "GET_SINGLE_POSTS",
+            payload: response.data,
+          });
+        }
+      })
+      .catch((error) => {
+        console.log("Error Message: ", error.message);
+        toast.error(error.message);
+      });
   };
 
   // get single user profile
@@ -77,7 +88,7 @@ export const PostProvider = ({ children }) => {
     const { data } = await response;
     dispatch({
       type: "GET_SINGLE_USER",
-      payload: data,
+      payload: data[0],
     });
   };
 

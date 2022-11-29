@@ -11,6 +11,7 @@ export const PostProvider = ({ children }) => {
     loading: true,
     post: null,
     singleUser: {},
+    featuredPosts: [],
   };
   const [state, dispatch] = useReducer(postReducer, initialState);
 
@@ -83,25 +84,55 @@ export const PostProvider = ({ children }) => {
 
   // get single user profile
   const getUserProfile = async (username) => {
-    const response = axios.get(`http://127.0.0.1:8000/api/user/${username}/`);
+    const url = `http://127.0.0.1:8000/api/user/${username}/`;
+    axios
+      .get(url)
+      .then((response) => {
+        if (response.status == 200) {
+          dispatch({
+            type: "GET_SINGLE_USER",
+            payload: response.data[0],
+          });
+        }
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
 
-    const { data } = await response;
-    dispatch({
-      type: "GET_SINGLE_USER",
-      payload: data[0],
-    });
+  // get featured blogs
+
+  const getFeaturedBlogs = async () => {
+    const url = "http://127.0.0.1:8000/api/blogs/featured/";
+
+    axios
+      .get(url)
+      .then((response) => {
+        if (response.status == 200) {
+          dispatch({
+            type: "GET_FEATURED_POSTS",
+            payload: response.data,
+          });
+          console.log(response.data);
+        }
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   };
 
   return (
     <PostContext.Provider
       value={{
-        posts: state.posts,
         getPosts,
         addPost,
         getSinglePost,
         getUserProfile,
+        getFeaturedBlogs,
+        posts: state.posts,
         post: state.post,
         singleUser: state.singleUser,
+        featuredPosts: state.featuredPosts,
       }}
     >
       {children}

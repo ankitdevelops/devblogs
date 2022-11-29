@@ -10,6 +10,7 @@ const UserProfile = () => {
   const { singleUser, getUserProfile } = useContext(PostContext);
   useEffect(() => {
     getUserProfile(username);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [username]);
 
   if (!singleUser) {

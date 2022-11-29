@@ -4,10 +4,7 @@ import ReactMarkdown from "react-markdown";
 import DotLoader from "react-spinners/DotLoader";
 import { Link } from "react-router-dom";
 const PostCard = () => {
-  const { posts, getPosts, post, loading } = useContext(PostContext);
-  useEffect(() => {
-    getPosts();
-  }, []);
+  const { posts } = useContext(PostContext);
 
   if (!posts) {
     return (

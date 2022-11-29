@@ -1,26 +1,31 @@
 const postReducer = (state, action) => {
-	switch (action.type) {
-		case "GET_POSTS":
-			return {
-				posts: action.payload,
-				loading: false,
-			};
+  switch (action.type) {
+    case "GET_POSTS":
+      return {
+        posts: action.payload,
+        loading: false,
+      };
 
-		case "ADD_POST":
-			return {...state,
-				posts: [...state.posts, action.payload],
-			};
-		
-		case "GET_SINGLE_POSTS":
-			return {post:action.payload}	
+    case "ADD_POST":
+      return { ...state, posts: [...state.posts, action.payload] };
 
-		case "GET_SINGLE_USER":
-			return {
-				singleUser:action.payload,
-			}
-		default:
-			return state;
-	}
+    case "GET_SINGLE_POSTS":
+      return { post: action.payload, loading: false };
+
+    case "GET_SINGLE_USER":
+      return {
+        singleUser: action.payload,
+        loading: false,
+      };
+    case "GET_FEATURED_POSTS":
+      return {
+        // ...state,
+        featuredPosts: action.payload,
+        loading: false,
+      };
+    default:
+      return state;
+  }
 };
 
 export default postReducer;

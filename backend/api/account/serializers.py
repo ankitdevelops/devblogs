@@ -65,3 +65,9 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token["username"] = user.username
 
         return token
+
+
+# class UserInfoSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = User
+#         fields =

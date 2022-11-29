@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-const LeftPanel = () => {
+
+const Categories = () => {
   return (
     <>
       <div className="d-grid gap-2 ">
@@ -21,4 +22,4 @@ const LeftPanel = () => {
   );
 };
 
-export default LeftPanel;
+export default Categories;

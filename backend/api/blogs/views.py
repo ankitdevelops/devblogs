@@ -1,6 +1,10 @@
 from django.shortcuts import render
 from rest_framework.response import Response
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import (
+    ListCreateAPIView,
+    RetrieveUpdateDestroyAPIView,
+    ListAPIView,
+)
 from api.blogs.models import Blog, Comment
 from .serializers import BlogSerializer
 
@@ -28,3 +32,12 @@ class BlogDetailsUpdateDeleteView(RetrieveUpdateDestroyAPIView):
     )
     serializer_class = BlogSerializer
     lookup_field = "slug"
+
+
+class FeaturedBlogs(ListAPIView):
+    queryset = Blog.objects.all().order_by("-updated")
+    serializer_class = BlogSerializer
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.filter(status="published", is_archived=False, is_featured=True)

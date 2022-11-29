@@ -1,11 +1,10 @@
 import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import LeftPanel from "../components/LeftPanel";
-import RightPanel from "../components/RightPanel";
 import PostContext from "../context/PostContext";
 import DotLoader from "react-spinners/DotLoader";
 import ReactMarkdown from "react-markdown";
 import { Link } from "react-router-dom";
+import Categories from "../components/Categories";
 
 const DetailsPage = () => {
   const { slug } = useParams();
@@ -13,7 +12,6 @@ const DetailsPage = () => {
   useEffect(() => {
     getSinglePost(slug);
   }, [slug]);
-  console.log(post);
   if (!post) {
     return (
       <>
@@ -26,9 +24,9 @@ const DetailsPage = () => {
 
   return (
     <main className="my-3">
-      <div className="row container  ">
+      <div className="row container">
         <div className="mx-auto d-none d-sm-block col-sm-2 col-md-2  text-white">
-          <LeftPanel />
+          <Categories />
         </div>
         <div className="mx-auto col-sm-7 col-md-7  ">
           <div className="card p-3">
@@ -71,6 +69,7 @@ const DetailsPage = () => {
             </div>
           </div>
         </div>
+
         <div className="d-none d-sm-block mx-auto col-sm-3 col-md-3">
           <div className="author-profile">
             <div className="card card-body">

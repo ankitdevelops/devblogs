@@ -1,36 +1,27 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import PostContext from "../context/PostContext";
 const FeaturedPost = () => {
-  let index;
+  const { featuredPosts, getFeaturedBlogs } = useContext(PostContext);
+
+  // useEffect(() => {
+  //   getFeaturedBlogs();
+  // }, []);
   return (
     <>
-      <ul className="list-group list-group-flush ">
-        <li className="list-group-item ">
-          <h5>Featured Post</h5>
-        </li>
-        <Link className="list-group-item list-group-item-action">An item</Link>
-        <Link className="list-group-item list-group-item-action">
-          A second item
-        </Link>
-        <Link className="list-group-item list-group-item-action">
-          A third item
-        </Link>
-        <Link className="list-group-item list-group-item-action">
-          A fourth item
-        </Link>
-        <Link className="list-group-item list-group-item-action">
-          And a fifth one
-        </Link>
-        <Link className="list-group-item list-group-item-action">
-          A third item
-        </Link>
-        <Link className="list-group-item list-group-item-action">
-          A fourth item
-        </Link>
-        <Link className="list-group-item list-group-item-action">
-          And a fifth one
-        </Link>
-      </ul>
+      <div className="card card-body p-1">
+        <ul className="list-group list-group-flush ">
+          <li className="list-group-item ">
+            <h5>Featured Post</h5>
+          </li>
+          {featuredPosts &&
+            featuredPosts.map((post, index) => (
+              <Link key={index} className="list-group-item list-group-item">
+                {post.title}
+              </Link>
+            ))}
+        </ul>
+      </div>
     </>
   );
 };

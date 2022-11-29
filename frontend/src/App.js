@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
@@ -11,8 +11,11 @@ import CreatePost from "./pages/CreatePost";
 import UserProfile from "./pages/UserProfile";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import PostContext from "./context/PostContext";
+
 function App() {
-  const { isLoggedin } = useContext(AuthContext);
+  const { isLoggedin, user } = useContext(AuthContext);
+
   return (
     <BrowserRouter>
       <ToastContainer />

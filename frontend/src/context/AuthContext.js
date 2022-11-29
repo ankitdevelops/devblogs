@@ -2,6 +2,8 @@ import { createContext, useState, useReducer, useEffect } from "react";
 import authReducer from "./AuthReducer";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
+import { toast } from "react-toastify";
+
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -11,6 +13,7 @@ export const AuthProvider = ({ children }) => {
       ? JSON.parse(localStorage.getItem("username"))
       : null,
     loading: true,
+    userInfo: null,
   };
   // useEffect(() => {
 
@@ -45,10 +48,11 @@ export const AuthProvider = ({ children }) => {
         });
       })
       .catch((error) => {
-        console.log("error", error.message);
+        toast.error(error.message);
       });
   };
 
+  // SignUp Function
   const signup = async (user) => {
     const baseUrl = "http://127.0.0.1:8000/api/user/register/";
     axios
@@ -75,10 +79,15 @@ export const AuthProvider = ({ children }) => {
         });
       })
       .catch((error) => {
-        console.log("error", error.message);
+        toast.error(error.message);
       });
   };
 
+  // Logged in User Info
+
+  const getUserInfo = async (username) => {
+    //
+  };
   return (
     <AuthContext.Provider
       value={{

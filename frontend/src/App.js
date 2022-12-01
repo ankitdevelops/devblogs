@@ -14,7 +14,11 @@ import "react-toastify/dist/ReactToastify.css";
 import PostContext from "./context/PostContext";
 
 function App() {
-  const { isLoggedin, user } = useContext(AuthContext);
+  const { isLoggedin, username, getUserInfo } = useContext(AuthContext);
+
+  useEffect(() => {
+    getUserInfo(username);
+  }, []);
 
   return (
     <BrowserRouter>

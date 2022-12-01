@@ -9,11 +9,11 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const initialState = {
     isLoggedin: localStorage.getItem("accessToken") ? true : false,
-    user: localStorage.getItem("username")
+    username: localStorage.getItem("username")
       ? JSON.parse(localStorage.getItem("username"))
       : null,
     loading: true,
-    userInfo: null,
+    userInfo: [],
   };
   // useEffect(() => {
 
@@ -86,15 +86,32 @@ export const AuthProvider = ({ children }) => {
   // Logged in User Info
 
   const getUserInfo = async (username) => {
-    //
+    const url = `http://127.0.0.1:8000/api/user/${username}/`;
+    axios
+      .get(url)
+      .then((response) => {
+        if (response.status === 200) {
+          localStorage.setItem("userInfo", JSON.stringify(response.data[0]));
+          dispatch({
+            type: "SET_USERINFO",
+            payload: response.data[0],
+          });
+        }
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   };
+
   return (
     <AuthContext.Provider
       value={{
-        user: state.user,
         login,
         signup,
+        getUserInfo,
+        username: state.username,
         isLoggedin: state.isLoggedin,
+        userInfo: state.userInfo,
       }}
     >
       {children}

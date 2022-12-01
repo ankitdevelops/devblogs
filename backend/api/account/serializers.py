@@ -1,7 +1,9 @@
 from rest_framework import serializers
-from api.account.models import User
 from api.blogs.serializers import BlogSerializer
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from django.contrib.auth import get_user_model
+
+# from api.account.models import User
 
 
 class UserRegisterSerializer(serializers.ModelSerializer):
@@ -11,7 +13,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
     # )
 
     class Meta:
-        model = User
+        model = get_user_model()
         fields = (
             "name",
             "username",
@@ -34,11 +36,8 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         #     raise serializers.ValidationError("Password don't match")
         # validated_data.pop("confirm_password")
         # print(validated_data)
-        user = User.objects.create_user(**validated_data)
+        user = get_user_model().objects.create_user(**validated_data)
         return user
-
-
-from django.contrib.auth import get_user_model
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
@@ -67,7 +66,13 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         return token
 
 
-# class UserInfoSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = User
-#         fields =
+class UserInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = get_user_model()
+        fields = (
+            "name",
+            "username",
+            "email",
+            "avatar",
+            "is_staff",
+        )

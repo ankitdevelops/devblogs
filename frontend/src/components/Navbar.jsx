@@ -2,11 +2,13 @@ import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 const Navbar = () => {
-  const { isLoggedin, user } = useContext(AuthContext);
+  const { isLoggedin, username, userInfo, getUserInfo } =
+    useContext(AuthContext);
   const [showDropdown, setShowDropdown] = useState(false);
   function myFunction() {
     setShowDropdown(!showDropdown);
   }
+
   return (
     <nav className="navbar-c ">
       <div className="container">
@@ -45,19 +47,25 @@ const Navbar = () => {
             </div>
             <div className="profile">
               <div>
-                <img
-                  src="https://randomuser.me/api/portraits/med/men/75.jpg"
-                  alt=""
-                  className="profile-btn"
-                  onClick={myFunction}
-                />
+                {isLoggedin && (
+                  <img
+                    src={
+                      userInfo && userInfo.avatar
+                        ? userInfo.avatar
+                        : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                    }
+                    alt=""
+                    className="profile-btn"
+                    onClick={myFunction}
+                  />
+                )}
                 <div
                   className={
                     showDropdown ? "show dropdown-content " : "dropdown-content"
                   }
                   id="myDropdown"
                 >
-                  <Link to={`/profile/${user}`}>Profile</Link>
+                  <Link to={`/profile/${username}`}>Profile</Link>
                   <Link to="/dashboard">Dashboard</Link>
                   <Link to="create">Create Post</Link>
                   <hr />

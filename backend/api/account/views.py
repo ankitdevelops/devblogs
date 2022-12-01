@@ -1,6 +1,10 @@
 from rest_framework.response import Response
 from rest_framework.generics import CreateAPIView, ListAPIView
-from .serializers import UserRegisterSerializer, UserProfileSerializer
+from .serializers import (
+    UserRegisterSerializer,
+    UserProfileSerializer,
+    UserInfoSerializer,
+)
 from api.account.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import status
@@ -23,7 +27,6 @@ class UserRegisterView(CreateAPIView):
                     "access": str(refresh.access_token),
                 },
             }
-
             return Response(res, status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -47,4 +50,9 @@ class MyTokenObtainPairView(TokenObtainPairView):
 
 
 class UserInfo(ListAPIView):
-    pass
+    queryset = User.objects.all()
+    serializer_class = UserInfoSerializer
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.filter(username=self.kwargs["username"])

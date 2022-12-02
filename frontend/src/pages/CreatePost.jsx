@@ -3,11 +3,9 @@ import { useNavigate, Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import { CKEditor } from "ckeditor4-react";
 import PostContext from "../context/PostContext";
+import AuthContext from "../context/AuthContext";
+
 const CreatePost = () => {
-  const navigate = useNavigate();
-
-  const user = JSON.parse(localStorage.getItem("username"));
-
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("");
@@ -15,7 +13,12 @@ const CreatePost = () => {
   const [thumbnail, setThumbnail] = useState([]);
   const [preview, setPreview] = useState(false);
 
+  const navigate = useNavigate();
+
+  const { userInfo } = useContext(AuthContext);
   const { posts, addPost } = useContext(PostContext);
+
+  const user = userInfo.username;
 
   const onSubmit = async (e) => {
     e.preventDefault();

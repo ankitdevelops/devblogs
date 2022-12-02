@@ -53,6 +53,8 @@ class UserInfo(ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserInfoSerializer
 
-    def get_queryset(self):
-        qs = super().get_queryset()
-        return qs.filter(username=self.kwargs["username"])
+    def list(self, request, *args, **kwargs):
+        serializer = self.get_serializer(
+            self.request.user,
+        )
+        return Response(serializer.data)

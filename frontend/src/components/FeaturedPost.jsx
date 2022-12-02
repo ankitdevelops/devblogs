@@ -2,11 +2,8 @@ import React, { useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import PostContext from "../context/PostContext";
 const FeaturedPost = () => {
-  const { featuredPosts, getFeaturedBlogs } = useContext(PostContext);
+  const { featuredPosts } = useContext(PostContext);
 
-  // useEffect(() => {
-  //   getFeaturedBlogs();
-  // }, []);
   return (
     <>
       <div className="card card-body p-1">

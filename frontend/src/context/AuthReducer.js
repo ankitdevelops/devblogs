@@ -18,6 +18,14 @@ const authReducer = (state, action) => {
       return {
         ...state,
         userInfo: action.payload,
+        // isLoggedin: true,
+      };
+
+    case "GET_USER_PROFILE":
+      return {
+        ...state,
+        userProfile: action.payload,
+        // isLoggedin: true,
       };
     default:
       return state;

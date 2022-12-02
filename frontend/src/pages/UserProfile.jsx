@@ -1,23 +1,25 @@
 import React, { useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import DotLoader from "react-spinners/DotLoader";
-// import AuthContext from "../context/AuthContext";
+import AuthContext from "../context/AuthContext";
 import PostContext from "../context/PostContext";
 import { useParams } from "react-router-dom";
 
 const UserProfile = () => {
   const { username } = useParams();
-  const { singleUser, getUserProfile } = useContext(PostContext);
+  const { userProfile, getUserProfile } = useContext(AuthContext);
   useEffect(() => {
     getUserProfile(username);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [username]);
 
-  if (!singleUser) {
+  // let userProfile = userProfile;
+
+  if (!userProfile) {
     return (
       <>
         <div className="loader d-flex justify-content-center mt-5">
-          <DotLoader color="#fff" size={150} />
+          <DotLoader color="#fff" size={50} />
         </div>
       </>
     );
@@ -29,7 +31,7 @@ const UserProfile = () => {
             <div className="card card-body">
               <div className="user-image mx-auto my-3">
                 <img
-                  src={`${singleUser.avatar}`}
+                  src={userProfile.avatar && userProfile.avatar}
                   alt="user_image"
                   height={150}
                   width={150}
@@ -37,18 +39,18 @@ const UserProfile = () => {
                 />
               </div>
               <div className="user-name text-center text-capitalize">
-                <h3>{singleUser.name}</h3>
+                <h3>{userProfile.name}</h3>
               </div>
               <div className="user-info text-center my-2">
-                <p className="fs-5">{singleUser.about}</p>
+                <p className="fs-5">{userProfile.about}</p>
               </div>
               <div className="user-social  w-50 mx-auto">
                 <ul className="d-flex justify-content-evenly">
                   <li className="list-group-item mx-1">
-                    {/* Date Joined: {singleUser.date_joined}cd */}
+                    {/* Date Joined: {userProfile.date_joined}cd */}
                   </li>
                   <li className="list-group-item mx-1">India</li>
-                  <li className="list-group-item mx-1">{singleUser.email}</li>
+                  <li className="list-group-item mx-1">{userProfile.email}</li>
                   <li className="list-group-item mx-1">
                     <Link>Github</Link>
                   </li>
@@ -85,7 +87,7 @@ const UserProfile = () => {
                         <li className="list-group-item ">
                           <h6>Current Job</h6>
                           <hr />
-                          {singleUser.designation}
+                          {userProfile.designation}
                         </li>
                       </ul>
                     </div>
@@ -129,8 +131,8 @@ const UserProfile = () => {
                         <li className="list-group-item ">
                           <h5>Recent Post</h5>
                         </li>
-                        {singleUser.authorBlogs &&
-                          singleUser.authorBlogs.map((post, index) => (
+                        {userProfile.authorBlogs &&
+                          userProfile.authorBlogs.map((post, index) => (
                             <Link
                               to={`/${username}/${post.slug}`}
                               className="list-group-item list-group-item text-capitalize"

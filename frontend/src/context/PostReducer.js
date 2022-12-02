@@ -2,6 +2,7 @@ const postReducer = (state, action) => {
   switch (action.type) {
     case "GET_POSTS":
       return {
+        ...state,
         posts: action.payload,
         loading: false,
       };
@@ -10,16 +11,11 @@ const postReducer = (state, action) => {
       return { ...state, posts: [...state.posts, action.payload] };
 
     case "GET_SINGLE_POSTS":
-      return { post: action.payload, loading: false };
+      return { ...state, post: action.payload, loading: false };
 
-    case "GET_SINGLE_USER":
-      return {
-        singleUser: action.payload,
-        loading: false,
-      };
     case "GET_FEATURED_POSTS":
       return {
-        // ...state,
+        ...state,
         featuredPosts: action.payload,
         loading: false,
       };

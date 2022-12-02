@@ -5,19 +5,6 @@ import Categories from "../components/Categories";
 import PostContext from "../context/PostContext";
 
 const HomePage = () => {
-  const { getPosts, getFeaturedBlogs, posts, featuredPosts } =
-    useContext(PostContext);
-
-  useEffect(() => {
-    getPosts();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  // useEffect(() => {
-  //   getFeaturedBlogs();
-  // }, []);
-
   return (
     <main className="mt-3">
       <div className="row container  ">

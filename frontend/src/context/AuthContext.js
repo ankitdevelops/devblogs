@@ -9,15 +9,11 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const initialState = {
     isLoggedin: localStorage.getItem("accessToken") ? true : false,
-    username: localStorage.getItem("username")
-      ? JSON.parse(localStorage.getItem("username"))
-      : null,
     loading: true,
-    userInfo: [],
+    userInfo: {},
+    userProfile: {},
   };
-  // useEffect(() => {
 
-  // },[])
   const [state, dispatch] = useReducer(authReducer, initialState);
 
   const login = async (user) => {
@@ -33,13 +29,6 @@ export const AuthProvider = ({ children }) => {
           localStorage.setItem(
             "refreshToken",
             JSON.stringify(response.data.refresh)
-          );
-
-          const token = response.data.access;
-          const decodedToken = jwt_decode(token);
-          localStorage.setItem(
-            "username",
-            JSON.stringify(decodedToken.username)
           );
         }
         dispatch({
@@ -67,11 +56,6 @@ export const AuthProvider = ({ children }) => {
             "refreshToken",
             JSON.stringify(response.data.tokens.refresh)
           );
-
-          localStorage.setItem(
-            "username",
-            JSON.stringify(response.data.user.username)
-          );
         }
         dispatch({
           type: "SIGNUP",
@@ -85,15 +69,40 @@ export const AuthProvider = ({ children }) => {
 
   // Logged in User Info
 
-  const getUserInfo = async (username) => {
+  const getUserInfo = async () => {
+    const url = `http://127.0.0.1:8000/api/user/`;
+    const config = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${JSON.parse(
+        localStorage.getItem("accessToken")
+      )}`,
+    };
+    axios
+      .get(url, { headers: config })
+      .then((response) => {
+        if (response.status === 200) {
+          localStorage.setItem("userInfo", JSON.stringify(response.data));
+          dispatch({
+            type: "SET_USERINFO",
+            payload: response.data,
+          });
+        }
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
+
+  // User Profile with all data
+
+  const getUserProfile = async (username) => {
     const url = `http://127.0.0.1:8000/api/user/${username}/`;
     axios
       .get(url)
       .then((response) => {
         if (response.status === 200) {
-          localStorage.setItem("userInfo", JSON.stringify(response.data[0]));
           dispatch({
-            type: "SET_USERINFO",
+            type: "GET_USER_PROFILE",
             payload: response.data[0],
           });
         }
@@ -109,9 +118,11 @@ export const AuthProvider = ({ children }) => {
         login,
         signup,
         getUserInfo,
+        getUserProfile,
         username: state.username,
         isLoggedin: state.isLoggedin,
         userInfo: state.userInfo,
+        userProfile: state.userProfile,
       }}
     >
       {children}

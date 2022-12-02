@@ -14,11 +14,28 @@ import "react-toastify/dist/ReactToastify.css";
 import PostContext from "./context/PostContext";
 
 function App() {
-  const { isLoggedin, username, getUserInfo } = useContext(AuthContext);
+  const { isLoggedin, getUserInfo } = useContext(AuthContext);
+  const { getPosts, getFeaturedPosts, posts } = useContext(PostContext);
 
   useEffect(() => {
-    getUserInfo(username);
+    getPosts();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    // if (posts.length !== 0) {
+    getFeaturedPosts();
+    // }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [posts]);
+
+  useEffect(() => {
+    if (isLoggedin) {
+      getUserInfo();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoggedin]);
 
   return (
     <BrowserRouter>

@@ -2,12 +2,13 @@ import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 const Navbar = () => {
-  const { isLoggedin, username, userInfo, getUserInfo } =
-    useContext(AuthContext);
+  const { isLoggedin, userInfo } = useContext(AuthContext);
   const [showDropdown, setShowDropdown] = useState(false);
   function myFunction() {
     setShowDropdown(!showDropdown);
   }
+
+  // const userInfo = localStorage.getItem("userInfo");
 
   return (
     <nav className="navbar-c ">
@@ -50,7 +51,7 @@ const Navbar = () => {
                 {isLoggedin && (
                   <img
                     src={
-                      userInfo && userInfo.avatar
+                      userInfo.avatar !== null && userInfo.avatar !== null
                         ? userInfo.avatar
                         : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
                     }
@@ -65,7 +66,10 @@ const Navbar = () => {
                   }
                   id="myDropdown"
                 >
-                  <Link to={`/profile/${username}`}>Profile</Link>
+                  {userInfo.username && (
+                    <Link to={`/profile/${userInfo.username}`}>Profile</Link>
+                  )}
+
                   <Link to="/dashboard">Dashboard</Link>
                   <Link to="create">Create Post</Link>
                   <hr />

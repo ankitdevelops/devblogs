@@ -47,7 +47,7 @@ export const PostProvider = ({ children }) => {
     axios
       .post(url, post, { headers: config })
       .then((response) => {
-        if (response.status == 200) {
+        if (response.status === 200) {
           dispatch({
             type: "ADD_POST",
             payload: response.data,
@@ -57,6 +57,31 @@ export const PostProvider = ({ children }) => {
       })
       .catch((error) => {
         console.log("Error Message: ", error.message);
+        toast.error(error.message);
+      });
+  };
+
+  // update post
+
+  const updatePost = async (slug, data) => {
+    console.log("slug", slug);
+    console.log("data", data);
+    const url = `http://127.0.0.1:8000/api/blogs/${slug}/`;
+    const config = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${JSON.parse(
+        localStorage.getItem("accessToken")
+      )}`,
+    };
+    axios
+      .put(url, data, { headers: config })
+      .then((response) => {
+        if (response.status === 200) {
+          console.log(response.data);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
         toast.error(error.message);
       });
   };
@@ -108,6 +133,7 @@ export const PostProvider = ({ children }) => {
         addPost,
         getSinglePost,
         getFeaturedPosts,
+        updatePost,
         posts: state.posts,
         post: state.post,
         featuredPosts: state.featuredPosts,

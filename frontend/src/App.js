@@ -12,6 +12,7 @@ import UserProfile from "./pages/UserProfile";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PostContext from "./context/PostContext";
+import EditPost from "./pages/EditPost";
 
 function App() {
   const { isLoggedin, getUserInfo } = useContext(AuthContext);
@@ -58,8 +59,12 @@ function App() {
         />
         <Route
           path="/profile/:username"
-          // element={<UserProfile/>}
           element={isLoggedin ? <UserProfile /> : <Signin />}
+        />
+        <Route
+          path="/edit/:slug"
+          exact
+          element={isLoggedin ? <EditPost /> : <Signin />}
         />
       </Routes>
     </BrowserRouter>

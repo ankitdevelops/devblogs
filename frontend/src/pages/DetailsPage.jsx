@@ -5,13 +5,17 @@ import DotLoader from "react-spinners/DotLoader";
 import ReactMarkdown from "react-markdown";
 import { Link } from "react-router-dom";
 import Categories from "../components/Categories";
+import AuthContext from "../context/AuthContext";
 
 const DetailsPage = () => {
   const { slug } = useParams();
   const { getSinglePost, post } = useContext(PostContext);
+  const { userInfo } = useContext(AuthContext);
+  // console.log(post.author.username);
   useEffect(() => {
     getSinglePost(slug);
   }, [slug]);
+
   if (!post) {
     return (
       <>
@@ -42,11 +46,20 @@ const DetailsPage = () => {
               <h6 className="my-3 text-warning">
                 {post.category.toUpperCase()}
               </h6>
-              <h2 className="my-3">{post.title.toUpperCase()}</h2>
+              <div className="d-flex justify-content-between">
+                <h2 className="my-3">{post.title.toUpperCase()}</h2>
+                <div>
+                  {userInfo.username === post.author.username && (
+                    <Link to={`/edit/${post.slug}`} className="btn btn-primary">
+                      Edit
+                    </Link>
+                  )}
+                </div>
+              </div>
               <div className="media d-flex align-items-center ">
                 <div className="avatar">
                   <img
-                    src="https://bootdey.com/img/Content/avatar/avatar1.png"
+                    src={userInfo.avatar}
                     title=""
                     alt=""
                     style={{

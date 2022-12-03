@@ -16,7 +16,7 @@ const CreatePost = () => {
   const navigate = useNavigate();
 
   const { userInfo } = useContext(AuthContext);
-  const { posts, addPost } = useContext(PostContext);
+  const { addPost } = useContext(PostContext);
 
   const user = userInfo.username;
 

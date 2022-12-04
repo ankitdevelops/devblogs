@@ -45,7 +45,7 @@ const CreatePost = () => {
             <form>
               <input
                 type="text"
-                className="form-control my-2 p-3"
+                className="form-control my-2 p-3 shadow-none"
                 placeholder="An Awesome Title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
@@ -57,9 +57,91 @@ const CreatePost = () => {
                 }}
               />
 
-              <ul className="nav my-2">
-                <li className="nav-item"></li>
+              <hr />
+              <ul className="nav my-2f d-flex justify-content-around align-items-center">
+                <li className="nav-item">
+                  <div className="row g-3 align-items-center">
+                    <div className="col-auto">
+                      <label className="col-form-label">Thumbnail</label>
+                    </div>
+
+                    <div className="col-auto">
+                      <input
+                        type="file"
+                        className="form-control"
+                        required
+                        accept="image/*"
+                        multiple={false}
+                        onChange={(e) =>
+                          setThumbnail([...thumbnail, e.target.files[0]])
+                        }
+                      />
+                    </div>
+                  </div>
+                </li>
+                <li className="nav-item">
+                  <div className="row g-3 align-items-center">
+                    <div className="col-auto">
+                      <label className="col-form-label">Category</label>
+                    </div>
+                    <div className="col-auto">
+                      <select
+                        className="form-select"
+                        value={category}
+                        onChange={(e) => setCategory(e.target.value)}
+                      >
+                        <option defaultValue>Category</option>
+                        <option value="html" className="text-upper">
+                          HTML
+                        </option>
+                        <option value="freebies" className="text-upper">
+                          freebies
+                        </option>
+                        <option value="css" className="text-upper">
+                          css
+                        </option>
+                        <option value="tutorials" className="text-upper">
+                          tutorials
+                        </option>
+                        <option value="others" className="text-upper">
+                          others
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </li>
+                <li className="nav-item">
+                  <div className="row g-3 align-items-center">
+                    <div className="col-auto">
+                      <label className="col-form-label">Status</label>
+                    </div>
+                    <div className="col-auto">
+                      <select
+                        className="form-select my-2"
+                        value={status}
+                        onChange={(e) => setStatus(e.target.value)}
+                      >
+                        <option defaultValue>Status</option>
+                        <option value="draft">DRAFT</option>
+                        <option value="published">PUBLISHED</option>
+                      </select>
+                    </div>
+                  </div>
+                </li>
+                <li className="nav-item">
+                  <div className="d-grid gap-2">
+                    <button
+                      className={
+                        preview ? "btn btn-dark my-2" : "btn btn-light my-2"
+                      }
+                      onClick={(e) => handlePreview(e)}
+                    >
+                      {preview ? "Edit" : "Preview"}
+                    </button>
+                  </div>
+                </li>
               </ul>
+              <hr />
 
               {preview ? (
                 <ReactMarkdown className="content">{content}</ReactMarkdown>
@@ -76,66 +158,12 @@ const CreatePost = () => {
                     fontSize: "1.3rem",
                     resize: "none",
                   }}
-                  className="form-control my-2 content-input"
+                  className="form-control my-2 content-input shadow-none"
                 ></textarea>
               )}
             </form>
           </div>
           <div className="col-md-2">
-            <div className="d-grid gap-2">
-              <button
-                className={preview ? "btn btn-dark my-2" : "btn btn-light my-2"}
-                onClick={(e) => handlePreview(e)}
-              >
-                {preview ? "Edit" : "Preview"}
-              </button>
-            </div>
-
-            <div className="mb-3">
-              <label htmlFor="floatingInput">Thumbnail</label>
-              <input
-                type="file"
-                className="form-control"
-                required
-                accept="image/*"
-                multiple={false}
-                onChange={(e) =>
-                  setThumbnail([...thumbnail, e.target.files[0]])
-                }
-              />
-            </div>
-            <select
-              className="form-select"
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-            >
-              <option defaultValue>Category</option>
-              <option value="html" className="text-upper">
-                HTML
-              </option>
-              <option value="freebies" className="text-upper">
-                freebies
-              </option>
-              <option value="css" className="text-upper">
-                css
-              </option>
-              <option value="tutorials" className="text-upper">
-                tutorials
-              </option>
-              <option value="others" className="text-upper">
-                others
-              </option>
-            </select>
-
-            <select
-              className="form-select my-2"
-              value={status}
-              onChange={(e) => setStatus(e.target.value)}
-            >
-              <option defaultValue>Status</option>
-              <option value="draft">DRAFT</option>
-              <option value="published">PUBLISHED</option>
-            </select>
             <div className="d-grid gap-2">
               <button
                 className="btn-warning btn mt-2 btn-block"

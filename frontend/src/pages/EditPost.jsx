@@ -3,7 +3,7 @@ import PostContext from "../context/PostContext";
 import AuthContext from "../context/AuthContext";
 import { useNavigate, Link, useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
-
+import { toast } from "react-toastify";
 const EditPost = () => {
   const navigate = useNavigate();
   const { slug } = useParams();
@@ -14,7 +14,26 @@ const EditPost = () => {
   // calling the function
   useEffect(() => {
     getSinglePost(slug);
+    if (post) {
+      if (post.author.username !== user) {
+        toast.error("You don't have permission to edit this post.");
+      }
+    }
   }, [slug]);
+
+  useEffect(() => {
+    if (post) {
+      if (post.author.username !== user) {
+        toast.error("You don't have permission to edit this post.");
+      } else {
+        setTitle(post.title);
+        setContent(post.content);
+        setCategory(post.category);
+        setStatus(post.status);
+        setThumbnail(post.thumbnail);
+      }
+    }
+  }, [post]);
 
   // state
 
@@ -26,18 +45,25 @@ const EditPost = () => {
   const [preview, setPreview] = useState(false);
   const [newThumbnail, setNewThumbnail] = useState(false);
 
-  console.log("title", title);
-
   // handling forms
   const onSubmit = async (e) => {
     e.preventDefault();
     let formData = new FormData();
-    formData.append("title", title);
-    formData.append("content", content);
-    formData.append("category", category);
-    formData.append("status", status);
-    formData.append("thumbnail", thumbnail[0]);
-    console.log("formDAta", formData);
+    if (post.title !== title) {
+      formData.append("title", title);
+    }
+    if (post.content !== content) {
+      formData.append("content", content);
+    }
+    if (post.category !== category) {
+      formData.append("category", category);
+    }
+    if (post.status !== status) {
+      formData.append("status", status);
+    }
+    // if (thumbnail[thumbnail.length - 1]) {
+    //   formData.append("thumbnail", thumbnail[thumbnail.length - 1]);
+    // }
     await updatePost(post.slug, formData);
     navigate(`/profile/${user}`);
   };
@@ -47,9 +73,6 @@ const EditPost = () => {
     setPreview(!preview);
   };
 
-  // set new picture
-  // const setNewThumbnail = () => {};
-
   return (
     <>
       <div className="container my-3">
@@ -58,7 +81,7 @@ const EditPost = () => {
             <form>
               <input
                 type="text"
-                className="form-control my-2 p-3"
+                className="form-control my-2 p-3 shadow-none"
                 placeholder="An Awesome Title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
@@ -80,7 +103,10 @@ const EditPost = () => {
                     <div className="col-auto">
                       {post && (
                         <>
-                          <button
+                          <a
+                            href={post.thumbnail}
+                            target="_blank"
+                            rel="noreferrer"
                             className={
                               newThumbnail
                                 ? "btn btn-primary d-none"
@@ -88,7 +114,7 @@ const EditPost = () => {
                             }
                           >
                             Show
-                          </button>
+                          </a>
                           <button
                             className={
                               newThumbnail
@@ -114,37 +140,6 @@ const EditPost = () => {
                         }
                       />
                     </div>
-
-                    {/* <div className="col-auto">
-                      {post ? (
-                        <>
-                          <Link
-                            to={post.thumbnail}
-                            target="_blank"
-                            className="btn btn-primary"
-                          >
-                            Show
-                          </Link>
-                          <Link
-                            className="ms-2 btn btn-primary"
-                            onClick={() => setNewThumbnail(true)}
-                          >
-                            Set New
-                          </Link>
-                        </>
-                      ) : (
-                        <input
-                          type="file"
-                          className="form-control"
-                          required
-                          accept="image/*"
-                          multiple={false}
-                          onChange={(e) =>
-                            setThumbnail([...thumbnail, e.target.files[0]])
-                          }
-                        />
-                      )}
-                    </div> */}
                   </div>
                 </li>
                 <li className="nav-item">
@@ -225,7 +220,7 @@ const EditPost = () => {
                     fontSize: "1.3rem",
                     resize: "none",
                   }}
-                  className="form-control my-2 content-input"
+                  className="form-control my-2 content-input shadow-none"
                 ></textarea>
               )}
             </form>
@@ -236,7 +231,7 @@ const EditPost = () => {
                 className="btn-warning btn mt-2 btn-block"
                 onClick={(e) => onSubmit(e)}
               >
-                Post Now
+                Update Now
               </button>
             </div>
           </div>

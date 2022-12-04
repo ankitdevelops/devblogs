@@ -132,15 +132,18 @@ const UserProfile = () => {
                           <h5>Recent Post</h5>
                         </li>
                         {userProfile.authorBlogs &&
-                          userProfile.authorBlogs.map((post, index) => (
-                            <Link
-                              to={`/${username}/${post.slug}`}
-                              className="list-group-item list-group-item text-capitalize"
-                              key={index}
-                            >
-                              {post.title}
-                            </Link>
-                          ))}
+                          userProfile.authorBlogs.map(
+                            (post, index) =>
+                              post.status === "published" && (
+                                <Link
+                                  to={`/${username}/${post.slug}`}
+                                  className="list-group-item list-group-item text-capitalize"
+                                  key={index}
+                                >
+                                  {post.title}
+                                </Link>
+                              )
+                          )}
                       </ul>
                     </div>
                   </div>

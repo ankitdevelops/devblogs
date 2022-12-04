@@ -5,6 +5,19 @@ import Categories from "../components/Categories";
 import PostContext from "../context/PostContext";
 
 const HomePage = () => {
+  const { getPosts, getFeaturedPosts, posts } = useContext(PostContext);
+  useEffect(() => {
+    getPosts();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    // if (posts.length !== 0) {
+    getFeaturedPosts();
+    // }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [posts]);
   return (
     <main className="mt-3">
       <div className="row container  ">

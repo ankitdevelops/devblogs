@@ -56,7 +56,7 @@ export const PostProvider = ({ children }) => {
         toast.success("Post Created Successfully");
       })
       .catch((error) => {
-        console.log("Error Message: ", error.message);
+        console.log(error);
         toast.error(error.message);
       });
   };
@@ -64,20 +64,18 @@ export const PostProvider = ({ children }) => {
   // update post
 
   const updatePost = async (slug, data) => {
-    console.log("slug", slug);
-    console.log("data", data);
     const url = `http://127.0.0.1:8000/api/blogs/${slug}/`;
     const config = {
-      "Content-Type": "application/json",
+      "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${JSON.parse(
         localStorage.getItem("accessToken")
       )}`,
     };
     axios
-      .put(url, data, { headers: config })
+      .patch(url, data, { headers: config })
       .then((response) => {
         if (response.status === 200) {
-          console.log(response.data);
+          toast.success("Post Updated Successfully");
         }
       })
       .catch((error) => {

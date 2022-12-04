@@ -12,11 +12,7 @@ from .serializers import BlogSerializer
 
 
 class BlogListCreateView(ListCreateAPIView):
-    queryset = (
-        Blog.objects.all()
-        .filter(status="published", is_archived=False)
-        .order_by("-updated")
-    )
+    queryset = Blog.objects.filtered()
     serializer_class = BlogSerializer
 
     def perform_create(self, serializer):
@@ -25,17 +21,13 @@ class BlogListCreateView(ListCreateAPIView):
 
 
 class BlogDetailsUpdateDeleteView(RetrieveUpdateDestroyAPIView):
-    queryset = (
-        Blog.objects.all()
-        .filter(status="published", is_archived=False)
-        .order_by("-updated")
-    )
+    queryset = Blog.objects.filtered()
     serializer_class = BlogSerializer
     lookup_field = "slug"
 
 
 class FeaturedBlogs(ListAPIView):
-    queryset = Blog.objects.all().order_by("-updated")
+    queryset = Blog.objects.filtered()
     serializer_class = BlogSerializer
 
     def get_queryset(self):

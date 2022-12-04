@@ -20,7 +20,6 @@ class UserRegisterSerializer(serializers.ModelSerializer):
             "email",
             "password",
             # "confirm_password",
-            "is_author",
             "is_staff",
             "last_login",
         )

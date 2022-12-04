@@ -18,18 +18,18 @@ function App() {
   const { isLoggedin, getUserInfo } = useContext(AuthContext);
   const { getPosts, getFeaturedPosts, posts } = useContext(PostContext);
 
-  useEffect(() => {
-    getPosts();
+  // useEffect(() => {
+  //   getPosts();
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
-  useEffect(() => {
-    // if (posts.length !== 0) {
-    getFeaturedPosts();
-    // }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [posts]);
+  // useEffect(() => {
+  //   // if (posts.length !== 0) {
+  //   getFeaturedPosts();
+  //   // }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [posts]);
 
   useEffect(() => {
     if (isLoggedin) {
@@ -62,7 +62,7 @@ function App() {
           element={isLoggedin ? <UserProfile /> : <Signin />}
         />
         <Route
-          path="/edit/:slug"
+          path="/:username/:slug/edit"
           exact
           element={isLoggedin ? <EditPost /> : <Signin />}
         />

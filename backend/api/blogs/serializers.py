@@ -24,7 +24,7 @@ class BlogSerializer(serializers.ModelSerializer):
             "category",
             "status",
             "is_featured",
-            "is_must_read",
+            "must_read",
             "created",
             "author",
         )

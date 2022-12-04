@@ -50,7 +50,10 @@ const DetailsPage = () => {
                 <h2 className="my-3">{post.title.toUpperCase()}</h2>
                 <div>
                   {userInfo.username === post.author.username && (
-                    <Link to={`/edit/${post.slug}`} className="btn btn-primary">
+                    <Link
+                      to={`/${post.author.username}/${post.slug}/edit`}
+                      className="btn btn-primary"
+                    >
                       Edit
                     </Link>
                   )}

@@ -72,8 +72,8 @@ class Blog(models.Model):
 
     @property
     def comments_count(self):
-        comments = Comment.objects.all().filter(blog=self).count()
-        return comments
+
+        return self.comments.count()
 
     @property
     def likes_count(self):
@@ -90,16 +90,16 @@ class Blog(models.Model):
 # Comments
 
 
-class CommentQuerySet(models.QuerySet):
-    def filtered(self):
-        return self.filter(
-            active=True,
-        )
+# class CommentQuerySet(models.QuerySet):
+#     def filtered(self):
+#         return self.filter(
+#             active=True,
+#         )
 
 
 class CommentManager(models.Manager):
     def get_queryset(self):
-        return CommentQuerySet(self.model, using=self._db).filter(active=True)
+        return super().get_queryset().filter(active=True)
 
 
 class Comment(models.Model):
@@ -115,7 +115,7 @@ class Comment(models.Model):
     def __str__(self):
         return f"{self.user} wrote a comment on post: {self.blog.title}"
 
-    object = CommentManager()
+    objects = CommentManager()
 
     class Meta:
         ordering = ["-created"]

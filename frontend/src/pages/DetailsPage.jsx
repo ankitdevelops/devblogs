@@ -6,15 +6,25 @@ import ReactMarkdown from "react-markdown";
 import { Link } from "react-router-dom";
 import Categories from "../components/Categories";
 import AuthContext from "../context/AuthContext";
+import CommentCard from "../components/CommentCard";
+import CommentForm from "../components/CommentForm";
 
 const DetailsPage = () => {
   const { slug } = useParams();
-  const { getSinglePost, post } = useContext(PostContext);
+  const { getSinglePost, post, singlePostComment, getPostComments } =
+    useContext(PostContext);
   const { userInfo } = useContext(AuthContext);
-  // console.log(post.author.username);
+
+  console.log(singlePostComment);
   useEffect(() => {
     getSinglePost(slug);
   }, [slug]);
+
+  useEffect(() => {
+    if (post) {
+      getPostComments(post.slug);
+    }
+  }, [post]);
 
   if (!post) {
     return (
@@ -83,6 +93,19 @@ const DetailsPage = () => {
             <div className="article-content my-3">
               <ReactMarkdown>{post.content}</ReactMarkdown>
             </div>
+          </div>
+          <div className="card p-3 my-2">
+            <div className="card-title">
+              <h3>Comments ({post.comments_count})</h3>
+              <hr />
+            </div>
+            {/* comment form */}
+            <CommentForm slug={post.slug} />
+            {/* comment */}
+            {singlePostComment.map((comment, index) => (
+              <CommentCard comment={comment} slug={post.slug} key={index} />
+            ))}
+            {/* comments end */}
           </div>
         </div>
 

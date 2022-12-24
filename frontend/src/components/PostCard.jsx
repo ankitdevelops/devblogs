@@ -50,14 +50,17 @@ const PostCard = () => {
             <div className="card-footer d-flex justify-content-between">
               <div className="reaction-container d-flex">
                 <div className="like-container me-2">
-                  <i className="bi bi-suit-heart" /> <span>34 Likes</span>
+                  <i className="bi bi-suit-heart" />{" "}
+                  <span>{post.likes_count} Likes</span>
                 </div>
                 <div className="comment-container">
-                  <i className="bi bi-chat" /> <span>46 Comments</span>
+                  <i className="bi bi-chat" />{" "}
+                  <span>{post.comments_count} Comments</span>
                 </div>
               </div>
               <div className="save-container">
-                <i className="bi bi-bookmark" />
+                <i className="bi bi-bookmark" />{" "}
+                <span>{post.reading_list_count} Times Saved</span>
               </div>
             </div>
           </div>

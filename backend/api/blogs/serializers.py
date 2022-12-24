@@ -9,13 +9,23 @@ class AuthorSerializer(serializers.ModelSerializer):
         model = User
         fields = ("name", "username", "avatar")
 
+    extra_kwargs = {
+        "user": {"read_only": True},
+        "username": {"read_only": True},
+        "avatar": {"read_only": True},
+    }
+
 
 class CommentSerializer(serializers.ModelSerializer):
-    user = AuthorSerializer()
+    user = AuthorSerializer(read_only=True)
 
     class Meta:
         model = Comment
         fields = ("user", "content", "created")
+
+    extra_kwargs = {
+        "user": {"read_only": True},
+    }
 
 
 class BlogSerializer(serializers.ModelSerializer):
@@ -35,11 +45,11 @@ class BlogSerializer(serializers.ModelSerializer):
             "is_featured",
             "must_read",
             "created",
-            "author",
-            "comments",
             "likes_count",
             "comments_count",
             "reading_list_count",
+            "author",
+            "comments",
         )
         extra_kwargs = {
             "is_featured": {"read_only": True},

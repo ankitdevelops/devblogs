@@ -11,6 +11,7 @@ export const PostProvider = ({ children }) => {
     loading: true,
     post: null,
     featuredPosts: [],
+    singlePostComment: [],
   };
   const [state, dispatch] = useReducer(postReducer, initialState);
 
@@ -124,6 +125,53 @@ export const PostProvider = ({ children }) => {
       });
   };
 
+  // get comment
+
+  const getPostComments = async (slug) => {
+    const url = `http://127.0.0.1:8000/api/blogs/comment/${slug}/`;
+
+    axios
+      .get(url)
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch({
+            type: "GET_COMMENT",
+            payload: response.data,
+          });
+        }
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
+
+  // post comment
+  const addComment = async (data) => {
+    const url = "http://127.0.0.1:8000/api/blogs/comment/";
+
+    const config = {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${JSON.parse(
+        localStorage.getItem("accessToken")
+      )}`,
+    };
+    axios
+      .post(url, data, { headers: config })
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch({
+            type: "ADD_COMMENT",
+            payload: response.data,
+          });
+        }
+        toast.success("Comment Added Successfully");
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error(error.message);
+      });
+  };
+
   return (
     <PostContext.Provider
       value={{
@@ -132,9 +180,12 @@ export const PostProvider = ({ children }) => {
         getSinglePost,
         getFeaturedPosts,
         updatePost,
+        getPostComments,
+        addComment,
         posts: state.posts,
         post: state.post,
         featuredPosts: state.featuredPosts,
+        singlePostComment: state.singlePostComment,
       }}
     >
       {children}

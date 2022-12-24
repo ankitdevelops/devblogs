@@ -70,12 +70,28 @@ class Blog(models.Model):
         self.slug = slugify(self.title)
         super(Blog, self).save(*args, **kwargs)
 
+    @property
+    def comments_count(self):
+        comments = Comment.objects.all().filter(blog=self).count()
+        return comments
+
+    @property
+    def likes_count(self):
+        likes = Like.objects.all().filter(post=self).count()
+        return likes
+
+    @property
+    def reading_list_count(self):
+        return ReadingList.objects.all().filter(post=self).count()
+
     objects = MyBlogManager()
 
 
 class Comment(models.Model):
-    blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name="comments")
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="userComment"
+    )
     content = models.TextField()
     active = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)

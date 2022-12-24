@@ -11,9 +11,11 @@ class AuthorSerializer(serializers.ModelSerializer):
 
 
 class CommentSerializer(serializers.ModelSerializer):
+    user = AuthorSerializer()
+
     class Meta:
         model = Comment
-        fields = "__all__"
+        fields = ("user", "content", "created")
 
 
 class BlogSerializer(serializers.ModelSerializer):

@@ -87,6 +87,21 @@ class Blog(models.Model):
     objects = MyBlogManager()
 
 
+# Comments
+
+
+class CommentQuerySet(models.QuerySet):
+    def filtered(self):
+        return self.filter(
+            active=True,
+        )
+
+
+class CommentManager(models.Manager):
+    def get_queryset(self):
+        return CommentQuerySet(self.model, using=self._db).filter(active=True)
+
+
 class Comment(models.Model):
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name="comments")
     user = models.ForeignKey(
@@ -99,6 +114,11 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"{self.user} wrote a comment on post: {self.blog.title}"
+
+    object = CommentManager()
+
+    class Meta:
+        ordering = ["-created"]
 
 
 class Like(models.Model):

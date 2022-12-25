@@ -5,8 +5,13 @@ from rest_framework.generics import (
     RetrieveUpdateDestroyAPIView,
     ListAPIView,
 )
-from api.blogs.models import Blog, Comment
-from .serializers import BlogSerializer, CommentSerializer
+from api.blogs.models import Blog, Comment, Like, ReadingList
+from .serializers import (
+    BlogSerializer,
+    CommentSerializer,
+    LikeSerializer,
+    ReadingListSerializer,
+)
 
 # Create your views here.
 
@@ -44,18 +49,32 @@ class CommentCreateView(ListCreateAPIView):
         serializer.save(user=self.request.user, blog=blog)
 
     def get_queryset(self):
-        print(self.kwargs["slug"])
         blog = Blog.objects.get(slug=self.kwargs["slug"])
         qs = super().get_queryset()
         return qs.filter(blog=blog)
 
-    # def list(self, request, *args, **kwargs):
-    # queryset = self.filter_queryset(self.get_queryset())
 
-    # page = self.paginate_queryset(queryset)
-    # if page is not None:
-    #     serializer = self.get_serializer(page, many=True)
-    #     return self.get_paginated_response(serializer.data)
+class LikeCreateView(ListCreateAPIView):
+    queryset = Like.objects.all()
+    serializer_class = LikeSerializer
 
-    # serializer = self.get_serializer(queryset, many=True)
-    # return Response(serializer.data)
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        blog = Blog.objects.get(slug=self.request.data["slug"])
+        serializer.save(user=self.request.user, post=blog)
+
+
+class ReadingListView(ListCreateAPIView):
+    queryset = ReadingList.objects.all()
+    serializer_class = ReadingListSerializer
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        blog = Blog.objects.get(slug=self.request.data["slug"])
+        serializer.save(user=self.request.user, post=blog)

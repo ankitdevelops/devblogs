@@ -6,25 +6,16 @@ import ReactMarkdown from "react-markdown";
 import { Link } from "react-router-dom";
 import Categories from "../components/Categories";
 import AuthContext from "../context/AuthContext";
-import CommentCard from "../components/CommentCard";
-import CommentForm from "../components/CommentForm";
+import Comment from "../components/Comment";
 
 const DetailsPage = () => {
   const { slug } = useParams();
-  const { getSinglePost, post, singlePostComment, getPostComments } =
-    useContext(PostContext);
+  const { getSinglePost, post } = useContext(PostContext);
   const { userInfo } = useContext(AuthContext);
 
-  console.log(singlePostComment);
   useEffect(() => {
     getSinglePost(slug);
   }, [slug]);
-
-  useEffect(() => {
-    if (post) {
-      getPostComments(post.slug);
-    }
-  }, [post]);
 
   if (!post) {
     return (
@@ -94,19 +85,9 @@ const DetailsPage = () => {
               <ReactMarkdown>{post.content}</ReactMarkdown>
             </div>
           </div>
-          <div className="card p-3 my-2">
-            <div className="card-title">
-              <h3>Comments ({post.comments_count})</h3>
-              <hr />
-            </div>
-            {/* comment form */}
-            <CommentForm slug={post.slug} />
-            {/* comment */}
-            {singlePostComment.map((comment, index) => (
-              <CommentCard comment={comment} slug={post.slug} key={index} />
-            ))}
-            {/* comments end */}
-          </div>
+          {/* comment */}
+          <Comment postData={post} commentsCount={post.comments_count} />
+          {/* comment end */}
         </div>
 
         <div className="d-none d-sm-block mx-auto col-sm-3 col-md-3">

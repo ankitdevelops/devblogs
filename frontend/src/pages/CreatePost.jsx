@@ -29,7 +29,7 @@ const CreatePost = () => {
     formData.append("status", status);
     formData.append("thumbnail", thumbnail[0]);
     await addPost(formData);
-    navigate(`/profile/${user}`);
+    navigate(`/`);
   };
 
   const handlePreview = (e) => {

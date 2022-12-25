@@ -87,16 +87,6 @@ class Blog(models.Model):
     objects = MyBlogManager()
 
 
-# Comments
-
-
-# class CommentQuerySet(models.QuerySet):
-#     def filtered(self):
-#         return self.filter(
-#             active=True,
-#         )
-
-
 class CommentManager(models.Manager):
     def get_queryset(self):
         return super().get_queryset().filter(active=True)
@@ -126,6 +116,7 @@ class Like(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, related_name="likes_user", on_delete=models.CASCADE
     )
+    # created = models.DateTimeField(auto_now_add=True, editable=False)
 
     def __str__(self):
         return f"{self.user} liked {self.post}"
@@ -140,3 +131,4 @@ class ReadingList(models.Model):
         related_name="reading_list_user",
         on_delete=models.CASCADE,
     )
+    # created = models.DateTimeField(auto_now_add=True, editable=False)

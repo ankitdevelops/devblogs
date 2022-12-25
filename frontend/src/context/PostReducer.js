@@ -11,26 +11,23 @@ const postReducer = (state, action) => {
       return { ...state, posts: [...state.posts, action.payload] };
 
     case "GET_SINGLE_POSTS":
-      return { ...state, post: action.payload, loading: false };
+      return { ...state, post: action.payload };
 
     case "GET_FEATURED_POSTS":
       return {
         ...state,
         featuredPosts: action.payload,
-        loading: false,
       };
 
     case "GET_COMMENT":
       return {
         ...state,
         singlePostComment: action.payload,
-        loading: false,
       };
     case "ADD_COMMENT":
       return {
         ...state,
         singlePostComment: [...state.singlePostComment, action.payload],
-        loading: false,
       };
 
     default:

@@ -88,7 +88,7 @@ export const PostProvider = ({ children }) => {
   // get single post
 
   const getSinglePost = async (slug) => {
-    const url = `http://127.0.0.1:8000/api/blogs/${slug}/`;
+    const url = `http://127.0.0.1:8000/api/blogs/blog/${slug}/`;
     axios
       .get(url)
       .then((response) => {
@@ -164,6 +164,7 @@ export const PostProvider = ({ children }) => {
             payload: response.data,
           });
         }
+        console.log(response.data);
         toast.success("Comment Added Successfully");
       })
       .catch((error) => {

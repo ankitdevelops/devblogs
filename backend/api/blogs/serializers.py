@@ -1,6 +1,6 @@
 from dataclasses import fields
 from rest_framework import serializers
-from api.blogs.models import Blog, Comment
+from api.blogs.models import Blog, Comment, Like, ReadingList
 from api.account.models import User
 
 
@@ -31,7 +31,7 @@ class CommentSerializer(serializers.ModelSerializer):
 class BlogSerializer(serializers.ModelSerializer):
     author = AuthorSerializer(read_only=True)
     thumbnail = serializers.ImageField(use_url=True)
-    comments = CommentSerializer(many=True)
+    # comments = CommentSerializer(many=True)
 
     class Meta:
         model = Blog
@@ -49,7 +49,7 @@ class BlogSerializer(serializers.ModelSerializer):
             "comments_count",
             "reading_list_count",
             "author",
-            "comments",
+            # "comments",
         )
         extra_kwargs = {
             "is_featured": {"read_only": True},
@@ -58,3 +58,47 @@ class BlogSerializer(serializers.ModelSerializer):
             "author": {"read_only": True},
             "comment": {"read_only": True},
         }
+
+
+class LikeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Like
+        fields = "__all__"
+
+        extra_kwargs = {
+            "user": {"read_only": True},
+            "post": {"read_only": True},
+        }
+
+    def create(self, validated_data):
+        user = validated_data.get("user")
+        post = validated_data.get("post")
+        liked = Like.objects.filter(user=user, post=post.id)
+        if liked:
+            instance = liked.delete()
+            return instance
+        else:
+            instance = Like.objects.create(**validated_data)
+            return instance
+
+
+class ReadingListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ReadingList
+        fields = ("post", "user")
+
+        extra_kwargs = {
+            "user": {"read_only": True},
+            "post": {"read_only": True},
+        }
+
+    def create(self, validated_data):
+        user = validated_data.get("user")
+        post = validated_data.get("post")
+        saved = ReadingList.objects.filter(user=user, post=post.id)
+        if saved:
+            instance = saved.delete()
+            return instance
+        else:
+            instance = ReadingList.objects.create(**validated_data)
+            return instance

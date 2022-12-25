@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import PostContext from "../context/PostContext";
 
-const CommentCard = ({ comment, slug }) => {
+const CommentCard = ({ comment }) => {
   const { getPostComments, singlePostComment } = useContext(PostContext);
 
   return (

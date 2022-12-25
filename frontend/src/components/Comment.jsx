@@ -7,23 +7,24 @@ const Comment = () => {
     useContext(PostContext);
 
   const [content, setContent] = useState("");
-
+  const [load, setLoad] = useState(false);
   const onSubmit = async (e) => {
     e.preventDefault();
     let formData = new FormData();
     formData.append("content", content);
     formData.append("blogSlug", post.slug);
     await addComment(formData);
-    getPostComments(post.slug);
+    setLoad(true);
     setContent("");
   };
 
   useEffect(() => {
     if (post) {
       getPostComments(post.slug);
+      setLoad(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [post]);
+  }, [load]);
 
   return (
     <div>
@@ -76,9 +77,11 @@ const Comment = () => {
           </div>
         </div>
         {/* comment */}
-        {singlePostComment.map((comment, index) => (
-          <CommentCard comment={comment} slug={post.slug} key={index} />
-        ))}
+        {singlePostComment &&
+          singlePostComment.map((comment, index) => (
+            <CommentCard comment={comment} slug={post.slug} key={index} />
+          ))}
+
         {/* comments end */}
       </div>
     </div>

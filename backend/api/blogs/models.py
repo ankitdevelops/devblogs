@@ -116,7 +116,7 @@ class Like(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, related_name="likes_user", on_delete=models.CASCADE
     )
-    # created = models.DateTimeField(auto_now_add=True, editable=False)
+    created = models.DateTimeField(auto_now_add=True, editable=False)
 
     def __str__(self):
         return f"{self.user} liked {self.post}"
@@ -131,4 +131,4 @@ class ReadingList(models.Model):
         related_name="reading_list_user",
         on_delete=models.CASCADE,
     )
-    # created = models.DateTimeField(auto_now_add=True, editable=False)
+    created = models.DateTimeField(auto_now_add=True, editable=False)

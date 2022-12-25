@@ -1,9 +1,6 @@
-import React, { useContext, useEffect } from "react";
-import PostContext from "../context/PostContext";
+import React from "react";
 
 const CommentCard = ({ comment }) => {
-  const { getPostComments, singlePostComment } = useContext(PostContext);
-
   return (
     <div>
       <div

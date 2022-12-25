@@ -22,7 +22,7 @@ export const PostProvider = ({ children }) => {
     axios
       .get(url)
       .then((response) => {
-        if (response.status == 200) {
+        if (response.status === 200) {
           dispatch({
             type: "GET_POSTS",
             payload: response.data,
@@ -92,7 +92,7 @@ export const PostProvider = ({ children }) => {
     axios
       .get(url)
       .then((response) => {
-        if (response.status == 200) {
+        if (response.status === 200) {
           dispatch({
             type: "GET_SINGLE_POSTS",
             payload: response.data,
@@ -139,6 +139,7 @@ export const PostProvider = ({ children }) => {
             payload: response.data,
           });
         }
+        console.log(response.data);
       })
       .catch((error) => {
         toast.error(error.message);

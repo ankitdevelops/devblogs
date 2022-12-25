@@ -8,7 +8,7 @@ const postReducer = (state, action) => {
       };
 
     case "ADD_POST":
-      return { ...state, posts: [...state.posts, action.payload] };
+      return { posts: action.payload, ...state.posts };
 
     case "GET_SINGLE_POSTS":
       return { ...state, post: action.payload };
@@ -25,9 +25,10 @@ const postReducer = (state, action) => {
         singlePostComment: action.payload,
       };
     case "ADD_COMMENT":
+      // console.log(action.payload);
       return {
-        ...state,
-        singlePostComment: [...state.singlePostComment, action.payload],
+        singlePostComment: action.payload,
+        ...state.singlePostComment,
       };
 
     default:

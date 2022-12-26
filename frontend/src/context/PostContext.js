@@ -12,7 +12,7 @@ export const PostProvider = ({ children }) => {
     post: null,
     featuredPosts: [],
     singlePostComment: [],
-    postLikeStatusByLoggedInUser: false,
+    postLikeStatusByLoggedInUser: null,
   };
   const [state, dispatch] = useReducer(postReducer, initialState);
 
@@ -191,7 +191,13 @@ export const PostProvider = ({ children }) => {
             type: "ADD_LIKE",
           });
         }
-        // toast.success("Post Liked Successfully");
+        if (state.postLikeStatusByLoggedInUser === true) {
+          toast.success("Post UnLiked Successfully");
+        }
+
+        if (state.postLikeStatusByLoggedInUser === false) {
+          toast.success("Post Liked Successfully");
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -200,15 +206,22 @@ export const PostProvider = ({ children }) => {
   };
 
   const userPostLikedStatus = async (slug) => {
-    const url = `http://127.0.0.1:8000/api/blogs/comment/${slug}/`;
+    const url = `http://127.0.0.1:8000/api/blogs/like/${slug}`;
+
+    const config = {
+      // "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${JSON.parse(
+        localStorage.getItem("accessToken")
+      )}`,
+    };
 
     axios
-      .get(url)
+      .get(url, { headers: config })
       .then((response) => {
         if (response.status === 200) {
           dispatch({
             type: "LIKE_STATUS",
-            payload: response.data,
+            payload: response.data.status,
           });
         }
       })

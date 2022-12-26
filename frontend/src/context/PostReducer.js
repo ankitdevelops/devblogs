@@ -8,7 +8,7 @@ const postReducer = (state, action) => {
       };
 
     case "ADD_POST":
-      return { posts: action.payload, ...state.posts };
+      return { ...state, posts: action.payload, ...state.posts };
 
     case "GET_SINGLE_POSTS":
       return { ...state, post: action.payload };
@@ -26,16 +26,19 @@ const postReducer = (state, action) => {
       };
     case "ADD_COMMENT":
       return {
+        ...state,
         singlePostComment: action.payload,
         ...state.singlePostComment,
       };
 
     case "LIKE_STATUS":
       return {
-        postLikeStatusByLoggedInUser: !state.postLikeStatusByLoggedInUser,
+        ...state,
+        postLikeStatusByLoggedInUser: action.payload,
       };
     case "ADD_LIKE":
       return {
+        ...state,
         postLikeStatusByLoggedInUser: !state.postLikeStatusByLoggedInUser,
       };
 

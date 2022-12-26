@@ -67,6 +67,22 @@ class LikeCreateView(ListCreateAPIView):
         serializer.save(user=self.request.user, post=blog)
 
 
+# function to check if user liked a post or not
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+
+@api_view(
+    [
+        "GET",
+    ]
+)
+def check_liked_by_user(request, slug):
+    post = Blog.objects.get(slug=slug)
+    like_status = Like.objects.filter(user=request.user, post=post).exists()
+    return Response({"status": like_status})
+
+
 class ReadingListView(ListCreateAPIView):
     queryset = ReadingList.objects.all()
     serializer_class = ReadingListSerializer

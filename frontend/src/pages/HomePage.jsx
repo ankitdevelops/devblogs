@@ -10,7 +10,7 @@ const HomePage = () => {
     getPosts();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [posts]);
 
   useEffect(() => {
     // if (posts.length !== 0) {

@@ -12,6 +12,7 @@ export const PostProvider = ({ children }) => {
     post: null,
     featuredPosts: [],
     singlePostComment: [],
+    postLikeStatusByLoggedInUser: false,
   };
   const [state, dispatch] = useReducer(postReducer, initialState);
 
@@ -65,7 +66,7 @@ export const PostProvider = ({ children }) => {
   // update post
 
   const updatePost = async (slug, data) => {
-    const url = `http://127.0.0.1:8000/api/blogs/${slug}/`;
+    const url = `http://127.0.0.1:8000/api/blogs/blog/${slug}/`;
     const config = {
       "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${JSON.parse(
@@ -139,7 +140,6 @@ export const PostProvider = ({ children }) => {
             payload: response.data,
           });
         }
-        console.log(response.data);
       })
       .catch((error) => {
         toast.error(error.message);
@@ -165,11 +165,54 @@ export const PostProvider = ({ children }) => {
             payload: response.data,
           });
         }
-        console.log(response.data);
         toast.success("Comment Added Successfully");
       })
       .catch((error) => {
         console.log(error);
+        toast.error(error.message);
+      });
+  };
+
+  // like post
+  const likePost = async (data) => {
+    const url = "http://127.0.0.1:8000/api/blogs/like/";
+
+    const config = {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${JSON.parse(
+        localStorage.getItem("accessToken")
+      )}`,
+    };
+    axios
+      .post(url, data, { headers: config })
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch({
+            type: "ADD_LIKE",
+          });
+        }
+        // toast.success("Post Liked Successfully");
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error(error.message);
+      });
+  };
+
+  const userPostLikedStatus = async (slug) => {
+    const url = `http://127.0.0.1:8000/api/blogs/comment/${slug}/`;
+
+    axios
+      .get(url)
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch({
+            type: "LIKE_STATUS",
+            payload: response.data,
+          });
+        }
+      })
+      .catch((error) => {
         toast.error(error.message);
       });
   };
@@ -184,10 +227,13 @@ export const PostProvider = ({ children }) => {
         updatePost,
         getPostComments,
         addComment,
+        likePost,
+        userPostLikedStatus,
         posts: state.posts,
         post: state.post,
         featuredPosts: state.featuredPosts,
         singlePostComment: state.singlePostComment,
+        postLikeStatusByLoggedInUser: state.postLikeStatusByLoggedInUser,
       }}
     >
       {children}

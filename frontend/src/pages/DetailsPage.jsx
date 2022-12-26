@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import PostContext from "../context/PostContext";
 import DotLoader from "react-spinners/DotLoader";
@@ -7,15 +7,31 @@ import { Link } from "react-router-dom";
 import Categories from "../components/Categories";
 import AuthContext from "../context/AuthContext";
 import Comment from "../components/Comment";
+import Like from "../components/Like";
 
 const DetailsPage = () => {
   const { slug } = useParams();
-  const { getSinglePost, post } = useContext(PostContext);
+  const {
+    getSinglePost,
+    post,
+    likePost,
+    postLikeStatusByLoggedInUser,
+    userPostLikedStatus,
+  } = useContext(PostContext);
   const { userInfo } = useContext(AuthContext);
 
   useEffect(() => {
     getSinglePost(slug);
-  }, [slug]);
+
+    // userPostLikedStatus(slug);
+  }, []);
+
+  console.log(postLikeStatusByLoggedInUser);
+  // useEffect(() => {
+  //   if (post) {
+  //     userPostLikedStatus(slug);
+  //   }
+  // }, []);
 
   if (!post) {
     return (
@@ -63,7 +79,7 @@ const DetailsPage = () => {
               <div className="media d-flex align-items-center ">
                 <div className="avatar">
                   <img
-                    src={userInfo.avatar}
+                    src={post.author.avatar}
                     title=""
                     alt=""
                     style={{
@@ -121,6 +137,9 @@ const DetailsPage = () => {
               </div>
             </div>
           </div>
+          {/* like */}
+          <Like />
+          {/* like end */}
           <div className="author-post mt-3">
             <div className="card card-body">
               <ul className="list-group list-group-flush ">

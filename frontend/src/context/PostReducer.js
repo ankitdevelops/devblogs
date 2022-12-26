@@ -25,10 +25,18 @@ const postReducer = (state, action) => {
         singlePostComment: action.payload,
       };
     case "ADD_COMMENT":
-      // console.log(action.payload);
       return {
         singlePostComment: action.payload,
         ...state.singlePostComment,
+      };
+
+    case "LIKE_STATUS":
+      return {
+        postLikeStatusByLoggedInUser: !state.postLikeStatusByLoggedInUser,
+      };
+    case "ADD_LIKE":
+      return {
+        postLikeStatusByLoggedInUser: !state.postLikeStatusByLoggedInUser,
       };
 
     default:

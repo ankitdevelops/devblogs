@@ -7,6 +7,7 @@ from .views import (
     LikeCreateView,
     ReadingListView,
     check_liked_by_user,
+    check_post_saved_by_user,
 )
 
 urlpatterns = [
@@ -21,9 +22,11 @@ urlpatterns = [
     path("comment/<str:slug>/", CommentCreateView.as_view(), name="get-comment"),
     path("like/", LikeCreateView.as_view(), name="like-post"),
     path(
-        "like/<str:slug>",
+        "like/<str:slug>/",
         check_liked_by_user,
     ),
     path("reading-list/", ReadingListView.as_view(), name="reading-list"),
-    # path("reading-list/<str:slug>/", ReadingListView.as_view(), name="reading-list"),
+    path(
+        "reading-list/<str:slug>/", check_post_saved_by_user, name="reading-list-check"
+    ),
 ]

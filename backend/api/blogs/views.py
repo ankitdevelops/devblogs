@@ -83,6 +83,17 @@ def check_liked_by_user(request, slug):
     return Response({"status": like_status})
 
 
+@api_view(
+    [
+        "GET",
+    ]
+)
+def check_post_saved_by_user(request, slug):
+    post = Blog.objects.get(slug=slug)
+    like_status = ReadingList.objects.filter(user=request.user, post=post).exists()
+    return Response({"status": like_status})
+
+
 class ReadingListView(ListCreateAPIView):
     queryset = ReadingList.objects.all()
     serializer_class = ReadingListSerializer

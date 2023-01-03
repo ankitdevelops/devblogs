@@ -4,34 +4,19 @@ import PostContext from "../context/PostContext";
 import DotLoader from "react-spinners/DotLoader";
 import ReactMarkdown from "react-markdown";
 import { Link } from "react-router-dom";
-import Categories from "../components/Categories";
 import AuthContext from "../context/AuthContext";
 import Comment from "../components/Comment";
 import Like from "../components/Like";
+import SaveButton from "../components/SaveButton";
 
 const DetailsPage = () => {
   const { slug } = useParams();
-  const {
-    getSinglePost,
-    post,
-    likePost,
-    postLikeStatusByLoggedInUser,
-    userPostLikedStatus,
-  } = useContext(PostContext);
+  const { getSinglePost, post } = useContext(PostContext);
   const { userInfo } = useContext(AuthContext);
 
   useEffect(() => {
     getSinglePost(slug);
-
-    // userPostLikedStatus(slug);
   }, []);
-
-  console.log(postLikeStatusByLoggedInUser);
-  // useEffect(() => {
-  //   if (post) {
-  //     userPostLikedStatus(slug);
-  //   }
-  // }, []);
 
   if (!post) {
     return (
@@ -47,7 +32,10 @@ const DetailsPage = () => {
     <main className="my-3">
       <div className="row container">
         <div className="mx-auto d-none d-sm-block col-sm-2 col-md-2  text-white">
-          <Categories />
+          <Like />
+          <div className="mt-5">
+            <SaveButton />
+          </div>
         </div>
         <div className="mx-auto col-sm-7 col-md-7  ">
           <div className="card p-3">
@@ -137,9 +125,6 @@ const DetailsPage = () => {
               </div>
             </div>
           </div>
-          {/* like */}
-          <Like />
-          {/* like end */}
           <div className="author-post mt-3">
             <div className="card card-body">
               <ul className="list-group list-group-flush ">

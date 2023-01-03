@@ -1,7 +1,6 @@
 import { createContext, useReducer } from "react";
 import postReducer from "./PostReducer";
 import axios from "axios";
-import { Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const PostContext = createContext();
@@ -13,6 +12,7 @@ export const PostProvider = ({ children }) => {
     featuredPosts: [],
     singlePostComment: [],
     postLikeStatusByLoggedInUser: null,
+    postSaveStatusByLoggedInUser: null,
   };
   const [state, dispatch] = useReducer(postReducer, initialState);
 
@@ -205,8 +205,9 @@ export const PostProvider = ({ children }) => {
       });
   };
 
+  // user post liked status
   const userPostLikedStatus = async (slug) => {
-    const url = `http://127.0.0.1:8000/api/blogs/like/${slug}`;
+    const url = `http://127.0.0.1:8000/api/blogs/like/${slug}/`;
 
     const config = {
       // "Content-Type": "multipart/form-data",
@@ -230,6 +231,64 @@ export const PostProvider = ({ children }) => {
       });
   };
 
+  // add post to reading list
+  const savePost = async (data) => {
+    const url = "http://127.0.0.1:8000/api/blogs/reading-list/";
+
+    const config = {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${JSON.parse(
+        localStorage.getItem("accessToken")
+      )}`,
+    };
+    axios
+      .post(url, data, { headers: config })
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch({
+            type: "SAVE_POST",
+          });
+        }
+        if (state.postSaveStatusByLoggedInUser === true) {
+          toast.success("Post Removed From Your Reading List ");
+        }
+
+        if (state.postSaveStatusByLoggedInUser === false) {
+          toast.success("Post Added To Your Reading List");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error(error.message);
+      });
+  };
+
+  // check post saved by user
+  const userPostSavedStatus = async (slug) => {
+    const url = `http://127.0.0.1:8000/api/blogs/reading-list/${slug}/`;
+
+    const config = {
+      // "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${JSON.parse(
+        localStorage.getItem("accessToken")
+      )}`,
+    };
+
+    axios
+      .get(url, { headers: config })
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch({
+            type: "SAVE_STATUS",
+            payload: response.data.status,
+          });
+        }
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
+
   return (
     <PostContext.Provider
       value={{
@@ -242,11 +301,14 @@ export const PostProvider = ({ children }) => {
         addComment,
         likePost,
         userPostLikedStatus,
+        userPostSavedStatus,
+        savePost,
         posts: state.posts,
         post: state.post,
         featuredPosts: state.featuredPosts,
         singlePostComment: state.singlePostComment,
         postLikeStatusByLoggedInUser: state.postLikeStatusByLoggedInUser,
+        postSaveStatusByLoggedInUser: state.postSaveStatusByLoggedInUser,
       }}
     >
       {children}

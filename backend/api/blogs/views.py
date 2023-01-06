@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from rest_framework.response import Response
+from django.db.models import Q
 from rest_framework.generics import (
     ListCreateAPIView,
     RetrieveUpdateDestroyAPIView,
@@ -105,3 +106,24 @@ class ReadingListView(ListCreateAPIView):
     def perform_create(self, serializer):
         blog = Blog.objects.get(slug=self.request.data["slug"])
         serializer.save(user=self.request.user, post=blog)
+
+
+class CategoryListView(ListAPIView):
+    queryset = Blog.objects.filtered()
+    serializer_class = BlogSerializer
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.filter(category=self.kwargs["category"])
+
+
+class SearchListView(ListAPIView):
+    queryset = Blog.objects.filtered()
+    serializer_class = BlogSerializer
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.filter(
+            Q(title__icontains=self.kwargs["keyword"])
+            | Q(content__icontains=self.kwargs["keyword"])
+        )

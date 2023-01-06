@@ -52,6 +52,19 @@ const postReducer = (state, action) => {
         postSaveStatusByLoggedInUser: !state.postSaveStatusByLoggedInUser,
       };
 
+    case "GET_CATEGORY_POSTS":
+      return {
+        ...state,
+        posts: action.payload,
+        loading: false,
+      };
+    case "SEARCH_POSTS":
+      return {
+        ...state,
+        posts: action.payload,
+        loading: false,
+      };
+
     default:
       return state;
   }

@@ -289,6 +289,43 @@ export const PostProvider = ({ children }) => {
       });
   };
 
+  // get post by category
+  const getCategoryPosts = async (category) => {
+    const url = `http://127.0.0.1:8000/api/blogs/blog/category/${category}/`;
+    axios
+      .get(url)
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch({
+            type: "GET_CATEGORY_POSTS",
+            payload: response.data,
+          });
+        }
+      })
+      .catch((error) => {
+        console.log("error", error.message);
+        toast.success(error.message);
+      });
+  };
+
+  // search post
+  const searchPost = async (keyword) => {
+    const url = `http://127.0.0.1:8000/api/blogs/blog/search/${keyword}/`;
+    axios
+      .get(url)
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch({
+            type: "SEARCH_POSTS",
+            payload: response.data,
+          });
+        }
+      })
+      .catch((error) => {
+        console.log("error", error.message);
+        toast.success(error.message);
+      });
+  };
   return (
     <PostContext.Provider
       value={{
@@ -303,6 +340,8 @@ export const PostProvider = ({ children }) => {
         userPostLikedStatus,
         userPostSavedStatus,
         savePost,
+        getCategoryPosts,
+        searchPost,
         posts: state.posts,
         post: state.post,
         featuredPosts: state.featuredPosts,

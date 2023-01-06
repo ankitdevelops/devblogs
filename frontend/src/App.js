@@ -31,6 +31,7 @@ function App() {
       <Routes>
         <Route path="/" exact element={<HomePage />} />
         <Route path="/:username/:slug" exact element={<DetailsPage />} />
+
         <Route
           path="/signin"
           element={isLoggedin ? <Navigate to="/" /> : <Signin />}

@@ -6,6 +6,8 @@ from .views import (
     CommentCreateView,
     LikeCreateView,
     ReadingListView,
+    CategoryListView,
+    SearchListView,
     check_liked_by_user,
     check_post_saved_by_user,
 )
@@ -17,6 +19,8 @@ urlpatterns = [
         BlogDetailsUpdateDeleteView.as_view(),
         name="api-blog-details-view",
     ),
+    path("blog/category/<str:category>/", CategoryListView.as_view(), name="category"),
+    path("blog/search/<str:keyword>/", SearchListView.as_view(), name="search"),
     path("featured/", FeaturedBlogs.as_view(), name="featured-blog"),
     path("comment/", CommentCreateView.as_view(), name="create-comment"),
     path("comment/<str:slug>/", CommentCreateView.as_view(), name="get-comment"),

@@ -61,9 +61,10 @@ body {
   font-size: 20px;
 }
 .search-btn {
-  background-color: #555050;
+  background-color: #171717;
+  border: 2px solid #555050;
   border-radius: 5px;
-  padding: 10px 10px;
+  padding: 10px 20px;
   margin-left: 5px;
   outline: none;
   box-shadow: none;

@@ -13,9 +13,7 @@ const HomePage = () => {
   }, []);
 
   useEffect(() => {
-    // if (posts.length !== 0) {
     getFeaturedPosts();
-    // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [posts]);
   return (

@@ -11,8 +11,8 @@ export const PostProvider = ({ children }) => {
     post: null,
     featuredPosts: [],
     singlePostComment: [],
-    postLikeStatusByLoggedInUser: null,
-    postSaveStatusByLoggedInUser: null,
+    postLikeStatusByLoggedInUser: false,
+    postSaveStatusByLoggedInUser: false,
   };
   const [state, dispatch] = useReducer(postReducer, initialState);
 
@@ -186,7 +186,7 @@ export const PostProvider = ({ children }) => {
     axios
       .post(url, data, { headers: config })
       .then((response) => {
-        if (response.status === 200) {
+        if (response.status === 201) {
           dispatch({
             type: "ADD_LIKE",
           });
@@ -244,7 +244,7 @@ export const PostProvider = ({ children }) => {
     axios
       .post(url, data, { headers: config })
       .then((response) => {
-        if (response.status === 200) {
+        if (response.status === 201) {
           dispatch({
             type: "SAVE_POST",
           });

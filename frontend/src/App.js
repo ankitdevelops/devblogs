@@ -16,20 +16,6 @@ import EditPost from "./pages/EditPost";
 
 function App() {
   const { isLoggedin, getUserInfo } = useContext(AuthContext);
-  const { getPosts, getFeaturedPosts, posts } = useContext(PostContext);
-
-  // useEffect(() => {
-  //   getPosts();
-
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
-
-  // useEffect(() => {
-  //   // if (posts.length !== 0) {
-  //   getFeaturedPosts();
-  //   // }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [posts]);
 
   useEffect(() => {
     if (isLoggedin) {

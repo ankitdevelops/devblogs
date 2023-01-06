@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import PostContext from "../context/PostContext";
 import DotLoader from "react-spinners/DotLoader";
@@ -11,12 +11,33 @@ import SaveButton from "../components/SaveButton";
 
 const DetailsPage = () => {
   const { slug } = useParams();
-  const { getSinglePost, post } = useContext(PostContext);
+  const {
+    getSinglePost,
+    post,
+    postLikeStatusByLoggedInUser,
+    userPostLikedStatus,
+    postSaveStatusByLoggedInUser,
+    userPostSavedStatus,
+  } = useContext(PostContext);
   const { userInfo } = useContext(AuthContext);
-
   useEffect(() => {
     getSinglePost(slug);
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [slug]);
+
+  useEffect(() => {
+    if (post) {
+      userPostSavedStatus(post.slug);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [post, postSaveStatusByLoggedInUser]);
+
+  useEffect(() => {
+    if (post) {
+      userPostLikedStatus(post.slug);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [post, postLikeStatusByLoggedInUser]);
 
   if (!post) {
     return (

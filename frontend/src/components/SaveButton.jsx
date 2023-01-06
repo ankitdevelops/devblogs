@@ -1,30 +1,16 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import PostContext from "../context/PostContext";
 
 const SaveButton = () => {
-  const {
-    getSinglePost,
-    post,
-    savePost,
-    postSaveStatusByLoggedInUser,
-    userPostSavedStatus,
-  } = useContext(PostContext);
-
-  const [load, setLoad] = useState(false);
+  const { post, savePost, postSaveStatusByLoggedInUser } =
+    useContext(PostContext);
 
   const handleSave = async () => {
     let formData = new FormData();
     formData.append("slug", post.slug);
     await savePost(formData);
-    setLoad(true);
   };
 
-  useEffect(() => {
-    if (post) {
-      userPostSavedStatus(post.slug);
-      setLoad(false);
-    }
-  }, [load]);
   return (
     <div>
       <div className="like-save mt-3">

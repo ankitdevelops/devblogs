@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import PostContext from "../context/PostContext";
 const FeaturedPost = () => {
@@ -13,7 +13,11 @@ const FeaturedPost = () => {
           </li>
           {featuredPosts &&
             featuredPosts.map((post, index) => (
-              <Link key={index} className="list-group-item list-group-item">
+              <Link
+                to={`/${post.author.username}/${post.slug}`}
+                key={index}
+                className="list-group-item list-group-item"
+              >
                 {post.title}
               </Link>
             ))}

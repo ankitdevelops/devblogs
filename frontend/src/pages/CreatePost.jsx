@@ -94,17 +94,23 @@ const CreatePost = () => {
                         <option value="html" className="text-upper">
                           HTML
                         </option>
-                        <option value="freebies" className="text-upper">
-                          freebies
+                        <option value="javascript" className="text-upper">
+                          JavaScript
                         </option>
                         <option value="css" className="text-upper">
-                          css
+                          CSS
                         </option>
                         <option value="tutorials" className="text-upper">
-                          tutorials
+                          Tutorials
+                        </option>
+                        <option value="django" className="text-upper">
+                          Django
+                        </option>
+                        <option value="python" className="text-upper">
+                          Python
                         </option>
                         <option value="others" className="text-upper">
-                          others
+                          Others
                         </option>
                       </select>
                     </div>

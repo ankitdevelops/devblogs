@@ -326,6 +326,25 @@ export const PostProvider = ({ children }) => {
         toast.success(error.message);
       });
   };
+
+  // delete post
+  const deletePost = async (slug) => {
+    const url = `http://127.0.0.1:8000/api/blogs/blog/${slug}/`;
+    axios
+      .delete(url)
+      .then((response) => {
+        if (response.status === 204) {
+          dispatch({
+            type: "DELETE_POST",
+            payload: slug,
+          });
+          toast.success("Post Deleted Successfully");
+        }
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
   return (
     <PostContext.Provider
       value={{
@@ -342,6 +361,7 @@ export const PostProvider = ({ children }) => {
         savePost,
         getCategoryPosts,
         searchPost,
+        deletePost,
         posts: state.posts,
         post: state.post,
         featuredPosts: state.featuredPosts,

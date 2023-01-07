@@ -14,6 +14,7 @@ import "react-toastify/dist/ReactToastify.css";
 import PostContext from "./context/PostContext";
 import EditPost from "./pages/EditPost";
 import SearchPage from "./pages/SearchPage";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   const { isLoggedin, getUserInfo } = useContext(AuthContext);
@@ -32,6 +33,7 @@ function App() {
       <Routes>
         <Route path="/" exact element={<HomePage />} />
         <Route path="/search" exact element={<SearchPage />} />
+
         <Route path="/:username/:slug" exact element={<DetailsPage />} />
 
         <Route
@@ -45,6 +47,10 @@ function App() {
         <Route
           path="/create"
           element={isLoggedin ? <CreatePost /> : <Signin />}
+        />
+        <Route
+          path="/dashboard"
+          element={isLoggedin ? <Dashboard /> : <Signin />}
         />
         <Route
           path="/profile/:username"

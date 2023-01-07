@@ -84,11 +84,14 @@ const Navbar = () => {
                   id="myDropdown"
                 >
                   {userInfo.username && (
-                    <Link to={`/profile/${userInfo.username}`}>Profile</Link>
+                    <>
+                      <Link to={`/profile/${userInfo.username}`}>Profile</Link>
+
+                      <Link to="/dashboard">Dashboard</Link>
+                      <Link to="create">Create Post</Link>
+                    </>
                   )}
 
-                  <Link to="/dashboard">Dashboard</Link>
-                  <Link to="create">Create Post</Link>
                   <hr />
                   {isLoggedin ? (
                     <Link to="/logout">Sign Out</Link>

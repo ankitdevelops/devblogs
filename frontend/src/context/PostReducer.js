@@ -64,6 +64,11 @@ const postReducer = (state, action) => {
         posts: action.payload,
         loading: false,
       };
+    case "DELETE_POST":
+      return {
+        ...state,
+        posts: state.posts.filter((post) => post.slug !== action.payload),
+      };
 
     default:
       return state;

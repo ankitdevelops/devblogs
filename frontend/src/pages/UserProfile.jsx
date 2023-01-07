@@ -13,7 +13,12 @@ const UserProfile = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [username]);
 
-  // let userProfile = userProfile;
+  let skillsArray = [];
+
+  userProfile.skills &&
+    Object.entries(userProfile.skills[0]).forEach((entry) =>
+      skillsArray.push(entry[1])
+    );
 
   if (!userProfile) {
     return (
@@ -42,12 +47,14 @@ const UserProfile = () => {
                 <h3>{userProfile.name}</h3>
               </div>
               <div className="user-info text-center my-2">
-                <p className="fs-5">{userProfile.about}</p>
+                <p className="fs-5  mx-auto" style={{ width: "60%" }}>
+                  {userProfile.about}
+                </p>
               </div>
               <div className="user-social  w-50 mx-auto">
                 <ul className="d-flex justify-content-evenly">
                   <li className="list-group-item mx-1">
-                    {/* Date Joined: {userProfile.date_joined}cd */}
+                    {/* Date Joined: {userProfile.date_joined} */}
                   </li>
                   <li className="list-group-item mx-1">India</li>
                   <li className="list-group-item mx-1">{userProfile.email}</li>
@@ -74,7 +81,7 @@ const UserProfile = () => {
                         <li className="list-group-item ">
                           <h6>Learning</h6>
                           <hr />
-                          Python
+                          {userProfile.learning}
                         </li>
                       </ul>
                     </div>
@@ -101,10 +108,11 @@ const UserProfile = () => {
                           <h6>Skills</h6>
                           <hr />
                         </li>
-                        <li className="list-group-item ">Python</li>
-                        <li className="list-group-item ">Django</li>
-                        <li className="list-group-item ">JavaScript</li>
-                        <li className="list-group-item ">React</li>
+                        {skillsArray.map((item, index) => (
+                          <li className="list-group-item " key={index}>
+                            {item}
+                          </li>
+                        ))}
                       </ul>
                     </div>
                   </div>
@@ -116,7 +124,7 @@ const UserProfile = () => {
                         <li className="list-group-item ">
                           <h6>Available For</h6>
                           <hr />
-                          Freelance Project
+                          {userProfile.available_for}
                         </li>
                       </ul>
                     </div>
@@ -144,32 +152,6 @@ const UserProfile = () => {
                                 </Link>
                               )
                           )}
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div className="row my-2">
-                  <div className="col">
-                    <div className="card card-body">
-                      <ul className="list-group list-group-flush ">
-                        <li className="list-group-item ">
-                          <h5>Recent Comments</h5>
-                        </li>
-                        <Link className="list-group-item list-group-item">
-                          An item
-                        </Link>
-                        <Link className="list-group-item list-group-item">
-                          A second item
-                        </Link>
-                        <Link className="list-group-item list-group-item">
-                          A third item
-                        </Link>
-                        <Link className="list-group-item list-group-item">
-                          A fourth item
-                        </Link>
-                        <Link className="list-group-item list-group-item">
-                          And a fifth one
-                        </Link>
                       </ul>
                     </div>
                   </div>

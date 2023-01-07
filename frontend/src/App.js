@@ -13,6 +13,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PostContext from "./context/PostContext";
 import EditPost from "./pages/EditPost";
+import SearchPage from "./pages/SearchPage";
 
 function App() {
   const { isLoggedin, getUserInfo } = useContext(AuthContext);
@@ -30,6 +31,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" exact element={<HomePage />} />
+        <Route path="/search" exact element={<SearchPage />} />
         <Route path="/:username/:slug" exact element={<DetailsPage />} />
 
         <Route

@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import PostContext from "../context/PostContext";
 
@@ -9,6 +9,7 @@ const Navbar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
 
   const [keyword, setKeyword] = useState("");
+  const navigate = useNavigate();
   function myFunction() {
     setShowDropdown(!showDropdown);
   }
@@ -16,6 +17,8 @@ const Navbar = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     searchPost(keyword);
+    navigate(`/search?q=${keyword}`);
+    setKeyword("");
   };
 
   return (

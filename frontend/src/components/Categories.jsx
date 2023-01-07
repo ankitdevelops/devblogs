@@ -60,6 +60,14 @@ const Categories = () => {
         >
           Tutorials
         </Link>
+        <Link
+          className="btn  border-0 btn-outline-light"
+          onClick={(e) => {
+            category("others");
+          }}
+        >
+          Others
+        </Link>
       </div>
     </>
   );

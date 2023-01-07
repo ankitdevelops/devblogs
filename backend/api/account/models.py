@@ -50,14 +50,17 @@ class User(AbstractBaseUser):
     designation = models.CharField(max_length=200, blank=True)
     about = models.TextField(blank=True)
     skills = models.JSONField(blank=True, null=True)
-    learning = models.CharField(max_length=200, blank=True)
-    available_for = models.CharField(max_length=200, blank=True)
+    learning = models.CharField(max_length=200, blank=True)  # make json field
+    available_for = models.CharField(max_length=200, blank=True)  # make json field
     date_joined = models.DateTimeField(auto_now_add=True)
     last_login = models.DateTimeField(auto_now_add=True)
     is_admin = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
     is_superadmin = models.BooleanField(default=False)
+    # github
+    # likedin
+    # website
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["username", "name"]

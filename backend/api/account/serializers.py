@@ -52,6 +52,9 @@ class UserProfileSerializer(serializers.ModelSerializer):
             "designation",
             "date_joined",
             "about",
+            "skills",
+            "learning",
+            "available_for",
             "authorBlogs",
         )
 

@@ -83,9 +83,11 @@ class LikeSerializer(serializers.ModelSerializer):
 
 
 class ReadingListSerializer(serializers.ModelSerializer):
+    post = BlogSerializer(read_only=True)
+
     class Meta:
         model = ReadingList
-        fields = ("post", "user")
+        fields = ("post",)
 
         extra_kwargs = {
             "user": {"read_only": True},

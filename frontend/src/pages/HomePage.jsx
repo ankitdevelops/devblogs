@@ -23,7 +23,7 @@ const HomePage = () => {
           <Categories />
         </div>
         <div className="mx-auto col-sm-7 col-md-7  ">
-          <PostCard />
+          <PostCard posts={posts} />
         </div>
         <div className="d-none d-sm-block mx-auto col-sm-3 col-md-3 text-white p-0">
           <FeaturedPost />

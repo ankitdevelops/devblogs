@@ -1,70 +1,52 @@
 import React, { useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import PostContext from "../context/PostContext";
 
 const Categories = () => {
-  const { getCategoryPosts } = useContext(PostContext);
-  const navigate = useNavigate();
-  const category = (category) => {
-    getCategoryPosts(category);
-  };
   return (
     <>
       <div className="d-grid gap-2 ">
-        <Link className="btn  border-0 btn-outline-light">Reading List</Link>
+        <Link to={`/saved`} className="btn  border-0 btn-outline-light">
+          Reading List
+        </Link>
         <Link
+          to={`/category/${"html"}`}
           className="btn  border-0 btn-outline-light"
-          onClick={(e) => {
-            category("html");
-          }}
         >
           HTML
         </Link>
         <Link
+          to={`/category/${"css"}`}
           className="btn  border-0 btn-outline-light"
-          onClick={(e) => {
-            category("css");
-          }}
         >
           CSS
         </Link>
         <Link
+          to={`/category/${"javascript"}`}
           className="btn  border-0 btn-outline-light"
-          onClick={(e) => {
-            category("javascript");
-          }}
         >
           JavaScript
         </Link>
         <Link
+          to={`/category/${"python"}`}
           className="btn  border-0 btn-outline-light"
-          onClick={(e) => {
-            category("python");
-          }}
         >
           Python
         </Link>
         <Link
+          to={`/category/${"django"}`}
           className="btn  border-0 btn-outline-light"
-          onClick={(e) => {
-            category("django");
-          }}
         >
           Django
         </Link>
         <Link
+          to={`/category/${"tutorials"}`}
           className="btn  border-0 btn-outline-light"
-          onClick={(e) => {
-            category("tutorials");
-          }}
         >
           Tutorials
         </Link>
         <Link
+          to={`/category/${"others"}`}
           className="btn  border-0 btn-outline-light"
-          onClick={(e) => {
-            category("others");
-          }}
         >
           Others
         </Link>

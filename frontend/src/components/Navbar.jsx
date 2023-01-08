@@ -27,9 +27,7 @@ const Navbar = () => {
         <div className="nav-container">
           <div className="left-container">
             <div className="navbar-brand">
-              <Link to="/" onClick={window.location.reload}>
-                Dev
-              </Link>
+              <Link to="/">Dev</Link>
             </div>
             <div className="search">
               <form className="form-container" onSubmit={handleSearch}>

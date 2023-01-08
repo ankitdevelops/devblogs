@@ -55,19 +55,24 @@ const postReducer = (state, action) => {
     case "GET_CATEGORY_POSTS":
       return {
         ...state,
-        posts: action.payload,
+        categoryResults: action.payload,
         loading: false,
       };
     case "SEARCH_POSTS":
       return {
         ...state,
-        posts: action.payload,
+        searchResults: action.payload,
         loading: false,
       };
     case "DELETE_POST":
       return {
         ...state,
         posts: state.posts.filter((post) => post.slug !== action.payload),
+      };
+    case "GET_SAVED_POSTS":
+      return {
+        ...state,
+        savedPost: action.payload,
       };
 
     default:

@@ -15,6 +15,8 @@ import PostContext from "./context/PostContext";
 import EditPost from "./pages/EditPost";
 import SearchPage from "./pages/SearchPage";
 import Dashboard from "./pages/Dashboard";
+import ReadingList from "./pages/ReadingList";
+import CategoryPage from "./pages/CategoryPage";
 
 function App() {
   const { isLoggedin, getUserInfo } = useContext(AuthContext);
@@ -33,6 +35,7 @@ function App() {
       <Routes>
         <Route path="/" exact element={<HomePage />} />
         <Route path="/search" exact element={<SearchPage />} />
+        <Route path="/category/:category" element={<CategoryPage />} />
 
         <Route path="/:username/:slug" exact element={<DetailsPage />} />
 
@@ -55,6 +58,10 @@ function App() {
         <Route
           path="/profile/:username"
           element={isLoggedin ? <UserProfile /> : <Signin />}
+        />
+        <Route
+          path="/saved"
+          element={isLoggedin ? <ReadingList /> : <Signin />}
         />
         <Route
           path="/:username/:slug/edit"

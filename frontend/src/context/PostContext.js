@@ -13,6 +13,9 @@ export const PostProvider = ({ children }) => {
     singlePostComment: [],
     postLikeStatusByLoggedInUser: false,
     postSaveStatusByLoggedInUser: false,
+    savedPost: [],
+    searchResults: [],
+    categoryResults: [],
   };
   const [state, dispatch] = useReducer(postReducer, initialState);
 
@@ -345,6 +348,31 @@ export const PostProvider = ({ children }) => {
         toast.error(error.message);
       });
   };
+
+  // get user saved post
+  const getSavedPost = async (slug) => {
+    const url = `http://127.0.0.1:8000/api/blogs/reading-list/`;
+    const config = {
+      // "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${JSON.parse(
+        localStorage.getItem("accessToken")
+      )}`,
+    };
+
+    axios
+      .get(url, { headers: config })
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch({
+            type: "GET_SAVED_POSTS",
+            payload: response.data,
+          });
+        }
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
   return (
     <PostContext.Provider
       value={{
@@ -362,12 +390,16 @@ export const PostProvider = ({ children }) => {
         getCategoryPosts,
         searchPost,
         deletePost,
+        getSavedPost,
         posts: state.posts,
         post: state.post,
         featuredPosts: state.featuredPosts,
         singlePostComment: state.singlePostComment,
         postLikeStatusByLoggedInUser: state.postLikeStatusByLoggedInUser,
         postSaveStatusByLoggedInUser: state.postSaveStatusByLoggedInUser,
+        savedPost: state.savedPost,
+        searchResults: state.searchResults,
+        categoryResults: state.categoryResults,
       }}
     >
       {children}

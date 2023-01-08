@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import Categories from "../components/Categories";
 import PostCard from "../components/PostCard";
+import PostContext from "../context/PostContext";
 
 const SearchPage = () => {
+  const { searchResults } = useContext(PostContext);
   return (
     <main className="mt-3">
       <div className="row container  ">
@@ -10,7 +12,7 @@ const SearchPage = () => {
           <Categories />
         </div>
         <div className="mx-auto col-sm-7 col-md-7  ">
-          <PostCard />
+          <PostCard posts={searchResults} />
         </div>
         <div className="d-none d-sm-block mx-auto col-sm-3 col-md-3 text-white p-0"></div>
       </div>

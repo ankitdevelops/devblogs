@@ -1,11 +1,8 @@
-import React, { useContext, useEffect } from "react";
-import PostContext from "../context/PostContext";
-import ReactMarkdown from "react-markdown";
+import React from "react";
 import DotLoader from "react-spinners/DotLoader";
 import { Link } from "react-router-dom";
-const PostCard = () => {
-  const { posts } = useContext(PostContext);
 
+const PostCard = ({ posts }) => {
   if (!posts) {
     return (
       <>

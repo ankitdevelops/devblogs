@@ -18,6 +18,13 @@
 - Post Details
 - Post Updating
 - User Profile
+- Comments
+- Category Filtering
+- Featured Post
+- Search
+- Post Like/Unlike
+- Post Saving
+- Dashboard to manage posts(Edit,delete,archive)
 
 
 
@@ -33,7 +40,7 @@
 ![](./screenshots/signin.png)
 
 ### HomePage
-![](./screenshots/home.png)
+![](./screenshots/new_home.png)
 
 ### Details Page
 ![](./screenshots/details.png)
@@ -45,4 +52,13 @@
 ![](./screenshots/edit.png)
 
 ### UserProfile Page
-![](./screenshots/profile.png)
+![](./screenshots/user_profile.png)
+
+### Dashboard
+![](./screenshots/dashboard.png)
+
+### Post Like
+![](./screenshots/post_like.png)
+
+### Post Save
+![](./screenshots/post_save.png)

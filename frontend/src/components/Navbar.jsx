@@ -10,6 +10,7 @@ const Navbar = () => {
 
   const [keyword, setKeyword] = useState("");
   const navigate = useNavigate();
+
   function myFunction() {
     setShowDropdown(!showDropdown);
   }

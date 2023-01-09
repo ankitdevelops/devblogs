@@ -17,6 +17,7 @@ import SearchPage from "./pages/SearchPage";
 import Dashboard from "./pages/Dashboard";
 import ReadingList from "./pages/ReadingList";
 import CategoryPage from "./pages/CategoryPage";
+import UserEditPage from "./pages/UserEditPage";
 
 function App() {
   const { isLoggedin, getUserInfo } = useContext(AuthContext);
@@ -38,6 +39,7 @@ function App() {
         <Route path="/category/:category" element={<CategoryPage />} />
 
         <Route path="/:username/:slug" exact element={<DetailsPage />} />
+        <Route path="/:username/edit/" exact element={<UserEditPage />} />
 
         <Route
           path="/signin"

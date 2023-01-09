@@ -4,6 +4,7 @@ import AuthContext from "../context/AuthContext";
 import { useNavigate, Link, useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import { toast } from "react-toastify";
+
 const EditPost = () => {
   const navigate = useNavigate();
   const { slug } = useParams();

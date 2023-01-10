@@ -373,6 +373,7 @@ export const PostProvider = ({ children }) => {
         toast.error(error.message);
       });
   };
+
   return (
     <PostContext.Provider
       value={{

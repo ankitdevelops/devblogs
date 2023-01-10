@@ -112,6 +112,28 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
+  // update user profile
+  const updateUser = async (username, data) => {
+    const url = `http://127.0.0.1:8000/api/user/${username}/`;
+    const config = {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${JSON.parse(
+        localStorage.getItem("accessToken")
+      )}`,
+    };
+    axios
+      .patch(url, data, { headers: config })
+      .then((response) => {
+        if (response.status === 200) {
+          toast.success("user Updated Successfully");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error(error.message);
+      });
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -119,6 +141,7 @@ export const AuthProvider = ({ children }) => {
         signup,
         getUserInfo,
         getUserProfile,
+        updateUser,
         username: state.username,
         isLoggedin: state.isLoggedin,
         userInfo: state.userInfo,

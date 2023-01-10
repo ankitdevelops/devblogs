@@ -74,6 +74,12 @@ const Navbar = () => {
                     alt=""
                     className="profile-btn"
                     onClick={myFunction}
+                    style={{
+                      height: "50px",
+                      width: "50px",
+                      borderRadius: "50px",
+                      objectFit: "cover",
+                    }}
                   />
                 )}
                 <div

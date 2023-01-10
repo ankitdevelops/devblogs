@@ -41,6 +41,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
 
 class UserProfileSerializer(serializers.ModelSerializer):
     authorBlogs = BlogSerializer(read_only=True, many=True)
+    avatar = serializers.ImageField(use_url=True)
 
     class Meta:
         model = get_user_model()
@@ -58,6 +59,18 @@ class UserProfileSerializer(serializers.ModelSerializer):
             "available_for",
             "authorBlogs",
         )
+        extra_kwargs = {
+            "username": {"read_only": True},
+            "email": {"read_only": True},
+            "authorBlogs": {"read_only": True},
+        }
+
+    # def update(self, instance, validated_data):
+    #     print(validated_data)
+    #     # validated_data.pop("username")
+    #     # validated_data.pop("email")
+    #     print(instance)
+    #     return instance
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):

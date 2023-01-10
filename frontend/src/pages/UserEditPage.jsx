@@ -1,11 +1,12 @@
 import React, { useState, useContext, useEffect } from "react";
 import AuthContext from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 const UserEditPage = () => {
-  const { userProfile, getUserProfile } = useContext(AuthContext);
+  const { userProfile, getUserProfile, updateUser } = useContext(AuthContext);
   const { username } = useParams();
-
+  const navigate = useNavigate();
   useEffect(() => {
     getUserProfile(username);
   }, [username]);
@@ -20,6 +21,8 @@ const UserEditPage = () => {
       setLearning(userProfile.learning);
       setAbout(userProfile.about);
       setAvailable(userProfile.available_for);
+      setSkills(userProfile.skills);
+      // setAvatar(userProfile.avatar);
     }
   }, [userProfile]);
 
@@ -28,6 +31,7 @@ const UserEditPage = () => {
   const [uname, setUname] = useState(userProfile ? userProfile.username : "");
   const [email, setEmail] = useState(userProfile ? userProfile.email : "");
   const [about, setAbout] = useState(userProfile ? userProfile.about : "");
+  const [avatar, setAvatar] = useState([]);
   const [phone, setPhone] = useState(
     userProfile ? userProfile.phone_number : ""
   );
@@ -44,6 +48,39 @@ const UserEditPage = () => {
 
   const [skills, setSkills] = React.useState(userProfile.skills);
 
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    let formData = new FormData();
+    if (userProfile.name !== name) {
+      formData.append("name", name);
+    }
+    if (userProfile.about !== about) {
+      formData.append("about", about);
+    }
+    if (userProfile.phone_number !== phone) {
+      formData.append("phone_number", phone);
+    }
+    if (userProfile.designation !== designation) {
+      formData.append("designation", designation);
+    }
+    if (userProfile.skills !== skills) {
+      formData.append("skills", skills);
+    }
+    if (userProfile.learning !== learning) {
+      formData.append("learning", learning);
+    }
+    if (userProfile.available_for !== available) {
+      formData.append("available_for", available);
+    }
+
+    if (avatar.length !== 0) {
+      formData.append("avatar", avatar[0]);
+    }
+
+    await updateUser(username, formData);
+    navigate(`/profile/${username}`);
+  };
+
   return (
     <main className="mt-3">
       <div className="row container  ">
@@ -53,13 +90,13 @@ const UserEditPage = () => {
               <div className="col-12">
                 <div className="d-flex  align-items-center">
                   <img
-                    src="https://randomuser.me/api/portraits/women/30.jpg"
-                    title=""
-                    alt=""
+                    src={userProfile.avatar}
+                    alt="user-profileImage"
                     style={{
                       height: "100px",
-                      width: "auto",
+                      width: "100px",
                       borderRadius: "50px",
+                      objectFit: "cover",
                     }}
                   />
                   <input
@@ -67,6 +104,9 @@ const UserEditPage = () => {
                     type="file"
                     id="formFile"
                     style={{ width: "30%" }}
+                    accept="image/*"
+                    multiple={false}
+                    onChange={(e) => setAvatar([...avatar, e.target.files[0]])}
                   ></input>
                 </div>
               </div>
@@ -86,6 +126,8 @@ const UserEditPage = () => {
                   className="form-control"
                   value={uname || ""}
                   onChange={(e) => setUname(e.target.value)}
+                  disabled
+                  style={{ cursor: "not-allowed" }}
                 />
               </div>
               <div className="col-12">
@@ -97,6 +139,8 @@ const UserEditPage = () => {
                   className="form-control"
                   value={email || ""}
                   onChange={(e) => setEmail(e.target.value)}
+                  disabled
+                  style={{ cursor: "not-allowed" }}
                 />
               </div>
               <div className="col-12">
@@ -133,8 +177,8 @@ const UserEditPage = () => {
                 <input
                   type="text"
                   className="form-control"
-                  value={learning || ""}
-                  onChange={(e) => setLearning(e.target.value)}
+                  value={skills || ""}
+                  onChange={(e) => setSkills(e.target.value)}
                 />
               </div>
               <div className="col-md-6">
@@ -156,7 +200,11 @@ const UserEditPage = () => {
                 />
               </div>
               <div className="col-12 ">
-                <button type="submit" className="btn btn-primary">
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  onClick={onSubmit}
+                >
                   Update
                 </button>
               </div>

@@ -1,5 +1,5 @@
 from rest_framework.response import Response
-from rest_framework.generics import CreateAPIView, ListAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView, UpdateAPIView
 from .serializers import (
     UserRegisterSerializer,
     UserProfileSerializer,
@@ -31,9 +31,10 @@ class UserRegisterView(CreateAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class UserProfileView(ListAPIView):
+class UserProfileView(ListAPIView, UpdateAPIView):
     queryset = User.objects.all()
     serializer_class = UserProfileSerializer
+    lookup_field = "username"
 
     def get_queryset(self):
         qs = super().get_queryset()

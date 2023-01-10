@@ -49,7 +49,7 @@ class User(AbstractBaseUser):
     avatar = models.ImageField(blank=True, upload_to="avatar")
     designation = models.CharField(max_length=200, blank=True)
     about = models.TextField(blank=True)
-    skills = models.JSONField(blank=True, null=True)
+    skills = models.CharField(blank=True, null=True, max_length=500)
     learning = models.CharField(max_length=200, blank=True)  # make json field
     available_for = models.CharField(max_length=200, blank=True)  # make json field
     date_joined = models.DateTimeField(auto_now_add=True)

@@ -52,6 +52,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
             "designation",
             "date_joined",
             "about",
+            "phone_number",
             "skills",
             "learning",
             "available_for",

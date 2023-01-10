@@ -19,7 +19,7 @@ const DetailsPage = () => {
     postSaveStatusByLoggedInUser,
     userPostSavedStatus,
   } = useContext(PostContext);
-  const { userInfo } = useContext(AuthContext);
+  const { userInfo, userProfile } = useContext(AuthContext);
   useEffect(() => {
     getSinglePost(slug);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -157,18 +157,6 @@ const DetailsPage = () => {
                   </h5>
                 </li>
                 <Link className="list-group-item list-group-item">An item</Link>
-                <Link className="list-group-item list-group-item">
-                  A second item
-                </Link>
-                <Link className="list-group-item list-group-item">
-                  A third item
-                </Link>
-                <Link className="list-group-item list-group-item">
-                  A fourth item
-                </Link>
-                <Link className="list-group-item list-group-item">
-                  And a fifth one
-                </Link>
               </ul>
             </div>
           </div>

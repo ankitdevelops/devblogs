@@ -31,7 +31,7 @@ const EditPost = () => {
         setContent(post.content);
         setCategory(post.category);
         setStatus(post.status);
-        setThumbnail(post.thumbnail);
+        setImage(post.thumbnail);
       }
     }
   }, [post]);
@@ -42,9 +42,10 @@ const EditPost = () => {
   const [content, setContent] = useState(post ? post.content : "");
   const [category, setCategory] = useState(post ? post.category : "");
   const [status, setStatus] = useState(post ? post.status : "");
-  const [thumbnail, setThumbnail] = useState([post ? post.thumbnail : ""]);
-  const [preview, setPreview] = useState(false);
-  const [newThumbnail, setNewThumbnail] = useState(false);
+  const [thumbnail, setThumbnail] = useState([]);
+  const [preview, setPreview] = useState("false");
+  const [image, setImage] = useState("");
+  // const [newThumbnail, setNewThumbnail] = useState(false);
 
   // handling forms
   const onSubmit = async (e) => {
@@ -62,9 +63,9 @@ const EditPost = () => {
     if (post.status !== status) {
       formData.append("status", status);
     }
-    // if (thumbnail[thumbnail.length - 1]) {
-    //   formData.append("thumbnail", thumbnail[thumbnail.length - 1]);
-    // }
+    if (thumbnail.length !== 0) {
+      formData.append("thumbnail", thumbnail[0]);
+    }
     await updatePost(post.slug, formData);
     navigate(`/profile/${user}`);
   };
@@ -97,49 +98,33 @@ const EditPost = () => {
               <ul className="nav my-2f d-flex justify-content-around align-items-center">
                 <li className="nav-item">
                   <div className="row g-3 align-items-center">
-                    <div className="col-auto">
-                      <label className="col-form-label">Thumbnail</label>
+                    <div className="col-auto d-flex align-items-center">
+                      <img
+                        src={image}
+                        alt="post-thumbnail"
+                        style={{
+                          width: "140px",
+                          height: "100px",
+                          objectFit: "cover",
+                        }}
+                      />
                     </div>
-
+                  </div>
+                </li>
+                <li className="nav-item">
+                  <div className="row g-3 align-items-center">
                     <div className="col-auto">
-                      {post && (
-                        <>
-                          <a
-                            href={post.thumbnail}
-                            target="_blank"
-                            rel="noreferrer"
-                            className={
-                              newThumbnail
-                                ? "btn btn-primary d-none"
-                                : "btn btn-primary"
-                            }
-                          >
-                            Show
-                          </a>
-                          <button
-                            className={
-                              newThumbnail
-                                ? "btn btn-primary d-none ms-2"
-                                : "btn btn-primary ms-2"
-                            }
-                            onClick={() => setNewThumbnail(true)}
-                          >
-                            Set New
-                          </button>
-                        </>
-                      )}
                       <input
+                        className="form-control mx-5"
                         type="file"
-                        className={
-                          newThumbnail ? "form-control" : "form-control d-none"
-                        }
-                        required
+                        id="formFile"
+                        style={{ width: "60%" }}
                         accept="image/*"
                         multiple={false}
                         onChange={(e) =>
                           setThumbnail([...thumbnail, e.target.files[0]])
                         }
-                      />
+                      ></input>
                     </div>
                   </div>
                 </li>
@@ -148,6 +133,7 @@ const EditPost = () => {
                     <div className="col-auto">
                       <label className="col-form-label">Category</label>
                     </div>
+
                     <div className="col-auto">
                       <select
                         className="form-select"

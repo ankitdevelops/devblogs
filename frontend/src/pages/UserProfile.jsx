@@ -2,23 +2,16 @@ import React, { useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import DotLoader from "react-spinners/DotLoader";
 import AuthContext from "../context/AuthContext";
-import PostContext from "../context/PostContext";
 import { useParams } from "react-router-dom";
 
 const UserProfile = () => {
   const { username } = useParams();
   const { userProfile, getUserProfile } = useContext(AuthContext);
+
   useEffect(() => {
     getUserProfile(username);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [username]);
-
-  let skillsArray = [];
-
-  userProfile.skills &&
-    Object.entries(userProfile.skills[0]).forEach((entry) =>
-      skillsArray.push(entry[1])
-    );
 
   if (!userProfile) {
     return (
@@ -108,11 +101,10 @@ const UserProfile = () => {
                           <h6>Skills</h6>
                           <hr />
                         </li>
-                        {skillsArray.map((item, index) => (
-                          <li className="list-group-item " key={index}>
-                            {item}
-                          </li>
-                        ))}
+
+                        <li className="list-group-item ">
+                          {userProfile.skills}
+                        </li>
                       </ul>
                     </div>
                   </div>

@@ -15,6 +15,11 @@ const Navbar = () => {
     setShowDropdown(!showDropdown);
   }
 
+  const signOut = () => {
+    localStorage.clear();
+    window.location.reload();
+  };
+
   const handleSearch = (e) => {
     e.preventDefault();
     searchPost(keyword);
@@ -99,7 +104,9 @@ const Navbar = () => {
 
                   <hr />
                   {isLoggedin ? (
-                    <Link to="/logout">Sign Out</Link>
+                    <Link to="/" onClick={signOut}>
+                      Sign Out
+                    </Link>
                   ) : (
                     <Link to="/signin">Sign in</Link>
                   )}

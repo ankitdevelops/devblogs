@@ -6,12 +6,13 @@ from rest_framework.generics import (
     RetrieveUpdateDestroyAPIView,
     ListAPIView,
 )
-from api.blogs.models import Blog, Comment, Like, ReadingList
+from api.blogs.models import Blog, Comment, Like, ReadingList, PostImage
 from .serializers import (
     BlogSerializer,
     CommentSerializer,
     LikeSerializer,
     ReadingListSerializer,
+    PostImageSerializer,
 )
 
 # Create your views here.
@@ -127,3 +128,15 @@ class SearchListView(ListAPIView):
             Q(title__icontains=self.kwargs["keyword"])
             | Q(content__icontains=self.kwargs["keyword"])
         )
+
+
+class PostImageView(ListCreateAPIView):
+    queryset = PostImage.objects.all()
+    serializer_class = PostImageSerializer
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)

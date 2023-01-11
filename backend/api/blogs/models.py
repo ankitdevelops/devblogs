@@ -132,3 +132,12 @@ class ReadingList(models.Model):
         on_delete=models.CASCADE,
     )
     created = models.DateTimeField(auto_now_add=True, editable=False)
+
+
+class PostImage(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="postImage"
+    )
+    image = models.ImageField(upload_to="blog/images/%Y/%m/")
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)

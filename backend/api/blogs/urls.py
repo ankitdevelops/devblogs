@@ -8,6 +8,7 @@ from .views import (
     ReadingListView,
     CategoryListView,
     SearchListView,
+    PostImageView,
     check_liked_by_user,
     check_post_saved_by_user,
 )
@@ -33,4 +34,5 @@ urlpatterns = [
     path(
         "reading-list/<str:slug>/", check_post_saved_by_user, name="reading-list-check"
     ),
+    path("images/", PostImageView.as_view()),
 ]

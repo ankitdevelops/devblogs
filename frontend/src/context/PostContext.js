@@ -16,6 +16,7 @@ export const PostProvider = ({ children }) => {
     savedPost: [],
     searchResults: [],
     categoryResults: [],
+    postImages: [],
   };
   const [state, dispatch] = useReducer(postReducer, initialState);
 
@@ -374,6 +375,57 @@ export const PostProvider = ({ children }) => {
       });
   };
 
+  // upload post images
+  const uploadPostImages = async (data) => {
+    const url = "http://127.0.0.1:8000/api/blogs/images/";
+
+    const config = {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${JSON.parse(
+        localStorage.getItem("accessToken")
+      )}`,
+    };
+    axios
+      .post(url, data, { headers: config })
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch({
+            type: "ADD_POST_IMAGE",
+            payload: response.data,
+          });
+        }
+        toast.success("Image Added Successfully");
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error(error.message);
+      });
+  };
+
+  // get post images
+  const getPostImages = async (slug) => {
+    const url = `http://127.0.0.1:8000/api/blogs/images/`;
+    const config = {
+      // "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${JSON.parse(
+        localStorage.getItem("accessToken")
+      )}`,
+    };
+
+    axios
+      .get(url, { headers: config })
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch({
+            type: "GET_POST_IMAGES",
+            payload: response.data,
+          });
+        }
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
   return (
     <PostContext.Provider
       value={{
@@ -392,6 +444,8 @@ export const PostProvider = ({ children }) => {
         searchPost,
         deletePost,
         getSavedPost,
+        getPostImages,
+        uploadPostImages,
         posts: state.posts,
         post: state.post,
         featuredPosts: state.featuredPosts,
@@ -401,6 +455,7 @@ export const PostProvider = ({ children }) => {
         savedPost: state.savedPost,
         searchResults: state.searchResults,
         categoryResults: state.categoryResults,
+        postImages: state.postImages,
       }}
     >
       {children}

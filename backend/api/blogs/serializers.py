@@ -1,6 +1,6 @@
 from dataclasses import fields
 from rest_framework import serializers
-from api.blogs.models import Blog, Comment, Like, ReadingList
+from api.blogs.models import Blog, Comment, Like, ReadingList, PostImage
 from api.account.models import User
 
 
@@ -104,3 +104,11 @@ class ReadingListSerializer(serializers.ModelSerializer):
         else:
             instance = ReadingList.objects.create(**validated_data)
             return instance
+
+
+class PostImageSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField(use_url=True)
+
+    class Meta:
+        model = PostImage
+        fields = ("image",)

@@ -75,6 +75,12 @@ const postReducer = (state, action) => {
         savedPost: action.payload,
       };
 
+    case "GET_POST_IMAGES":
+      return {
+        ...state,
+        postImages: action.payload,
+      };
+
     default:
       return state;
   }

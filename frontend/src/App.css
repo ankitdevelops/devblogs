@@ -221,3 +221,12 @@ textarea {
 textarea:focus {
   outline: 1.5px solid #636262;
 }
+
+.file-input {
+  width: 100%;
+}
+.file-input[type="file"] {
+  color: transparent;
+  width: 100%;
+  display: none;
+}

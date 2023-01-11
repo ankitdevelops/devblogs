@@ -27,6 +27,15 @@ const UserProfile = () => {
         <div className="row container  ">
           <div className="mx-auto col-sm-10 col-md-10  ">
             <div className="card card-body">
+              <div>
+                <Link
+                  to={`/${username}/edit/`}
+                  className="float-end btn btn-warning"
+                  style={{ width: "150px" }}
+                >
+                  Edit Profile
+                </Link>
+              </div>
               <div className="user-image mx-auto my-3">
                 <img
                   src={userProfile.avatar && userProfile.avatar}

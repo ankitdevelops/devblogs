@@ -53,7 +53,7 @@ export const PostProvider = ({ children }) => {
     axios
       .post(url, post, { headers: config })
       .then((response) => {
-        if (response.status === 200) {
+        if (response.status === 201) {
           dispatch({
             type: "ADD_POST",
             payload: response.data,
@@ -388,7 +388,7 @@ export const PostProvider = ({ children }) => {
     axios
       .post(url, data, { headers: config })
       .then((response) => {
-        if (response.status === 200) {
+        if (response.status === 201) {
           dispatch({
             type: "ADD_POST_IMAGE",
             payload: response.data,

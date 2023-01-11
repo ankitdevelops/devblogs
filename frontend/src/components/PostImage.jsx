@@ -1,15 +1,24 @@
 import React, { useContext, useEffect, useState } from "react";
 import PostContext from "../context/PostContext";
 const PostImage = () => {
-  const { getPostImages, postImages } = useContext(PostContext);
+  const { getPostImages, postImages, uploadPostImages } =
+    useContext(PostContext);
 
   const [image, setImage] = useState([]);
+  const [load, setLoad] = useState(false);
+
+  if (image.length !== 0) {
+    let formData = new FormData();
+    formData.append("image", image[0]);
+    uploadPostImages(formData);
+    setImage([]);
+    setLoad(true);
+  }
 
   useEffect(() => {
     getPostImages();
   }, []);
 
-  console.log(postImages);
   return (
     <div>
       <div className="card card-body mt-2">
@@ -20,6 +29,7 @@ const PostImage = () => {
             id="img"
             multiple={false}
             className=" file-input"
+            onChange={(e) => setImage([...image, e.target.files[0]])}
           />
           <label htmlFor="img" className="btn btn-primary">
             <svg

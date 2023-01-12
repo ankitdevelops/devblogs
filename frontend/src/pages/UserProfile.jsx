@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 
 const UserProfile = () => {
   const { username } = useParams();
-  const { userProfile, getUserProfile } = useContext(AuthContext);
+  const { userProfile, getUserProfile, userInfo } = useContext(AuthContext);
 
   useEffect(() => {
     getUserProfile(username);
@@ -28,13 +28,16 @@ const UserProfile = () => {
           <div className="mx-auto col-sm-10 col-md-10  ">
             <div className="card card-body">
               <div>
-                <Link
-                  to={`/${username}/edit/`}
-                  className="float-end btn btn-warning"
-                  style={{ width: "150px" }}
-                >
-                  Edit Profile
-                </Link>
+                {" "}
+                {userInfo.username === username && (
+                  <Link
+                    to={`/${username}/edit/`}
+                    className="float-end btn btn-warning"
+                    style={{ width: "150px" }}
+                  >
+                    Edit Profile
+                  </Link>
+                )}
               </div>
               <div className="user-image mx-auto my-3">
                 <img

@@ -32,6 +32,7 @@ class BlogSerializer(serializers.ModelSerializer):
     author = AuthorSerializer(read_only=True)
     thumbnail = serializers.ImageField(use_url=True)
     # comments = CommentSerializer(many=True)
+    # created = serializers.DateTimeField(format="%d-%m-%Y %H:%M:%S")
 
     class Meta:
         model = Blog

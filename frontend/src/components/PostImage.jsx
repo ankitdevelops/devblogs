@@ -5,14 +5,12 @@ const PostImage = () => {
     useContext(PostContext);
 
   const [image, setImage] = useState([]);
-  const [load, setLoad] = useState(false);
 
   if (image.length !== 0) {
     let formData = new FormData();
     formData.append("image", image[0]);
     uploadPostImages(formData);
     setImage([]);
-    setLoad(true);
   }
 
   useEffect(() => {

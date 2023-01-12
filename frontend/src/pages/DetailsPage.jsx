@@ -39,6 +39,21 @@ const DetailsPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [post, postLikeStatusByLoggedInUser]);
 
+  const monthNameList = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "June",
+    "July",
+    "Aug",
+    "Sept",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
   if (!post) {
     return (
       <>
@@ -72,8 +87,10 @@ const DetailsPage = () => {
               <h6 className="my-3 text-warning">
                 {post.category.toUpperCase()}
               </h6>
+
               <div className="d-flex justify-content-between">
                 <h2 className="my-3">{post.title.toUpperCase()}</h2>
+
                 <div>
                   {userInfo.username === post.author.username && (
                     <Link
@@ -99,10 +116,18 @@ const DetailsPage = () => {
                   />
                 </div>
                 <div className="media-body ms-2">
-                  <p>
+                  <h6 className="opacity-50">
                     {post.author.name.charAt(0).toUpperCase() +
                       post.author.name.slice(1)}
-                  </p>
+                  </h6>
+                  <h6 className="opacity-50">
+                    <small>Published On </small>
+                    {`${
+                      monthNameList[new Date(post.created).getMonth()]
+                    }, ${new Date(post.created).getDate()}, ${new Date(
+                      post.created
+                    ).getFullYear()}`}
+                  </h6>
                 </div>
               </div>
             </div>

@@ -8,7 +8,7 @@ const postReducer = (state, action) => {
       };
 
     case "ADD_POST":
-      return { posts: action.payload, ...state.posts };
+      return { ...state, posts: [action.payload, ...state.posts] };
 
     case "GET_SINGLE_POSTS":
       return { ...state, post: action.payload };
@@ -82,7 +82,10 @@ const postReducer = (state, action) => {
       };
 
     case "ADD_POST_IMAGE":
-      return [action.payload, ...state.postImages];
+      return {
+        ...state,
+        postImages: [action.payload, ...state.postImages],
+      };
 
     default:
       return state;

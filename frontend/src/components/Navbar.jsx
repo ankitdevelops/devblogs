@@ -96,9 +96,9 @@ const Navbar = () => {
                   {userInfo.username && (
                     <>
                       <Link to={`/profile/${userInfo.username}`}>Profile</Link>
-
+                      <Link to="/create">Create </Link>
+                      <Link to="/saved">Reading List</Link>
                       <Link to="/dashboard">Dashboard</Link>
-                      <Link to="create">Create Post</Link>
                     </>
                   )}
 

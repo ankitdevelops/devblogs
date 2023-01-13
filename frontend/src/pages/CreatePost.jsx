@@ -29,7 +29,6 @@ const CreatePost = () => {
     formData.append("status", status);
     formData.append("thumbnail", thumbnail[0]);
     console.log(formData);
-    await addPost(formData);
     navigate(`/`);
   };
 

@@ -17,6 +17,7 @@ const EditPost = () => {
     getSinglePost(slug);
     if (post) {
       if (post.author.username !== user) {
+        navigate(`/`);
         toast.error("You don't have permission to edit this post.");
       }
     }
@@ -25,6 +26,7 @@ const EditPost = () => {
   useEffect(() => {
     if (post) {
       if (post.author.username !== user) {
+        navigate(`/`);
         toast.error("You don't have permission to edit this post.");
       } else {
         setTitle(post.title);

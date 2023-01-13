@@ -1,5 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import PostContext from "../context/PostContext";
+import copy from "copy-to-clipboard";
+
 const PostImage = () => {
   const { getPostImages, postImages, uploadPostImages } =
     useContext(PostContext);
@@ -64,6 +66,9 @@ const PostImage = () => {
                 <span
                   className="badge rounded-pill text-bg-primary"
                   role="button"
+                  onClick={() => {
+                    copy(`![](${image.image})`);
+                  }}
                 >
                   Copy Link
                 </span>

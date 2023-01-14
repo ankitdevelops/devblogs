@@ -31,8 +31,6 @@ class CommentSerializer(serializers.ModelSerializer):
 class BlogSerializer(serializers.ModelSerializer):
     author = AuthorSerializer(read_only=True)
     thumbnail = serializers.ImageField(use_url=True)
-    # comments = CommentSerializer(many=True)
-    # created = serializers.DateTimeField(format="%d-%m-%Y %H:%M:%S")
 
     class Meta:
         model = Blog
@@ -50,7 +48,6 @@ class BlogSerializer(serializers.ModelSerializer):
             "comments_count",
             "reading_list_count",
             "author",
-            # "comments",
         )
         extra_kwargs = {
             "is_featured": {"read_only": True},

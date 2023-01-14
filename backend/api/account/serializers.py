@@ -3,8 +3,6 @@ from api.blogs.serializers import BlogSerializer
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.contrib.auth import get_user_model
 
-# from api.account.models import User
-
 
 class UserRegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(max_length=60, min_length=6, write_only=True)
@@ -34,7 +32,6 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         if validated_data.get("password") != validated_data.get("confirm_password"):
             raise serializers.ValidationError("Password don't match")
         validated_data.pop("confirm_password")
-        print(validated_data)
         user = get_user_model().objects.create_user(**validated_data)
         return user
 

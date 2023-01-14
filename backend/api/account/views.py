@@ -1,5 +1,10 @@
 from rest_framework.response import Response
-from rest_framework.generics import CreateAPIView, ListAPIView, UpdateAPIView
+from rest_framework.generics import (
+    CreateAPIView,
+    ListAPIView,
+    UpdateAPIView,
+    RetrieveUpdateAPIView,
+)
 from .serializers import (
     UserRegisterSerializer,
     UserProfileSerializer,
@@ -9,6 +14,7 @@ from api.account.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import status
 from api.blogs.models import Blog
+from .permissions import UpdateOwnProfile
 
 
 class UserRegisterView(CreateAPIView):
@@ -31,23 +37,13 @@ class UserRegisterView(CreateAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class UserProfileView(ListAPIView, UpdateAPIView):
+class UserProfileView(RetrieveUpdateAPIView):
     queryset = User.objects.all()
     serializer_class = UserProfileSerializer
+    permission_classes = [
+        UpdateOwnProfile,
+    ]
     lookup_field = "username"
-
-    def get_queryset(self):
-        qs = super().get_queryset()
-        return qs.filter(username=self.kwargs["username"])
-
-
-# Trying to Add Username in login returned token
-from rest_framework_simplejwt.views import TokenObtainPairView
-from .serializers import MyTokenObtainPairSerializer
-
-
-class MyTokenObtainPairView(TokenObtainPairView):
-    serializer_class = MyTokenObtainPairSerializer
 
 
 class UserInfo(ListAPIView):
@@ -59,3 +55,12 @@ class UserInfo(ListAPIView):
             self.request.user,
         )
         return Response(serializer.data)
+
+
+# Trying to Add Username in login returned token
+from rest_framework_simplejwt.views import TokenObtainPairView
+from .serializers import MyTokenObtainPairSerializer
+
+
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer

@@ -103,7 +103,7 @@ export const AuthProvider = ({ children }) => {
         if (response.status === 200) {
           dispatch({
             type: "GET_USER_PROFILE",
-            payload: response.data[0],
+            payload: response.data,
           });
         }
       })

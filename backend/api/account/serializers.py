@@ -8,9 +8,9 @@ from django.contrib.auth import get_user_model
 
 class UserRegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(max_length=60, min_length=6, write_only=True)
-    # confirm_password = serializers.CharField(
-    #     max_length=60, min_length=6, write_only=True
-    # )
+    confirm_password = serializers.CharField(
+        max_length=60, min_length=6, write_only=True
+    )
 
     class Meta:
         model = get_user_model()
@@ -19,7 +19,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
             "username",
             "email",
             "password",
-            # "confirm_password",
+            "confirm_password",
             "is_staff",
             "last_login",
         )
@@ -31,10 +31,10 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         }
 
     def create(self, validated_data):
-        # if validated_data.get("password") != validated_data.get("confirm_password"):
-        #     raise serializers.ValidationError("Password don't match")
-        # validated_data.pop("confirm_password")
-        # print(validated_data)
+        if validated_data.get("password") != validated_data.get("confirm_password"):
+            raise serializers.ValidationError("Password don't match")
+        validated_data.pop("confirm_password")
+        print(validated_data)
         user = get_user_model().objects.create_user(**validated_data)
         return user
 
@@ -64,13 +64,6 @@ class UserProfileSerializer(serializers.ModelSerializer):
             "email": {"read_only": True},
             "authorBlogs": {"read_only": True},
         }
-
-    # def update(self, instance, validated_data):
-    #     print(validated_data)
-    #     # validated_data.pop("username")
-    #     # validated_data.pop("email")
-    #     print(instance)
-    #     return instance
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):

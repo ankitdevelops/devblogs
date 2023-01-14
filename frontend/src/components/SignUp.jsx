@@ -18,10 +18,12 @@ const SignUp = () => {
       username: username,
       email: email,
       password: password,
+      confirm_password: confirmPassword,
     };
     if (name && username && email && password) {
-      console.log(data);
-      await signup(data);
+      if (password === Comment) {
+        await signup(data);
+      }
     } else {
       setError("Please Check Your Details");
     }

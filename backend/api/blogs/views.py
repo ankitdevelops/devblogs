@@ -14,6 +14,7 @@ from .serializers import (
     ReadingListSerializer,
     PostImageSerializer,
 )
+from .permissions import UpdateDeleteOwnPost
 
 # Create your views here.
 
@@ -30,6 +31,9 @@ class BlogListCreateView(ListCreateAPIView):
 class BlogDetailsUpdateDeleteView(RetrieveUpdateDestroyAPIView):
     queryset = Blog.objects.filtered()
     serializer_class = BlogSerializer
+    permission_classes = [
+        UpdateDeleteOwnPost,
+    ]
     lookup_field = "slug"
 
 

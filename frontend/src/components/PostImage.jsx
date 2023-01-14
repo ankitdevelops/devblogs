@@ -17,6 +17,7 @@ const PostImage = () => {
 
   useEffect(() => {
     getPostImages();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

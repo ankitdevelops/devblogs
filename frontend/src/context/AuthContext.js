@@ -1,7 +1,6 @@
-import { createContext, useState, useReducer, useEffect } from "react";
+import { createContext, useReducer } from "react";
 import authReducer from "./AuthReducer";
 import axios from "axios";
-import jwt_decode from "jwt-decode";
 import { toast } from "react-toastify";
 
 const AuthContext = createContext();

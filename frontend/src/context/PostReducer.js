@@ -67,7 +67,7 @@ const postReducer = (state, action) => {
     case "DELETE_POST":
       return {
         ...state,
-        posts: state.posts.filter((post) => post.slug !== action.payload),
+        posts: [state.posts.filter((post) => post.slug !== action.payload)],
       };
     case "GET_SAVED_POSTS":
       return {

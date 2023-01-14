@@ -28,7 +28,6 @@ const UserProfile = () => {
           <div className="mx-auto col-sm-10 col-md-10  ">
             <div className="card card-body">
               <div>
-                {" "}
                 {userInfo.username === username && (
                   <Link
                     to={`/${username}/edit/`}

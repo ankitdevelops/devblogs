@@ -1,8 +1,7 @@
 import React, { useState, useContext } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import PostContext from "../context/PostContext";
-import AuthContext from "../context/AuthContext";
 import PostImage from "../components/PostImage";
 
 const CreatePost = () => {
@@ -15,10 +14,7 @@ const CreatePost = () => {
 
   const navigate = useNavigate();
 
-  const { userInfo } = useContext(AuthContext);
   const { addPost } = useContext(PostContext);
-
-  const user = userInfo.username;
 
   const onSubmit = async (e) => {
     e.preventDefault();

@@ -10,6 +10,7 @@ const CategoryPage = () => {
   const { category } = useParams();
   useEffect(() => {
     getCategoryPosts(category);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category]);
 
   return (

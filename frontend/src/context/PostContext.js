@@ -54,6 +54,7 @@ export const PostProvider = ({ children }) => {
       .post(url, post, { headers: config })
       .then((response) => {
         if (response.status === 201) {
+          console.log(response.data);
           dispatch({
             type: "ADD_POST",
             payload: response.data,
@@ -334,8 +335,16 @@ export const PostProvider = ({ children }) => {
   // delete post
   const deletePost = async (slug) => {
     const url = `http://127.0.0.1:8000/api/blogs/blog/${slug}/`;
+
+    const config = {
+      // "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${JSON.parse(
+        localStorage.getItem("accessToken")
+      )}`,
+    };
+
     axios
-      .delete(url)
+      .delete(url, { headers: config })
       .then((response) => {
         if (response.status === 204) {
           dispatch({
@@ -347,6 +356,7 @@ export const PostProvider = ({ children }) => {
       })
       .catch((error) => {
         toast.error(error.message);
+        console.log(error);
       });
   };
 

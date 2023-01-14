@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import PostContext from "../context/PostContext";
 import AuthContext from "../context/AuthContext";
-import { useNavigate, Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import { toast } from "react-toastify";
 
@@ -21,6 +21,7 @@ const EditPost = () => {
         toast.error("You don't have permission to edit this post.");
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slug]);
 
   useEffect(() => {
@@ -36,6 +37,7 @@ const EditPost = () => {
         setImage(post.thumbnail);
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [post]);
 
   // state

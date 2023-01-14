@@ -9,6 +9,7 @@ const UserEditPage = () => {
   const navigate = useNavigate();
   useEffect(() => {
     getUserProfile(username);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [username]);
 
   useEffect(() => {

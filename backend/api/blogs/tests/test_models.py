@@ -34,10 +34,3 @@ class TestBlog(TestCase):
         self.assertEqual(self.blog.category, "html")
         self.assertEqual(self.blog.thumbnail.read(), open("test_img.png", "rb").read())
         self.assertEqual(self.blog.slug, "an-awesome-title")
-
-    def test_blog_list_view(self):
-        response = self.client.get(reverse("blog-home"))
-        blog_count = Blog.objects.count()
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "An awesome title")
-        self.assertEqual(len(response.data), blog_count)

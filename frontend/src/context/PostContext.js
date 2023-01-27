@@ -23,7 +23,7 @@ export const PostProvider = ({ children }) => {
   // get all posts
 
   const getPosts = async () => {
-    const url = "http://127.0.0.1:8000/api/blogs/";
+    const url = "/api/blogs/";
     axios
       .get(url)
       .then((response) => {
@@ -43,7 +43,7 @@ export const PostProvider = ({ children }) => {
   //  add new post
 
   const addPost = async (post) => {
-    const url = "http://127.0.0.1:8000/api/blogs/";
+    const url = "/api/blogs/";
     const config = {
       "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${JSON.parse(
@@ -71,7 +71,7 @@ export const PostProvider = ({ children }) => {
   // update post
 
   const updatePost = async (slug, data) => {
-    const url = `http://127.0.0.1:8000/api/blogs/blog/${slug}/`;
+    const url = `/api/blogs/blog/${slug}/`;
     const config = {
       "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${JSON.parse(
@@ -94,7 +94,7 @@ export const PostProvider = ({ children }) => {
   // get single post
 
   const getSinglePost = async (slug) => {
-    const url = `http://127.0.0.1:8000/api/blogs/blog/${slug}/`;
+    const url = `/api/blogs/blog/${slug}/`;
     axios
       .get(url)
       .then((response) => {
@@ -114,7 +114,7 @@ export const PostProvider = ({ children }) => {
   // get featured blogs
 
   const getFeaturedPosts = async () => {
-    const url = "http://127.0.0.1:8000/api/blogs/featured/";
+    const url = "/api/blogs/featured/";
 
     axios
       .get(url)
@@ -134,7 +134,7 @@ export const PostProvider = ({ children }) => {
   // get comment
 
   const getPostComments = async (slug) => {
-    const url = `http://127.0.0.1:8000/api/blogs/comment/${slug}/`;
+    const url = `/api/blogs/comment/${slug}/`;
 
     axios
       .get(url)
@@ -153,7 +153,7 @@ export const PostProvider = ({ children }) => {
 
   // post comment
   const addComment = async (data) => {
-    const url = "http://127.0.0.1:8000/api/blogs/comment/";
+    const url = "/api/blogs/comment/";
 
     const config = {
       "Content-Type": "multipart/form-data",
@@ -180,7 +180,7 @@ export const PostProvider = ({ children }) => {
 
   // like post
   const likePost = async (data) => {
-    const url = "http://127.0.0.1:8000/api/blogs/like/";
+    const url = "/api/blogs/like/";
 
     const config = {
       "Content-Type": "multipart/form-data",
@@ -212,7 +212,7 @@ export const PostProvider = ({ children }) => {
 
   // user post liked status
   const userPostLikedStatus = async (slug) => {
-    const url = `http://127.0.0.1:8000/api/blogs/like/${slug}/`;
+    const url = `/api/blogs/like/${slug}/`;
 
     const config = {
       // "Content-Type": "multipart/form-data",
@@ -238,7 +238,7 @@ export const PostProvider = ({ children }) => {
 
   // add post to reading list
   const savePost = async (data) => {
-    const url = "http://127.0.0.1:8000/api/blogs/reading-list/";
+    const url = "/api/blogs/reading-list/";
 
     const config = {
       "Content-Type": "multipart/form-data",
@@ -270,7 +270,7 @@ export const PostProvider = ({ children }) => {
 
   // check post saved by user
   const userPostSavedStatus = async (slug) => {
-    const url = `http://127.0.0.1:8000/api/blogs/reading-list/${slug}/`;
+    const url = `/api/blogs/reading-list/${slug}/`;
 
     const config = {
       // "Content-Type": "multipart/form-data",
@@ -296,7 +296,7 @@ export const PostProvider = ({ children }) => {
 
   // get post by category
   const getCategoryPosts = async (category) => {
-    const url = `http://127.0.0.1:8000/api/blogs/blog/category/${category}/`;
+    const url = `/api/blogs/blog/category/${category}/`;
     axios
       .get(url)
       .then((response) => {
@@ -315,7 +315,7 @@ export const PostProvider = ({ children }) => {
 
   // search post
   const searchPost = async (keyword) => {
-    const url = `http://127.0.0.1:8000/api/blogs/blog/search/${keyword}/`;
+    const url = `/api/blogs/blog/search/${keyword}/`;
     axios
       .get(url)
       .then((response) => {
@@ -334,7 +334,7 @@ export const PostProvider = ({ children }) => {
 
   // delete post
   const deletePost = async (slug) => {
-    const url = `http://127.0.0.1:8000/api/blogs/blog/${slug}/`;
+    const url = `/api/blogs/blog/${slug}/`;
 
     const config = {
       // "Content-Type": "multipart/form-data",
@@ -362,7 +362,7 @@ export const PostProvider = ({ children }) => {
 
   // get user saved post
   const getSavedPost = async (slug) => {
-    const url = `http://127.0.0.1:8000/api/blogs/reading-list/`;
+    const url = `/api/blogs/reading-list/`;
     const config = {
       // "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${JSON.parse(
@@ -387,7 +387,7 @@ export const PostProvider = ({ children }) => {
 
   // upload post images
   const uploadPostImages = async (data) => {
-    const url = "http://127.0.0.1:8000/api/blogs/images/";
+    const url = "/api/blogs/images/";
 
     const config = {
       "Content-Type": "multipart/form-data",
@@ -414,7 +414,7 @@ export const PostProvider = ({ children }) => {
 
   // get post images
   const getPostImages = async (slug) => {
-    const url = `http://127.0.0.1:8000/api/blogs/images/`;
+    const url = `/api/blogs/images/`;
     const config = {
       // "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${JSON.parse(

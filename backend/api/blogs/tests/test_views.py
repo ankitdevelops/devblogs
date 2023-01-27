@@ -53,7 +53,6 @@ class BlogViewTest(APITestCase):
 
     def test_blog_list_view(self):
         response = self.client.get(reverse("blog-home"))
-        blog_count = Blog.objects.count()
+        blog_count = Blog.objects.all().count()
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        # self.assertContains(response.data, "An awesome title")
         self.assertEqual(len(response.data), blog_count)

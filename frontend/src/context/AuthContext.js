@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
   const login = async (user) => {
-    const baseUrl = "http://127.0.0.1:8000/api/user/login/";
+    const baseUrl = "/api/user/login/";
     axios
       .post(baseUrl, user)
       .then((response) => {
@@ -42,7 +42,7 @@ export const AuthProvider = ({ children }) => {
 
   // SignUp Function
   const signup = async (user) => {
-    const baseUrl = "http://127.0.0.1:8000/api/user/register/";
+    const baseUrl = "/api/user/register/";
     axios
       .post(baseUrl, user)
       .then((response) => {
@@ -69,7 +69,7 @@ export const AuthProvider = ({ children }) => {
   // Logged in User Info
 
   const getUserInfo = async () => {
-    const url = `http://127.0.0.1:8000/api/user/`;
+    const url = `/api/user/`;
     const config = {
       "Content-Type": "application/json",
       Authorization: `Bearer ${JSON.parse(
@@ -95,7 +95,7 @@ export const AuthProvider = ({ children }) => {
   // User Profile with all data
 
   const getUserProfile = async (username) => {
-    const url = `http://127.0.0.1:8000/api/user/${username}/`;
+    const url = `/api/user/${username}/`;
     axios
       .get(url)
       .then((response) => {
@@ -113,7 +113,7 @@ export const AuthProvider = ({ children }) => {
 
   // update user profile
   const updateUser = async (username, data) => {
-    const url = `http://127.0.0.1:8000/api/user/${username}/`;
+    const url = `/api/user/${username}/`;
     const config = {
       "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${JSON.parse(

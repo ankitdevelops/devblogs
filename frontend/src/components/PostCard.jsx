@@ -3,7 +3,7 @@ import DotLoader from "react-spinners/DotLoader";
 import { Link } from "react-router-dom";
 
 const PostCard = ({ posts }) => {
-  if (!posts) {
+  if (posts.length === 0) {
     return (
       <>
         <div className="loader d-flex justify-content-center mt-5">

@@ -23,7 +23,7 @@ export const PostProvider = ({ children }) => {
   // get all posts
 
   const getPosts = async () => {
-    const url = "/api/blogs/";
+    const url = "/api/blogs";
     axios
       .get(url)
       .then((response) => {

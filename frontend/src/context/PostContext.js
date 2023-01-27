@@ -114,7 +114,7 @@ export const PostProvider = ({ children }) => {
   // get featured blogs
 
   const getFeaturedPosts = async () => {
-    const url = "/api/blogs/featured/";
+    const url = "https://hiankit09.pythonanywhere.com/api/blogs/featured/";
 
     axios
       .get(url)

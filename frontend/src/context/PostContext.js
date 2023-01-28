@@ -43,7 +43,7 @@ export const PostProvider = ({ children }) => {
   //  add new post
 
   const addPost = async (post) => {
-    const url = "/api/blogs/";
+    const url = "https://hiankit09.pythonanywhere.com/api/blogs/";
     const config = {
       "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${JSON.parse(
@@ -71,7 +71,7 @@ export const PostProvider = ({ children }) => {
   // update post
 
   const updatePost = async (slug, data) => {
-    const url = `/api/blogs/blog/${slug}/`;
+    const url = `https://hiankit09.pythonanywhere.com/api/blogs/blog/${slug}/`;
     const config = {
       "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${JSON.parse(
@@ -94,7 +94,7 @@ export const PostProvider = ({ children }) => {
   // get single post
 
   const getSinglePost = async (slug) => {
-    const url = `/api/blogs/blog/${slug}/`;
+    const url = `https://hiankit09.pythonanywhere.com/api/blogs/blog/${slug}/`;
     axios
       .get(url)
       .then((response) => {

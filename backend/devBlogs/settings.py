@@ -152,7 +152,12 @@ REST_FRAMEWORK = {
 }
 
 # cors setting
-CORS_ALLOW_ALL_ORIGINS = True
+if DEBUG:
+    CORS_ALLOW_ALL_ORIGINS = True
+else:
+    CORS_ALLOWED_ORIGINS = ["https://django-devblogs.vercel.app/"]
+
+# Jwt
 from datetime import timedelta
 
 SIMPLE_JWT = {

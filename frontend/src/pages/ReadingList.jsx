@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import PostContext from "../context/PostContext";
 import DotLoader from "react-spinners/DotLoader";
 import { Link } from "react-router-dom";
+import Categories from "../components/Categories";
 
 const ReadingList = () => {
   const { getSavedPost, savedPost } = useContext(PostContext);
@@ -11,26 +12,18 @@ const ReadingList = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (savedPost.length === 0) {
-    return (
-      <>
-        <div className="loader d-flex justify-content-center mt-5">
-          <DotLoader color="#fff" size={150} />
-        </div>
-      </>
-    );
-  }
-
   return (
     <main className="mt-3">
       <div className="row container  ">
-        <div className="mx-auto d-none d-sm-block col-sm-2 col-md-2  text-white"></div>
+        <div className="mx-auto d-none d-sm-block col-sm-2 col-md-2  text-white">
+          <Categories />
+        </div>
         <div className="mx-auto col-sm-7 col-md-7  ">
           {savedPost && (
             <>
               <h3>
-                Posts Saved By You{" "}
-                <span className="badge text-bg-warning">
+                Posts Saved By You
+                <span className="badge text-bg-warning ms-2">
                   {savedPost.length}
                 </span>
               </h3>

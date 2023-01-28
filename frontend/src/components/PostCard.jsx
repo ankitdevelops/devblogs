@@ -7,7 +7,7 @@ const PostCard = ({ posts }) => {
     return (
       <>
         <div className="loader d-flex justify-content-center mt-5">
-          <DotLoader color="#fff" size={150} />
+          <h3>No Post Found</h3>
         </div>
       </>
     );

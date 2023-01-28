@@ -6,13 +6,7 @@ import PostContext from "../context/PostContext";
 const FeaturedPost = () => {
   const { featuredPosts } = useContext(PostContext);
   if (featuredPosts.length === 0) {
-    return (
-      <>
-        <div className="loader d-flex justify-content-center mt-5">
-          <DotLoader color="#fff" size={30} />
-        </div>
-      </>
-    );
+    return <></>;
   } else {
     return (
       <>

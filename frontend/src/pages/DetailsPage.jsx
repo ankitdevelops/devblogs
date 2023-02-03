@@ -19,21 +19,21 @@ const DetailsPage = () => {
     postSaveStatusByLoggedInUser,
     userPostSavedStatus,
   } = useContext(PostContext);
-  const { userInfo } = useContext(AuthContext);
+  const { userInfo, isLoggedin } = useContext(AuthContext);
   useEffect(() => {
     getSinglePost(slug);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slug]);
 
   useEffect(() => {
-    if (post) {
+    if (post && isLoggedin) {
       userPostSavedStatus(post.slug);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [post, postSaveStatusByLoggedInUser]);
 
   useEffect(() => {
-    if (post) {
+    if (post && isLoggedin) {
       userPostLikedStatus(post.slug);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

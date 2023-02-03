@@ -35,7 +35,7 @@ export const PostProvider = ({ children }) => {
         }
       })
       .catch((error) => {
-        console.log("error", error.message);
+        // console.log("error", error.message);
         toast.success(error.message);
       });
   };
@@ -54,7 +54,7 @@ export const PostProvider = ({ children }) => {
       .post(url, post, { headers: config })
       .then((response) => {
         if (response.status === 201) {
-          console.log(response.data);
+          // console.log(response.data);
           dispatch({
             type: "ADD_POST",
             payload: response.data,
@@ -63,7 +63,7 @@ export const PostProvider = ({ children }) => {
         toast.success("Post Created Successfully");
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
         toast.error(error.message);
       });
   };
@@ -86,7 +86,7 @@ export const PostProvider = ({ children }) => {
         }
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
         toast.error(error.message);
       });
   };
@@ -106,7 +106,7 @@ export const PostProvider = ({ children }) => {
         }
       })
       .catch((error) => {
-        console.log("Error Message: ", error.message);
+        // console.log("Error Message: ", error.message);
         toast.error(error.message);
       });
   };
@@ -173,7 +173,7 @@ export const PostProvider = ({ children }) => {
         toast.success("Comment Added Successfully");
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
         toast.error(error.message);
       });
   };
@@ -205,7 +205,7 @@ export const PostProvider = ({ children }) => {
         }
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
         toast.error(error.message);
       });
   };
@@ -263,7 +263,7 @@ export const PostProvider = ({ children }) => {
         }
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
         toast.error(error.message);
       });
   };
@@ -308,7 +308,7 @@ export const PostProvider = ({ children }) => {
         }
       })
       .catch((error) => {
-        console.log("error", error.message);
+        // console.log("error", error.message);
         toast.success(error.message);
       });
   };
@@ -327,7 +327,7 @@ export const PostProvider = ({ children }) => {
         }
       })
       .catch((error) => {
-        console.log("error", error.message);
+        // console.log("error", error.message);
         toast.success(error.message);
       });
   };
@@ -356,7 +356,7 @@ export const PostProvider = ({ children }) => {
       })
       .catch((error) => {
         toast.error(error.message);
-        console.log(error);
+        // console.log(error);
       });
   };
 
@@ -407,7 +407,7 @@ export const PostProvider = ({ children }) => {
         toast.success("Image Added Successfully");
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
         toast.error(error.message);
       });
   };

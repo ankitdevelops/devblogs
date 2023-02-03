@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import PostContext from "../context/PostContext";
+import AuthContext from "../context/AuthContext";
 
 const SaveButton = () => {
   const { post, savePost, postSaveStatusByLoggedInUser } =
     useContext(PostContext);
+  const { isLoggedin } = useContext(AuthContext);
 
   const handleSave = async () => {
     let formData = new FormData();
@@ -17,7 +19,7 @@ const SaveButton = () => {
         <div className="text-center">
           <div className="follow-btn">
             <div className="d-grid gap-2">
-              {postSaveStatusByLoggedInUser !== null && (
+              {postSaveStatusByLoggedInUser !== null && isLoggedin && (
                 <span>
                   {postSaveStatusByLoggedInUser ? (
                     <>

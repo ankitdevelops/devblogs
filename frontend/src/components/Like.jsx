@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import PostContext from "../context/PostContext";
-
+import AuthContext from "../context/AuthContext";
 const Like = () => {
   const { post, likePost, postLikeStatusByLoggedInUser } =
     useContext(PostContext);
+  const { isLoggedin } = useContext(AuthContext);
+
   const handleLike = async () => {
     let formData = new FormData();
     formData.append("slug", post.slug);
@@ -16,7 +18,7 @@ const Like = () => {
         <div className="text-center">
           <div className="follow-btn">
             <div className="d-grid gap-2">
-              {postLikeStatusByLoggedInUser !== null && (
+              {postLikeStatusByLoggedInUser !== null && isLoggedin && (
                 <span>
                   {postLikeStatusByLoggedInUser ? (
                     <>

@@ -111,6 +111,12 @@ export const PostProvider = ({ children }) => {
       });
   };
 
+  const clearContext = () => {
+    dispatch({
+      type: "CLEAR_POST_CONTEXT",
+    });
+  };
+
   // get featured blogs
 
   const getFeaturedPosts = async () => {
@@ -456,6 +462,7 @@ export const PostProvider = ({ children }) => {
         getSavedPost,
         getPostImages,
         uploadPostImages,
+        clearContext,
         posts: state.posts,
         post: state.post,
         featuredPosts: state.featuredPosts,

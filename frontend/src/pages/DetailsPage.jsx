@@ -18,9 +18,11 @@ const DetailsPage = () => {
     userPostLikedStatus,
     postSaveStatusByLoggedInUser,
     userPostSavedStatus,
+    clearContext,
   } = useContext(PostContext);
   const { userInfo, isLoggedin } = useContext(AuthContext);
   useEffect(() => {
+    clearContext();
     getSinglePost(slug);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slug]);

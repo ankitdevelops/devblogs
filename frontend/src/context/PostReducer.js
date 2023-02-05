@@ -12,6 +12,8 @@ const postReducer = (state, action) => {
 
     case "GET_SINGLE_POSTS":
       return { ...state, post: action.payload };
+    case "CLEAR_POST_CONTEXT":
+      return { ...state, post: null };
 
     case "GET_FEATURED_POSTS":
       return {

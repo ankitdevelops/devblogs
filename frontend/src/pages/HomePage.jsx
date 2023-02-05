@@ -5,10 +5,10 @@ import Categories from "../components/Categories";
 import PostContext from "../context/PostContext";
 
 const HomePage = () => {
-  const { getPosts, getFeaturedPosts, posts, clearContext } =
+  const { getPosts, getFeaturedPosts, posts, clearDetailsPageContext } =
     useContext(PostContext);
   useEffect(() => {
-    clearContext();
+    clearDetailsPageContext();
     getPosts();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

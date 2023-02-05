@@ -111,7 +111,7 @@ export const PostProvider = ({ children }) => {
       });
   };
 
-  const clearContext = () => {
+  const clearDetailsPageContext = () => {
     dispatch({
       type: "CLEAR_POST_CONTEXT",
     });
@@ -216,6 +216,12 @@ export const PostProvider = ({ children }) => {
       });
   };
 
+  const clearLikeContext = () => {
+    dispatch({
+      type: "CLEAR_LIKE_CONTEXT",
+    });
+  };
+
   // user post liked status
   const userPostLikedStatus = async (slug) => {
     const url = `https://hiankit09.pythonanywhere.com/api/blogs/like/${slug}/`;
@@ -298,6 +304,11 @@ export const PostProvider = ({ children }) => {
       .catch((error) => {
         toast.error(error.message);
       });
+  };
+  const clearSaveContext = () => {
+    dispatch({
+      type: "CLEAR_SAVE_CONTEXT",
+    });
   };
 
   // get post by category
@@ -462,7 +473,9 @@ export const PostProvider = ({ children }) => {
         getSavedPost,
         getPostImages,
         uploadPostImages,
-        clearContext,
+        clearDetailsPageContext,
+        clearLikeContext,
+        clearSaveContext,
         posts: state.posts,
         post: state.post,
         featuredPosts: state.featuredPosts,

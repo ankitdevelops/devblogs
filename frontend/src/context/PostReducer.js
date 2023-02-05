@@ -38,10 +38,20 @@ const postReducer = (state, action) => {
         ...state,
         postLikeStatusByLoggedInUser: action.payload,
       };
+    case "CLEAR_LIKE_CONTEXT":
+      return {
+        ...state,
+        postLikeStatusByLoggedInUser: false,
+      };
     case "SAVE_STATUS":
       return {
         ...state,
         postSaveStatusByLoggedInUser: action.payload,
+      };
+    case "CLEAR_SAVE_CONTEXT":
+      return {
+        ...state,
+        postSaveStatusByLoggedInUser: false,
       };
     case "ADD_LIKE":
       return {

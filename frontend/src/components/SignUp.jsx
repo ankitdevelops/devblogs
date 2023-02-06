@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 const SignUp = () => {
-  const { signup } = useContext(AuthContext);
+  const { signUp } = useContext(AuthContext);
 
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
@@ -21,8 +21,8 @@ const SignUp = () => {
       confirm_password: confirmPassword,
     };
     if (name && username && email && password) {
-      if (password === Comment) {
-        await signup(data);
+      if (password === confirmPassword) {
+        await signUp(data);
       }
     } else {
       setError("Please Check Your Details");

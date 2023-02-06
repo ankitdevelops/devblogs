@@ -41,8 +41,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   // SignUp Function
-  const signup = async (user) => {
+  const signUp = async (user) => {
     const baseUrl = "https://hiankit09.pythonanywhere.com/api/user/register/";
+    console.log("Hello from signup");
     axios
       .post(baseUrl, user)
       .then((response) => {
@@ -56,6 +57,7 @@ export const AuthProvider = ({ children }) => {
             JSON.stringify(response.data.tokens.refresh)
           );
         }
+        console.log(response.data);
         dispatch({
           type: "SIGNUP",
           payload: response.data,
@@ -137,7 +139,7 @@ export const AuthProvider = ({ children }) => {
     <AuthContext.Provider
       value={{
         login,
-        signup,
+        signUp,
         getUserInfo,
         getUserProfile,
         updateUser,

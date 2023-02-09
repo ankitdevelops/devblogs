@@ -126,7 +126,6 @@ const Navbar = () => {
                     </>
                   )}
 
-                  <hr />
                   {isLoggedin ? (
                     <Link to="/" onClick={signOut}>
                       Sign Out
@@ -182,11 +181,10 @@ const Navbar = () => {
             </button>
           </form>
         </div>
-        <hr />
+
         <ul className="my-2 fs-2 list-unstyled text-center">
           {userInfo.username && (
             <>
-              <h3 className="text-decoration-underline">Links</h3>
               <li>
                 <Link
                   className="btn  border-0 btn-outline-light"
@@ -216,8 +214,6 @@ const Navbar = () => {
             </>
           )}
         </ul>
-        <hr />
-        <h3 className="text-decoration-underline">Categories</h3>
         <Categories />
       </div>
     </nav>

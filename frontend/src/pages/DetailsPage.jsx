@@ -10,7 +10,7 @@ import Like from "../components/Like";
 import SaveButton from "../components/SaveButton";
 
 const DetailsPage = () => {
-  const { slug } = useParams();
+  const { slug, username } = useParams();
   const {
     getSinglePost,
     post,
@@ -22,7 +22,8 @@ const DetailsPage = () => {
     clearSaveContext,
     clearLikeContext,
   } = useContext(PostContext);
-  const { userInfo, isLoggedin } = useContext(AuthContext);
+  const { userInfo, isLoggedin, getUserProfile, userProfile } =
+    useContext(AuthContext);
   useEffect(() => {
     clearDetailsPageContext();
     clearSaveContext();
@@ -45,6 +46,13 @@ const DetailsPage = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [post, postLikeStatusByLoggedInUser]);
+
+  useEffect(() => {
+    if (isLoggedin) {
+      getUserProfile(username);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoggedin]);
 
   const monthNameList = [
     "Jan",
@@ -188,7 +196,16 @@ const DetailsPage = () => {
                     's Post
                   </h5>
                 </li>
-                <Link className="list-group-item list-group-item">An item</Link>
+                {userProfile.authorBlogs &&
+                  userProfile.authorBlogs.map((post, index) => (
+                    <Link
+                      to={`/${post.author.username}/${post.slug}`}
+                      key={index}
+                      className="list-group-item list-group-item"
+                    >
+                      {post.title}
+                    </Link>
+                  ))}
               </ul>
             </div>
           </div>

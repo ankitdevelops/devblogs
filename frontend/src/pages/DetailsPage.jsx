@@ -48,9 +48,8 @@ const DetailsPage = () => {
   }, [post, postLikeStatusByLoggedInUser]);
 
   useEffect(() => {
-    if (isLoggedin) {
-      getUserProfile(username);
-    }
+    getUserProfile(username);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoggedin]);
 

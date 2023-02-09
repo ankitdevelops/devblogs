@@ -150,9 +150,6 @@ body {
 }
 
 @media screen and (max-width: 800px) {
-  .search {
-    display: none;
-  }
   .dropdown-content {
     width: 100%;
     position: absolute;
@@ -229,4 +226,20 @@ textarea:focus {
   color: transparent;
   width: 100%;
   display: none;
+}
+
+/* mobile nav */
+.nav__mobile {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  width: 80%;
+  min-height: 100%;
+  background-color: #171717;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 0;
+  z-index: 2342342234;
 }

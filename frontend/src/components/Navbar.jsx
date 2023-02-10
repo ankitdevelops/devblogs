@@ -40,7 +40,7 @@ const Navbar = () => {
             <div className="navbar-brand">
               <Link to="/">Dev</Link>
             </div>
-            <div className="search d-none">
+            <div className="search d-none d-sm-block">
               <form className="form-container" onSubmit={handleSearch}>
                 <input
                   type="search"
@@ -140,10 +140,14 @@ const Navbar = () => {
         </div>
       </div>
       {/* mobile nav */}
-      <div className={showMobileNav ? `nav__mobile  ` : "d-none d-sm-none"}>
+      <div
+        className={
+          showMobileNav ? `nav__mobile d-sm-none ` : "d-none d-sm-none"
+        }
+      >
         <button
           type="submit"
-          className="search-btn d-sm-none position-absolute top-0 right-0 float-end"
+          className="search-btn d-sm-none position-absolute top-0  end-0 mt-2 "
           onClick={mobileNav}
         >
           <svg
@@ -167,7 +171,11 @@ const Navbar = () => {
               onChange={(e) => setKeyword(e.target.value)}
               className="w-100"
             />
-            <button type="submit" className="search-btn">
+            <button
+              type="submit"
+              className="search-btn"
+              onClick={() => setshowMobileNav(!showMobileNav)}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -182,24 +190,33 @@ const Navbar = () => {
           </form>
         </div>
 
-        <ul className="my-2 fs-2 list-unstyled text-center">
+        <ul className=" fs-2 list-unstyled p-2 ">
           {userInfo.username && (
             <>
               <li>
                 <Link
                   className="btn  border-0 btn-outline-light"
                   to={`/profile/${userInfo.username}`}
+                  onClick={() => setshowMobileNav(!showMobileNav)}
                 >
                   Profile
                 </Link>
               </li>
               <li>
-                <Link className="btn  border-0 btn-outline-light" to="/create">
-                  Create{" "}
+                <Link
+                  className="btn  border-0 btn-outline-light"
+                  to="/create"
+                  onClick={() => setshowMobileNav(!showMobileNav)}
+                >
+                  Create
                 </Link>
               </li>
               <li>
-                <Link className="btn  border-0 btn-outline-light" to="/saved">
+                <Link
+                  className="btn  border-0 btn-outline-light"
+                  to="/saved"
+                  onClick={() => setshowMobileNav(!showMobileNav)}
+                >
                   Reading List
                 </Link>
               </li>
@@ -207,14 +224,80 @@ const Navbar = () => {
                 <Link
                   className="btn  border-0 btn-outline-light"
                   to="/dashboard"
+                  onClick={() => setshowMobileNav(!showMobileNav)}
                 >
                   Dashboard
                 </Link>
               </li>
             </>
           )}
+          {isLoggedin && <hr />}
+          <li>
+            <Link
+              to={`/category/${"html"}`}
+              className="btn  border-0 btn-outline-light"
+              onClick={() => setshowMobileNav(!showMobileNav)}
+            >
+              HTML
+            </Link>
+          </li>
+          <li>
+            <Link
+              to={`/category/${"css"}`}
+              className="btn  border-0 btn-outline-light"
+              onClick={() => setshowMobileNav(!showMobileNav)}
+            >
+              CSS
+            </Link>
+          </li>
+          <li>
+            <Link
+              to={`/category/${"javascript"}`}
+              className="btn  border-0 btn-outline-light"
+              onClick={() => setshowMobileNav(!showMobileNav)}
+            >
+              JavaScript
+            </Link>
+          </li>
+          <li>
+            <Link
+              to={`/category/${"python"}`}
+              className="btn  border-0 btn-outline-light"
+              onClick={() => setshowMobileNav(!showMobileNav)}
+            >
+              Python
+            </Link>
+          </li>
+          <li>
+            <Link
+              to={`/category/${"django"}`}
+              className="btn  border-0 btn-outline-light"
+              onClick={() => setshowMobileNav(!showMobileNav)}
+            >
+              Django
+            </Link>
+          </li>
+          <li>
+            <Link
+              to={`/category/${"tutorials"}`}
+              className="btn  border-0 btn-outline-light"
+              onClick={() => setshowMobileNav(!showMobileNav)}
+            >
+              Tutorials
+            </Link>
+          </li>
+          <li>
+            <Link
+              to={`/category/${"others"}`}
+              className="btn  border-0 btn-outline-light"
+              onClick={() => setshowMobileNav(!showMobileNav)}
+            >
+              Others
+            </Link>
+          </li>
         </ul>
-        <Categories />
+
+        <ul className="list-unstyled p-2 fs-2"></ul>
       </div>
     </nav>
   );

@@ -51,12 +51,12 @@ const UserProfile = () => {
                 <h3>{userProfile.name}</h3>
               </div>
               <div className="user-info text-center my-2">
-                <p className="fs-5  mx-auto" style={{ width: "60%" }}>
+                <p className="fs-5  mx-auto w-100 w-sm-50">
                   {userProfile.about}
                 </p>
               </div>
               <div className="user-social  w-50 mx-auto">
-                <ul className="d-flex justify-content-evenly">
+                <ul className="d-flex  flex-wrap justify-content-center text-center">
                   <li className="list-group-item mx-1">
                     {/* Date Joined: {userProfile.date_joined} */}
                   </li>

@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import PostContext from "../context/PostContext";
-import Categories from "./Categories";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   const { isLoggedin, userInfo } = useContext(AuthContext);
@@ -27,9 +27,13 @@ const Navbar = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    searchPost(keyword);
-    navigate(`/search?q=${keyword}`);
-    setKeyword("");
+    if (keyword !== "") {
+      searchPost(keyword);
+      navigate(`/search?q=${keyword}`);
+      setKeyword("");
+    } else {
+      toast.error("Empty Search Field");
+    }
   };
 
   return (
@@ -117,12 +121,40 @@ const Navbar = () => {
                   }
                   id="myDropdown"
                 >
-                  {userInfo.username && (
+                  {userInfo.username && isLoggedin && (
                     <>
-                      <Link to={`/profile/${userInfo.username}`}>Profile</Link>
-                      <Link to="/create">Create </Link>
-                      <Link to="/saved">Reading List</Link>
-                      <Link to="/dashboard">Dashboard</Link>
+                      <Link
+                        to={`/profile/${userInfo.username}`}
+                        onClick={() => {
+                          setShowDropdown(!showDropdown);
+                        }}
+                      >
+                        Profile
+                      </Link>
+                      <Link
+                        to="/create"
+                        onClick={() => {
+                          setShowDropdown(!showDropdown);
+                        }}
+                      >
+                        Create{" "}
+                      </Link>
+                      <Link
+                        to="/saved"
+                        onClick={() => {
+                          setShowDropdown(!showDropdown);
+                        }}
+                      >
+                        Reading List
+                      </Link>
+                      <Link
+                        to="/dashboard"
+                        onClick={() => {
+                          setShowDropdown(!showDropdown);
+                        }}
+                      >
+                        Dashboard
+                      </Link>
                     </>
                   )}
 

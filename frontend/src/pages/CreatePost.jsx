@@ -54,7 +54,7 @@ const CreatePost = () => {
               />
 
               <hr />
-              <ul className="nav my-2f d-flex justify-content-around align-items-center">
+              <ul className="nav my-2 d-flex justify-content-around align-items-center">
                 <li className="nav-item">
                   <div className="row g-3 align-items-center">
                     <div className="col-auto">Thumbnail</div>
@@ -91,7 +91,7 @@ const CreatePost = () => {
                     </div>
                   </div>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item my-2 my-sm-0">
                   <div className="row g-3 align-items-center">
                     <div className="col-auto">
                       <label className="col-form-label">Category</label>
@@ -192,45 +192,6 @@ const CreatePost = () => {
             </form>
           </div>
           <div className="col-md-2">
-            {/* <div className="card card-body mt-2">
-              <h6>Your Uploaded Images </h6>
-              <hr />
-              <ul className="list-group list-group-flush ">
-                <li className="list-group-item d-flex justify-content-between align-content-center">
-                  <a href="https://getbootstrap.com/docs/5.3/components/navs-tabs/">
-                    View
-                  </a>
-                  <span
-                    className="badge rounded-pill text-bg-primary"
-                    role="button"
-                  >
-                    Copy
-                  </span>
-                </li>
-                <li className="list-group-item d-flex justify-content-between align-content-center">
-                  <a href="https://getbootstrap.com/docs/5.3/components/navs-tabs/">
-                    View
-                  </a>
-                  <span
-                    className="badge rounded-pill text-bg-primary"
-                    role="button"
-                  >
-                    Copy
-                  </span>
-                </li>
-                <li className="list-group-item d-flex justify-content-between align-content-center">
-                  <a href="https://getbootstrap.com/docs/5.3/components/navs-tabs/">
-                    View
-                  </a>
-                  <span
-                    className="badge rounded-pill text-bg-primary"
-                    role="button"
-                  >
-                    Copy
-                  </span>
-                </li>
-              </ul>
-            </div> */}
             <PostImage />
           </div>
         </div>

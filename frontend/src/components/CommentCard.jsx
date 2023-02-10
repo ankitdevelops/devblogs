@@ -8,7 +8,7 @@ const CommentCard = ({ comment }) => {
         style={{ border: "1px solid #505050" }}
       >
         <div className="row ">
-          <div className="col-2">
+          <div className="col-12 col-sm-2">
             <div className="user-info">
               <div className="user-profile text-center">
                 <img
@@ -21,8 +21,10 @@ const CommentCard = ({ comment }) => {
               </div>
             </div>
           </div>
-          <div className="col-10">
-            <div className="content p-2">{comment.content}</div>
+          <div className="col-12 col-sm-10">
+            <div className="content p-2 text-center text-sm-start">
+              {comment.content}
+            </div>
           </div>
         </div>
       </div>

@@ -43,7 +43,7 @@ const Comment = () => {
             style={{ border: "1px solid #505050" }}
           >
             <div className="row ">
-              <div className="col-2">
+              <div className="col-12 col-sm-2">
                 <div className="user-info">
                   <div className="user-profile text-center">
                     <img
@@ -56,7 +56,7 @@ const Comment = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-10">
+              <div className="col-12 col-sm-10">
                 <div className="content p-2">
                   <textarea
                     className="p-2 rounded-3"

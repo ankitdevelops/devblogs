@@ -59,12 +59,12 @@ const Dashboard = () => {
                 <h3>{userProfile.name}</h3>
               </div>
               <div className="user-info text-center my-2">
-                <p className="fs-5  mx-auto" style={{ width: "60%" }}>
+                <p className="fs-5  mx-auto w-100 w-sm-75">
                   {userProfile.about}
                 </p>
               </div>
-              <div className="user-social  w-50 mx-auto">
-                <ul className="d-flex justify-content-evenly">
+              <div className="user-social  w-100 w-sm-50 mx-auto">
+                <ul className="d-flex justify-content-center  flex-wrap">
                   <li className="list-group-item mx-1">
                     {/* Date Joined: {userProfile.date_joined} */}
                   </li>
@@ -151,7 +151,7 @@ const Dashboard = () => {
                         (post, index) =>
                           post.status === "published" && (
                             <div className="card card-body my-2 " key={index}>
-                              <div className="post-wrapper d-flex justify-content-between align-items-center">
+                              <div className="post-wrapper d-flex justify-content-center align-items-center flex-wrap justify-content-md-between">
                                 <div className="post">
                                   <Link to={`/${username}/${post.slug}`}>
                                     <h5>{post.title}</h5>

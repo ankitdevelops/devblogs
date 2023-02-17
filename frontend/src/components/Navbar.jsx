@@ -121,7 +121,7 @@ const Navbar = () => {
                   }
                   id="myDropdown"
                 >
-                  {userInfo.username && isLoggedin && (
+                  {isLoggedin && (
                     <>
                       <Link
                         to={`/profile/${userInfo.username}`}
@@ -137,7 +137,7 @@ const Navbar = () => {
                           setShowDropdown(!showDropdown);
                         }}
                       >
-                        Create{" "}
+                        Create
                       </Link>
                       <Link
                         to="/saved"

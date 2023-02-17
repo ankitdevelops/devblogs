@@ -43,7 +43,7 @@ export const PostProvider = ({ children }) => {
   //  add new post
 
   const addPost = async (post) => {
-    const url = "https://hiankit09.pythonanywhere.com/api/blogs/";
+    const url = "http://139.144.6.253/api/blogs/";
     const config = {
       "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${JSON.parse(

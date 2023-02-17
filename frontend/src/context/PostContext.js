@@ -23,7 +23,7 @@ export const PostProvider = ({ children }) => {
   // get all posts
 
   const getPosts = async () => {
-    const url = "https://hiankit09.pythonanywhere.com/api/blogs/";
+    const url = "http://139.144.6.253/api/blogs/";
     axios
       .get(url)
       .then((response) => {

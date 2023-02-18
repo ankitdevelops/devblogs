@@ -57,10 +57,19 @@ allowing users to create profiles, publish articles, interact with other users t
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Built With
-- Django
-- DjangoRestFramework
-- ReactJs
-- Bootstrap
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+
+![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white)
+
+![DjangoREST](https://img.shields.io/badge/DJANGO-REST-ff1709?style=for-the-badge&logo=django&logoColor=white&color=ff1709&labelColor=gray)
+
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+
+
+![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)
+
+![Bootstrap](https://img.shields.io/badge/bootstrap-%23563D7C.svg?style=for-the-badge&logo=bootstrap&logoColor=white)
+
 
 **_DB DESIGN_**
  <img src="./screenshots/devBlogs.png" alt="Logo">
@@ -138,4 +147,6 @@ Project Link: [https://django-devblogs.vercel.app/](https://django-devblogs.verc
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-## [Read more](https://dev.to/ankitdevelops/introducing-devblogs-22b6)
+**_Read more_**
+
+[![Dev.to blog](https://img.shields.io/badge/dev.to-0A0A0A?style=for-the-badge&logo=dev.to&logoColor=white)](https://dev.to/ankitdevelops/introducing-devblogs-22b6) 

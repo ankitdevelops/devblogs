@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
   const login = async (user) => {
-    const baseUrl = "https://hiankit09.pythonanywhere.com/api/user/login/";
+    const baseUrl = "https://devblogsss.pythonanywhere.com/api/user/login/";
     axios
       .post(baseUrl, user)
       .then((response) => {
@@ -42,7 +42,7 @@ export const AuthProvider = ({ children }) => {
 
   // SignUp Function
   const signUp = async (user) => {
-    const baseUrl = "https://hiankit09.pythonanywhere.com/api/user/register/";
+    const baseUrl = "https://devblogsss.pythonanywhere.com/api/user/register/";
     axios
       .post(baseUrl, user)
       .then((response) => {
@@ -69,7 +69,7 @@ export const AuthProvider = ({ children }) => {
   // Logged in User Info
 
   const getUserInfo = async () => {
-    const url = `https://hiankit09.pythonanywhere.com/api/user/`;
+    const url = `https://devblogsss.pythonanywhere.com/api/user/`;
     const config = {
       "Content-Type": "application/json",
       Authorization: `Bearer ${JSON.parse(
@@ -95,7 +95,7 @@ export const AuthProvider = ({ children }) => {
   // User Profile with all data
 
   const getUserProfile = async (username) => {
-    const url = `https://hiankit09.pythonanywhere.com/api/user/${username}/`;
+    const url = `https://devblogsss.pythonanywhere.com/api/user/${username}/`;
     axios
       .get(url)
       .then((response) => {
@@ -113,7 +113,7 @@ export const AuthProvider = ({ children }) => {
 
   // update user profile
   const updateUser = async (username, data) => {
-    const url = `https://hiankit09.pythonanywhere.com/api/user/${username}/`;
+    const url = `https://devblogsss.pythonanywhere.com/api/user/${username}/`;
     const config = {
       "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${JSON.parse(

@@ -23,7 +23,7 @@ export const PostProvider = ({ children }) => {
   // get all posts
 
   const getPosts = async () => {
-    const url = "https://hiankit09.pythonanywhere.com/api/blogs/";
+    const url = "https://devblogsss.pythonanywhere.com/api/blogs/";
     axios
       .get(url)
       .then((response) => {
@@ -43,7 +43,7 @@ export const PostProvider = ({ children }) => {
   //  add new post
 
   const addPost = async (post) => {
-    const url = "https://hiankit09.pythonanywhere.com/api/blogs/";
+    const url = "https://devblogsss.pythonanywhere.com/api/blogs/";
     const config = {
       "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${JSON.parse(
@@ -71,7 +71,7 @@ export const PostProvider = ({ children }) => {
   // update post
 
   const updatePost = async (slug, data) => {
-    const url = `https://hiankit09.pythonanywhere.com/api/blogs/blog/${slug}/`;
+    const url = `https://devblogsss.pythonanywhere.com/api/blogs/blog/${slug}/`;
     const config = {
       "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${JSON.parse(
@@ -94,7 +94,7 @@ export const PostProvider = ({ children }) => {
   // get single post
 
   const getSinglePost = async (slug) => {
-    const url = `https://hiankit09.pythonanywhere.com/api/blogs/blog/${slug}/`;
+    const url = `https://devblogsss.pythonanywhere.com/api/blogs/blog/${slug}/`;
     axios
       .get(url)
       .then((response) => {
@@ -120,7 +120,7 @@ export const PostProvider = ({ children }) => {
   // get featured blogs
 
   const getFeaturedPosts = async () => {
-    const url = "https://hiankit09.pythonanywhere.com/api/blogs/featured/";
+    const url = "https://devblogsss.pythonanywhere.com/api/blogs/featured/";
 
     axios
       .get(url)
@@ -140,7 +140,7 @@ export const PostProvider = ({ children }) => {
   // get comment
 
   const getPostComments = async (slug) => {
-    const url = `https://hiankit09.pythonanywhere.com/api/blogs/comment/${slug}/`;
+    const url = `https://devblogsss.pythonanywhere.com/api/blogs/comment/${slug}/`;
 
     axios
       .get(url)
@@ -159,7 +159,7 @@ export const PostProvider = ({ children }) => {
 
   // post comment
   const addComment = async (data) => {
-    const url = "https://hiankit09.pythonanywhere.com/api/blogs/comment/";
+    const url = "https://devblogsss.pythonanywhere.com/api/blogs/comment/";
 
     const config = {
       "Content-Type": "multipart/form-data",
@@ -186,7 +186,7 @@ export const PostProvider = ({ children }) => {
 
   // like post
   const likePost = async (data) => {
-    const url = "https://hiankit09.pythonanywhere.com/api/blogs/like/";
+    const url = "https://devblogsss.pythonanywhere.com/api/blogs/like/";
 
     const config = {
       "Content-Type": "multipart/form-data",
@@ -224,7 +224,7 @@ export const PostProvider = ({ children }) => {
 
   // user post liked status
   const userPostLikedStatus = async (slug) => {
-    const url = `https://hiankit09.pythonanywhere.com/api/blogs/like/${slug}/`;
+    const url = `https://devblogsss.pythonanywhere.com/api/blogs/like/${slug}/`;
 
     const config = {
       // "Content-Type": "multipart/form-data",
@@ -250,7 +250,7 @@ export const PostProvider = ({ children }) => {
 
   // add post to reading list
   const savePost = async (data) => {
-    const url = "https://hiankit09.pythonanywhere.com/api/blogs/reading-list/";
+    const url = "https://devblogsss.pythonanywhere.com/api/blogs/reading-list/";
 
     const config = {
       "Content-Type": "multipart/form-data",
@@ -282,7 +282,7 @@ export const PostProvider = ({ children }) => {
 
   // check post saved by user
   const userPostSavedStatus = async (slug) => {
-    const url = `https://hiankit09.pythonanywhere.com/api/blogs/reading-list/${slug}/`;
+    const url = `https://devblogsss.pythonanywhere.com/api/blogs/reading-list/${slug}/`;
 
     const config = {
       // "Content-Type": "multipart/form-data",
@@ -313,7 +313,7 @@ export const PostProvider = ({ children }) => {
 
   // get post by category
   const getCategoryPosts = async (category) => {
-    const url = `https://hiankit09.pythonanywhere.com/api/blogs/blog/category/${category}/`;
+    const url = `https://devblogsss.pythonanywhere.com/api/blogs/blog/category/${category}/`;
     axios
       .get(url)
       .then((response) => {
@@ -332,7 +332,7 @@ export const PostProvider = ({ children }) => {
 
   // search post
   const searchPost = async (keyword) => {
-    const url = `https://hiankit09.pythonanywhere.com/api/blogs/blog/search/${keyword}/`;
+    const url = `https://devblogsss.pythonanywhere.com/api/blogs/blog/search/${keyword}/`;
     axios
       .get(url)
       .then((response) => {
@@ -351,7 +351,7 @@ export const PostProvider = ({ children }) => {
 
   // delete post
   const deletePost = async (slug) => {
-    const url = `https://hiankit09.pythonanywhere.com/api/blogs/blog/${slug}/`;
+    const url = `https://devblogsss.pythonanywhere.com/api/blogs/blog/${slug}/`;
 
     const config = {
       // "Content-Type": "multipart/form-data",
@@ -379,7 +379,7 @@ export const PostProvider = ({ children }) => {
 
   // get user saved post
   const getSavedPost = async (slug) => {
-    const url = `https://hiankit09.pythonanywhere.com/api/blogs/reading-list/`;
+    const url = `https://devblogsss.pythonanywhere.com/api/blogs/reading-list/`;
     const config = {
       // "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${JSON.parse(
@@ -404,7 +404,7 @@ export const PostProvider = ({ children }) => {
 
   // upload post images
   const uploadPostImages = async (data) => {
-    const url = "https://hiankit09.pythonanywhere.com/api/blogs/images/";
+    const url = "https://devblogsss.pythonanywhere.com/api/blogs/images/";
 
     const config = {
       "Content-Type": "multipart/form-data",
@@ -431,7 +431,7 @@ export const PostProvider = ({ children }) => {
 
   // get post images
   const getPostImages = async (slug) => {
-    const url = `https://hiankit09.pythonanywhere.com/api/blogs/images/`;
+    const url = `https://devblogsss.pythonanywhere.com/api/blogs/images/`;
     const config = {
       // "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${JSON.parse(
